@@ -51,78 +51,39 @@ public class Register extends AppCompatActivity {
                 String password = passwordEditText.getText().toString();
                 String email = emailEditText.getText().toString();
 
-                User user = new User(username, password, email);
+                if (!isValidEmail(email)){
+                    errorMsgTextView.setText("Email invalide");
+                }else if(!isPasswordValid(password)) {
+                    errorMsgTextView.setTextSize(15);
+                    errorMsgTextView.setText("Votre mot de passe doit contenir Contient au moins 8 caractères\n" +
+                            "Contient au moins une majuscule\n" +
+                            "Contient au moins une minuscule\n" +
+                            "Contient au moins un chiffre\n" +
+                            "Contient au moins un caractère spécial");
+                } else if (username.isEmpty()) {
+                    errorMsgTextView.setText("veuillez entrez un nom d'utilisateur");
+                }else {
+                    User user = new User(username, password, email);
 
-                ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
-                Call<User> call = apiInterface.register(username,password,email);
-                call.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        System.out.printf("suced\t\t\t\t");
-                        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                        startActivity(intent);
-                    }
+                    ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
+                    Call<User> call = apiInterface.register(username,password,email);
+                    call.enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+                            Toast.makeText(getApplicationContext(), "Vous êtes inscrit", Toast.LENGTH_LONG).show();
+                            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(intent);
+                        }
 
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        System.out.println(t.getMessage());
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            System.out.println(t.getMessage());
 
-                    }
-                });
-            }
-        });
-
-
-
-        registerButton.setEnabled(false);
-        emailEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Cette méthode est appelée avant que le texte ne soit modifié
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (isValidEmail(emailEditText.getText().toString())) {
-                    registerButton.setEnabled(true);
-                    errorMsgTextView.setText("");
+                        }
+                    });
                 }
-                else{
-                    registerButton.setEnabled(false);
-                    errorMsgTextView.setText("Votre  email est incorrect");
-                }
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Cette méthode est appelée après que le texte a été modifié
-            }
-        });
-        passwordEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Cette méthode est appelée avant que le texte ne soit modifié
-            }
 
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (isPasswordValid(passwordEditText.getText().toString())) {
-//                    registerButton.setEnabled(true);
-//                    errorMsgTextView.setText("");
-//                } else {
-//                    registerButton.setEnabled(false);
-//                    errorMsgTextView.setText("Votre mot de passe doit contenir Contient au moins 8 caractères\n" +
-//                            "Contient au moins une majuscule\n" +
-//                            "Contient au moins une minuscule\n" +
-//                            "Contient au moins un chiffre\n" +
-//                            "Contient au moins un caractère spécial");
-//                }
-
-
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Cette méthode est appelée après que le texte a été modifié
             }
         });
 
