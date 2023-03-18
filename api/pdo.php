@@ -11,21 +11,15 @@ try {
     $pdo = new PDO('mysql:host='.$hote.';port='.$port.';dbname='.$nom_bdd, $utilisateur, $mot_de_passe);
 	$retour["succes"]= true;
 	$retour["msg"]= 'Connexioon à la  base de donnée réussie';
-
 } catch(Exception $e) {
-	$retour["succes"]= false;
-	$retour["msg"]= 'Connexioon à la  base de donnée impossible';
+	retour_jsn(false,"Connexion à la base de donnée impossible");
 
 }
 
-	$requete=$pdo->prepare("Select * from user");
-	$requete->execute();
-	$result=$requete->fetchAll();
-	$retour["succes"]= true;
-	$retour["msg"]= 'voici les utilisateurs';
-	$retour["result"]["user"]=$result;
-	
+function retour_jsn($succes,$msg,$result=NULL){
+	$retour["succes"]= $succes;
+	$retour["msg"]= $msg;
+    $retour["result"]=$result;
 	echo json_encode($retour);
-
-
+}
 ?>
