@@ -14,7 +14,7 @@
         app:srcCompat="@drawable/logoburgr" />
 
     <TextView
-        android:text="connexion"
+        android:text="Inscription"
         android:textSize="32sp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -24,8 +24,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <TextView
+        android:id="@+id/errorMsg_textView"
+        android:text=""
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:textColor="@color/red"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-
+    <EditText
+        android:id="@+id/email_edittext"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/black"
+        android:padding="16dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textColorHint="@color/gray" />
 
     <EditText
         android:id="@+id/username_edittext"
@@ -55,31 +79,17 @@
         android:inputType="textPassword"
         android:textColorHint="@color/gray" />
 
-    <Button
-        android:id="@+id/login_button"
-        android:text="Connexion"
-        android:textColor="@color/white"
 
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
+
 
     <Button
         android:id="@+id/register_button"
         android:text="Inscription"
         android:textColor="@color/white"
-
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:text="Mot de passe oublié ?"
-        android:textColor="@color/black"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 </LinearLayout>
