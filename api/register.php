@@ -30,7 +30,7 @@ if($result["count(username)"] == 1) {
             // Requête SQL pour insérer l'utilisateur dans la base de données
             $requete = $pdo->prepare("INSERT INTO `user` (`id_user`, `username`, `password`, `email`) VALUES (NULL, ?, ?, ?);");
             $requete->execute(array($username, password_hash($mdp, PASSWORD_ARGON2I), $email));
-            reponse_json(true, "User registered successfully");
+            reponse_json(true, "Vous êtes bien inscrits");
         } catch(Exception $e) {
             reponse_json(false, "Connexion à la base de données impossible");
 

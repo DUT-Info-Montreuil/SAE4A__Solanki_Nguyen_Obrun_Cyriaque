@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class Register extends AppCompatActivity {
     private EditText ConfirmpasswordEditText;
     private EditText emailEditText;
     private TextView errorMsgTextView,acceuilButton ;
+    private CheckBox acceptConditionsCheckBox;
     private      Button registerButton;
 
     @Override
@@ -44,6 +46,7 @@ public class Register extends AppCompatActivity {
         usernameEditText = findViewById(R.id.username_edittext);
         passwordEditText = findViewById(R.id.password_edittext);
         ConfirmpasswordEditText =findViewById(R.id.confirmpassword_edittext);
+        acceptConditionsCheckBox=findViewById(R.id.acceptConditionsCheckBox);
         emailEditText = findViewById(R.id.email_edittext);
         errorMsgTextView = findViewById(R.id.errorMsg_textView);
         registerButton = findViewById(R.id.register_button);
@@ -68,7 +71,9 @@ public class Register extends AppCompatActivity {
                     errorMsgTextView.setText("Vos mot de passes ne sont pas indentiques");
                 } else if (username.isEmpty()) {
                     errorMsgTextView.setText("veuillez entrez un nom d'utilisateur");
-                }else {
+                } else if (!acceptConditionsCheckBox.isChecked()) {
+                    errorMsgTextView.setText("veuillez acceptez les conditions d'utilisations");
+                } else {
                     User user = new User(username, password, email);
                     ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
                     Call<ResponseBody> call = apiInterface.register(username, password, email);
