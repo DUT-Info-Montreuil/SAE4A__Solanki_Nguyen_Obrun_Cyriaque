@@ -2,13 +2,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/backGroundApp"
+
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -16,21 +20,20 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageView2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/logoburgr" />
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/logoburgr"
+                android:layout_marginTop="20sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="30sp"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
                 android:text="Inscription"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
@@ -39,65 +42,98 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="32dp"
                 android:text=""
                 android:textColor="@color/red"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30sp"
+                android:text="nom d'utilisateur"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
             <EditText
                 android:id="@+id/username_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="15sp"
                 android:layout_marginEnd="32dp"
-                android:background="@color/black"
+                android:background="@color/backGroundApp"
                 android:hint="Nom d'utilisateur"
                 android:inputType="text"
                 android:padding="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gray" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30sp"
+                android:text="Email "
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
             <EditText
                 android:id="@+id/email_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="15sp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginBottom="32dp"
-                android:background="@color/black"
+
+                android:background="@color/backGroundApp"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:padding="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gray" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30sp"
+                android:text="Mot de passe"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+
             <EditText
                 android:id="@+id/password_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="15sp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginBottom="32dp"
-                android:background="@color/black"
+                android:background="@color/backGroundApp"
                 android:hint="Mot de passe"
                 android:inputType="textPassword"
                 android:padding="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gray" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30sp"
+                android:text="Confirmez votre mt de passe"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/confirmpassword_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="15sp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginBottom="32dp"
-                android:background="@color/black"
+                android:background="@color/backGroundApp"
                 android:hint=" Confirmez votre Mot de passe"
                 android:inputType="textPassword"
                 android:padding="16dp"
@@ -110,10 +146,45 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
-                android:text="Inscription"
+                android:text="S'inscrire"
+                android:backgroundTint="@color/orange"
                 android:textColor="@color/white" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:text="Déja inscrit ?"
+                    android:textColor="@color/gray"
+                    android:layout_marginRight="50sp" />
+
+
+                <TextView
+                    android:id="@+id/acceuil_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="Se connecter"
+                    android:textColor="@color/orange" />
+
+
+
+            </LinearLayout>
+
+
         </LinearLayout>
+
+
+
     </ScrollView>
 
 

@@ -34,8 +34,8 @@ public class Register extends AppCompatActivity {
     private EditText passwordEditText;
     private EditText ConfirmpasswordEditText;
     private EditText emailEditText;
-    private TextView errorMsgTextView;
-    private      Button registerButton ;
+    private TextView errorMsgTextView,acceuilButton ;
+    private      Button registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class Register extends AppCompatActivity {
         emailEditText = findViewById(R.id.email_edittext);
         errorMsgTextView = findViewById(R.id.errorMsg_textView);
         registerButton = findViewById(R.id.register_button);
-
+        acceuilButton = findViewById(R.id.acceuil_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +102,14 @@ public class Register extends AppCompatActivity {
                 }
 
 
+            }
+        });
+
+        acceuilButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
             }
         });
 
