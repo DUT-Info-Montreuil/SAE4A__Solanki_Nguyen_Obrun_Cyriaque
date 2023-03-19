@@ -16,10 +16,4 @@ try {
 
 }
 
-function retour_jsn($succes,$msg,$result=NULL){
-	$retour["succes"]= $succes;
-	$retour["msg"]= $msg;
-    $retour["result"]=$result;
-	echo json_encode($retour);
-}
 ?>

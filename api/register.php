@@ -1,53 +1,40 @@
 <?php
+header('Content-Type: application/json');
+include('pdo.php');
 
-require_once('pdo.php');
+function reponse_json($success, $msgErreur, $data=NULL) {
+	$array['success'] = $success;
+	$array['msg'] = $msgErreur;
+	$array['result'] = $data;
 
-$email=$_POST["email"];
-$mdp=$_POST["password"];
-$username=$_POST["username"];
-
-// Requête SQL pour insérer l'utilisateur dans la base de données
-$requete=$pdo->prepare(" INSERT INTO `user` (`id_user`, `username`, `password`, `email`) VALUES (NULL, ?, ?, ?);");
-$requete->execute(array($username,password_hash($mdp,PASSWORD_ARGON2I),$email));
-$succes= true;
-$msg= 'utilisateur ajouter';
-// Exécution de la requête SQL
-
-    // Envoi d'une réponse JSON contenant un message de succès
-    $response["status"] = "success";
-    $response["message"] = "User registered successfully";
-    echo json_encode($response);
-
-
-
-
-
-/*
-
-var_dump($_POST);
-
-if(!empty($_POST["email"]) && !empty($_POST["username"]) && !empty($_POST["password"])){
-    $email=$_POST["email"];
-    $mdp=$_POST["password"];
-    $username=$_POST["username"];
-    $requete=$pdo->prepare(" INSERT INTO `user` (`id_user`, `username`, `password`, `email`) VALUES (NULL, ?, ?, ?);");
-    $requete->execute(array($username,password_hash($mdp,PASSWORD_ARGON2I),$email));
-    $succes= true;
-	$msg= 'utilisateur ajouter';
-    $restult=array();
-    retour_jsn($succes,$msg,$restult);
-}else{
-    $succes= false;
-	$msg= 'Il manque des infos';
-    retour_jsn($succes,$msg);
+	echo json_encode($array);
 }
-/* 
-	
-	$requete->execute();
-	$result=$requete->fetchAll();
-	$retour["succes"]= true;
-	$retour["msg"]= 'voici les utilisateurs';
-	$retour["result"]["user"]=$result;
-*/
-?>
+$success=true;
+$email = $_POST["email"];
+$mdp = $_POST["password"];
+$username = $_POST["username"];  
 
+$requete = $pdo->prepare("SELECT count(username) FROM `user` where username = ? ;");
+$requete->execute(array($username));
+$result = $requete->fetch();
+if($result["count(username)"] == 1) {
+ reponse_json(false, "User name existant");
+} else {
+    $requete = $pdo->prepare("SELECT count(email) FROM `user` where email = ? ;");
+    $requete->execute(array($email));
+    $result = $requete->fetch();
+    if($result["count(email)"] == 1) {
+        reponse_json(false, "email déja existant");
+    } else {
+        try {
+            // Requête SQL pour insérer l'utilisateur dans la base de données
+            $requete = $pdo->prepare("INSERT INTO `user` (`id_user`, `username`, `password`, `email`) VALUES (NULL, ?, ?, ?);");
+            $requete->execute(array($username, password_hash($mdp, PASSWORD_ARGON2I), $email));
+            reponse_json(true, "User registered successfully");
+        } catch(Exception $e) {
+            reponse_json(false, "Connexion à la base de données impossible");
+
+        }
+    }
+}
+?>

@@ -17,6 +17,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,21 +66,33 @@ public class Register extends AppCompatActivity {
                     errorMsgTextView.setText("veuillez entrez un nom d'utilisateur");
                 }else {
                     User user = new User(username, password, email);
-
                     ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
-                    Call<User> call = apiInterface.register(username,password,email);
-                    call.enqueue(new Callback<User>() {
+                    Call<ResponseBody> call = apiInterface.register(username, password, email);
+                    call.enqueue(new Callback<ResponseBody>() {
                         @Override
-                        public void onResponse(Call<User> call, Response<User> response) {
-                            Toast.makeText(getApplicationContext(), "Vous êtes inscrit", Toast.LENGTH_LONG).show();
-                            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                            startActivity(intent);
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            try {
+                                String jsonString = response.body().string();
+                                JSONObject jsonObject = new JSONObject(jsonString);
+                                boolean success = jsonObject.getBoolean("success");
+                                if (!success) {
+                                    errorMsgTextView.setText(jsonObject.getString("msg"));
+                                } else {
+                                    // Inscription réussie
+                                    String successMessage = jsonObject.getString("msg");
+                                    Toast.makeText(getApplicationContext(), successMessage, Toast.LENGTH_LONG).show();
+                                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            } catch (IOException | JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
 
-                        @Override
-                        public void onFailure(Call<User> call, Throwable t) {
-                            System.out.println(t.getMessage());
 
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            t.printStackTrace();
                         }
                     });
                 }
@@ -97,7 +111,7 @@ public class Register extends AppCompatActivity {
     }
 
     public static boolean isValidEmail(String email) {
-        String regex = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,}$";
+        String regex = "^[\\w\\.-]+@([\\w\\-]+\\.)+[a-zA-Z]{2,}$";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
@@ -106,12 +120,13 @@ public class Register extends AppCompatActivity {
     public interface ApiInterface {
         @FormUrlEncoded
         @POST("register.php")
-        Call<User>  register(
+        Call<ResponseBody> register(
                 @Field("username") String username,
                 @Field("password") String password,
                 @Field("email") String email
         );
     }
+
 
 
 }
