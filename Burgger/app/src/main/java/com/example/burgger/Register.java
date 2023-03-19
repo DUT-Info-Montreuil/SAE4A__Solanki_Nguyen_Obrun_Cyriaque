@@ -32,6 +32,7 @@ import retrofit2.http.POST;
 public class Register extends AppCompatActivity {
     private EditText usernameEditText;
     private EditText passwordEditText;
+    private EditText ConfirmpasswordEditText;
     private EditText emailEditText;
     private TextView errorMsgTextView;
     private      Button registerButton ;
@@ -42,6 +43,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         usernameEditText = findViewById(R.id.username_edittext);
         passwordEditText = findViewById(R.id.password_edittext);
+        ConfirmpasswordEditText =findViewById(R.id.confirmpassword_edittext);
         emailEditText = findViewById(R.id.email_edittext);
         errorMsgTextView = findViewById(R.id.errorMsg_textView);
         registerButton = findViewById(R.id.register_button);
@@ -62,6 +64,8 @@ public class Register extends AppCompatActivity {
                             "Contient au moins une minuscule\n" +
                             "Contient au moins un chiffre\n" +
                             "Contient au moins un caractère spécial");
+                } else if (!password.equals(ConfirmpasswordEditText.getText().toString())) {
+                    errorMsgTextView.setText("Vos mot de passes ne sont pas indentiques");
                 } else if (username.isEmpty()) {
                     errorMsgTextView.setText("veuillez entrez un nom d'utilisateur");
                 }else {
