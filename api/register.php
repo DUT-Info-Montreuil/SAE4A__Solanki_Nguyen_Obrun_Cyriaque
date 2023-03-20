@@ -10,7 +10,7 @@ function reponse_json($success, $msgErreur, $data=NULL) {
 	echo json_encode($array);
 }
 $email = $_POST["email"];
-$mdp = $_POST["password"];
+$mdp = $mdp = password_hash($_POST["password"], PASSWORD_ARGON2I);
 $username = $_POST["username"];  
 
 $requete = $pdo->prepare("SELECT count(username) FROM `user` where username = ? ;");

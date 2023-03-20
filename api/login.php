@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $requete->execute(array($username));
     $result = $requete->fetch();
     if($result) {
-        if($mdp==$result['password']) {
+        if(password_verify($mdp,$result['password'])) {
             reponse_json(true, "Connexion réussie", $result);
         } else {
             reponse_json(false, "Mot de passe incorrect");
