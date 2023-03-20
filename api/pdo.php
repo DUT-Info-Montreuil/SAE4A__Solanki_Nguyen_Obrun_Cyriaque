@@ -12,8 +12,18 @@ try {
 	$retour["succes"]= true;
 	$retour["msg"]= 'Connexioon à la  base de donnée réussie';
 } catch(Exception $e) {
-	retour_jsn(false,"Connexion à la base de donnée impossible");
+	reponse_json(false,"Connexion à la base de donnée impossible");
 
+}
+
+
+
+function reponse_json($success, $msgErreur, $data=NULL) {
+    $array['success'] = $success;
+    $array['msg'] = $msgErreur;
+    $array['result'] = $data;
+
+    echo json_encode($array);
 }
 
 ?>

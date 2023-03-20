@@ -123,6 +123,7 @@ public class Register extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     String jsonString = response.body().string();
+                    System.out.println(jsonString);
                     JSONObject jsonObject = new JSONObject(jsonString);
                     boolean success = jsonObject.getBoolean("success");
                     if (!success) {

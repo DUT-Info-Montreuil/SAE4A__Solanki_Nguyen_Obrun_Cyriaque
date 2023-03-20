@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     String jsonString = response.body().string();
+                    System.out.println(jsonString);
                     JSONObject jsonObject = new JSONObject(jsonString);
                     boolean success = jsonObject.getBoolean("success");
                     if (!success) {
