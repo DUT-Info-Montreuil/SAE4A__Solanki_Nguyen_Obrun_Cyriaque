@@ -9,7 +9,6 @@ function reponse_json($success, $msgErreur, $data=NULL) {
 
 	echo json_encode($array);
 }
-$success=true;
 $email = $_POST["email"];
 $mdp = $_POST["password"];
 $username = $_POST["username"];  
@@ -29,7 +28,8 @@ if($result["count(username)"] == 1) {
         try {
             // Requête SQL pour insérer l'utilisateur dans la base de données
             $requete = $pdo->prepare("INSERT INTO `user` (`id_user`, `username`, `password`, `email`) VALUES (NULL, ?, ?, ?);");
-            $requete->execute(array($username, password_hash($mdp, PASSWORD_ARGON2I), $email));
+            $requete->execute(array($username,$mdp, $email));
+
             reponse_json(true, "Vous êtes bien inscrits");
         } catch(Exception $e) {
             reponse_json(false, "Connexion à la base de données impossible");

@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: application/json'); 
+
 $hote = 'localhost';
 $port = "3306";
 $nom_bdd = 'api';

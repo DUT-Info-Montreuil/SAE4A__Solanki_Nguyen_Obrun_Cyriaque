@@ -74,36 +74,7 @@ public class Register extends AppCompatActivity {
                 } else if (!acceptConditionsCheckBox.isChecked()) {
                     errorMsgTextView.setText("veuillez acceptez les conditions d'utilisations");
                 } else {
-                    User user = new User(username, password, email);
-                    ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
-                    Call<ResponseBody> call = apiInterface.register(username, password, email);
-                    call.enqueue(new Callback<ResponseBody>() {
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            try {
-                                String jsonString = response.body().string();
-                                JSONObject jsonObject = new JSONObject(jsonString);
-                                boolean success = jsonObject.getBoolean("success");
-                                if (!success) {
-                                    errorMsgTextView.setText(jsonObject.getString("msg"));
-                                } else {
-                                    // Inscription réussie
-                                    String successMessage = jsonObject.getString("msg");
-                                    Toast.makeText(getApplicationContext(), successMessage, Toast.LENGTH_LONG).show();
-                                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                                    startActivity(intent);
-                                }
-                            } catch (IOException | JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            t.printStackTrace();
-                        }
-                    });
+                    RegisterUser(username,password,email);
                 }
 
 
@@ -142,6 +113,38 @@ public class Register extends AppCompatActivity {
                 @Field("password") String password,
                 @Field("email") String email
         );
+    }
+
+    public void RegisterUser(String username, String password, String email) {
+        ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
+        Call<ResponseBody> call = apiInterface.register(username, password, email);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String jsonString = response.body().string();
+                    JSONObject jsonObject = new JSONObject(jsonString);
+                    boolean success = jsonObject.getBoolean("success");
+                    if (!success) {
+                        errorMsgTextView.setText(jsonObject.getString("msg"));
+                    } else {
+                        // Inscription réussie
+                        String successMessage = jsonObject.getString("msg");
+                        Toast.makeText(getApplicationContext(), successMessage, Toast.LENGTH_LONG).show();
+                        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(intent);
+                    }
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
 
