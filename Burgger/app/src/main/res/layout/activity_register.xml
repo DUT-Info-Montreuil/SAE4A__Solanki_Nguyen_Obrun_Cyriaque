@@ -64,11 +64,60 @@
                 android:layout_marginStart="15sp"
                 android:layout_marginEnd="32dp"
                 android:background="@color/backGroundApp"
-                android:hint="Nom d'utilisateur"
+                android:hint="Entrez votre Nom d'utilisateur"
                 android:inputType="text"
                 android:padding="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30sp"
+                android:text="Nom"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/name_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15sp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/backGroundApp"
+                android:hint="Entrez votre Nom"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30sp"
+                android:text="Nom"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/firstname_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15sp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/backGroundApp"
+                android:hint="Entrez votre prénom"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray" />
+
+
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -88,11 +137,60 @@
                 android:layout_marginEnd="32dp"
 
                 android:background="@color/backGroundApp"
-                android:hint="Email"
+                android:hint="Entrez votre email"
                 android:inputType="textEmailAddress"
                 android:padding="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30sp"
+                android:text="Ville"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/city_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15sp"
+                android:layout_marginEnd="32dp"
+
+                android:background="@color/backGroundApp"
+                android:hint="Entrez votre Ville"
+                 android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30sp"
+                android:text="adresse"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/address_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15sp"
+                android:layout_marginEnd="32dp"
+
+                android:background="@color/backGroundApp"
+                android:hint="Entrez votre Adresse"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray" />
+
+
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -112,7 +210,7 @@
                 android:layout_marginStart="15sp"
                 android:layout_marginEnd="32dp"
                 android:background="@color/backGroundApp"
-                android:hint="Mot de passe"
+                android:hint="Entrez votre Mot de passe"
                 android:inputType="textPassword"
                 android:padding="16dp"
                 android:textColor="@color/white"

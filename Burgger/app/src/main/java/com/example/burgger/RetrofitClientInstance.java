@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClientInstance {
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://burgger7.000webhostapp.com/";//mettre l'ip de son ordinateur (ipconfig)
+    private static final String BASE_URL = "https://burgerr7.000webhostapp.com/";//mettre l'ip de son ordinateur (ipconfig)
 
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {

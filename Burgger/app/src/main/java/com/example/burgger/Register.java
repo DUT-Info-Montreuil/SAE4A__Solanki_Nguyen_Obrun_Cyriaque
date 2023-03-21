@@ -32,9 +32,17 @@ import retrofit2.http.POST;
 
 public class Register extends AppCompatActivity {
     private EditText usernameEditText;
+
+    private EditText nameEditText;
+
+    private EditText firstNameEditText;
     private EditText passwordEditText;
     private EditText ConfirmpasswordEditText;
     private EditText emailEditText;
+
+    private EditText cityEditText;
+
+    private EditText addressEditText;
     private TextView errorMsgTextView,acceuilButton ;
     private CheckBox acceptConditionsCheckBox;
     private      Button registerButton;
@@ -44,40 +52,32 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         usernameEditText = findViewById(R.id.username_edittext);
+        nameEditText = findViewById(R.id.name_edittext);
+        firstNameEditText = findViewById(R.id.firstname_edittext);
         passwordEditText = findViewById(R.id.password_edittext);
-        ConfirmpasswordEditText =findViewById(R.id.confirmpassword_edittext);
+        ConfirmpasswordEditText = findViewById(R.id.confirmpassword_edittext);
         acceptConditionsCheckBox=findViewById(R.id.acceptConditionsCheckBox);
         emailEditText = findViewById(R.id.email_edittext);
         errorMsgTextView = findViewById(R.id.errorMsg_textView);
         registerButton = findViewById(R.id.register_button);
         acceuilButton = findViewById(R.id.acceuil_button);
+        addressEditText = findViewById(R.id.address_edittext);
+        cityEditText = findViewById(R.id.city_edittext);
+
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 String email = emailEditText.getText().toString();
-
-                if (!isValidEmail(email)){
-                    errorMsgTextView.setText("Email invalide");
-                }else if(!isPasswordValid(password)) {
-                    errorMsgTextView.setTextSize(15);
-                    errorMsgTextView.setText("Votre mot de passe doit contenir Contient au moins 8 caractères\n" +
-                            "Contient au moins une majuscule\n" +
-                            "Contient au moins une minuscule\n" +
-                            "Contient au moins un chiffre\n" +
-                            "Contient au moins un caractère spécial");
-                } else if (!password.equals(ConfirmpasswordEditText.getText().toString())) {
-                    errorMsgTextView.setText("Vos mot de passes ne sont pas indentiques");
-                } else if (username.isEmpty()) {
-                    errorMsgTextView.setText("veuillez entrez un nom d'utilisateur");
-                } else if (!acceptConditionsCheckBox.isChecked()) {
-                    errorMsgTextView.setText("veuillez acceptez les conditions d'utilisations");
-                } else {
-                    RegisterUser(username,password,email);
-                }
+                String city = cityEditText.getText().toString();
+                String address = addressEditText.getText().toString();
+                String name = nameEditText.getText().toString();
+                String firstname= firstNameEditText.getText().toString();
 
 
+                if(checkForm( username,password, email,city,address,name,firstname))
+                    RegisterUser(username,password,name,firstname,email,city,address);
             }
         });
 
@@ -111,13 +111,17 @@ public class Register extends AppCompatActivity {
         Call<ResponseBody> register(
                 @Field("username") String username,
                 @Field("password") String password,
-                @Field("email") String email
+                @Field("name") String name,
+                @Field("firstName") String firstName,
+                @Field("email") String email,
+                @Field("address") String address,
+                @Field("city") String city
         );
     }
 
-    public void RegisterUser(String username, String password, String email) {
+    public void RegisterUser(String username, String password, String email,String city,String adress,String name , String firtName) {
         ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
-        Call<ResponseBody> call = apiInterface.register(username, password, email);
+        Call<ResponseBody> call = apiInterface.register(username, password,name,firtName, email,adress,city);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -148,7 +152,36 @@ public class Register extends AppCompatActivity {
         });
     }
 
+    public boolean checkForm(String username,String password,String email,String city,String adresse,String name,String firstname){
 
+        if (!isValidEmail(email)){
+            errorMsgTextView.setText("Email invalide");
+        }else if (name.isEmpty()){
+            errorMsgTextView.setText("veuillez votre nom");
+        }
+        else if (firstname.isEmpty()){
+            errorMsgTextView.setText("veuillez votre prénom");
+        }
+        else if(!isPasswordValid(password)) {
+            errorMsgTextView.setTextSize(15);
+            errorMsgTextView.setText("Votre mot de passe doit contenir Contient au moins 8 caractères\n" +
+                    "Contient au moins une majuscule\n" +
+                    "Contient au moins une minuscule\n" +
+                    "Contient au moins un chiffre\n" +
+                    "Contient au moins un caractère spécial");
+        } else if (city.isEmpty()) {
+            errorMsgTextView.setText("veuillez entrer une ville");
+        } else if (adresse.isEmpty()) {
+            errorMsgTextView.setText("veuillez entrez votre adresse");
+        } else if (!password.equals(ConfirmpasswordEditText.getText().toString())) {
+            errorMsgTextView.setText("Vos mot de passes ne sont pas indentiques");
+        } else if (username.isEmpty()) {
+            errorMsgTextView.setText("veuillez entrer un nom d'utilisateur");
+        } else if (!acceptConditionsCheckBox.isChecked()) {
+            errorMsgTextView.setText("veuillez accepter les conditions d'utilisations");
+        }
+        return true;
+    }
 
 }
 
