@@ -77,7 +77,7 @@ public class Register extends AppCompatActivity {
 
 
                 if(checkForm( username,password, email,city,address,name,firstname))
-                    RegisterUser(username,password,name,firstname,email,city,address);
+                    RegisterUser(username,password,email,city,address,name,firstname);
             }
         });
 
