@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private int userId;
+    private User user;
     private ImageView profilImawgeView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +33,17 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("user", "");
-        User user = gson.fromJson(json, User.class);
+        user = gson.fromJson(json, User.class);
 
         System.out.println(user);
 
 
-        if (userId == -1) {
+        if (user.getId_user() == -1) {
             // L'ID utilisateur n'a pas été trouvé dans SharedPreferences, renvoyer l'utilisateur à l'écran de connexion
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
-        System.out.println(userId);
+        System.out.println(user.getId_user());
     }
 
     // Utiliser l'ID utilisateur
