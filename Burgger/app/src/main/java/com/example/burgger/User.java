@@ -61,11 +61,9 @@ public class User {
     public void setCity(String city) {
         this.city = city;
     }
-
     public String getAddress() {
         return address;
     }
-
     @Override
     public String toString() {
         return "User{" +
@@ -78,7 +76,6 @@ public class User {
                 ", address='" + address + '\'' +
                 '}';
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
