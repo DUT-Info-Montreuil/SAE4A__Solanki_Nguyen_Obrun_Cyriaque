@@ -19,7 +19,7 @@
              android:name=".ModifierProfilActivity"
             android:exported="false" />
         <activity
-            android:name=".ModifierProfilActivity"
+            android:name=".BurgerDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ProfilActivity"
