@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -80,14 +82,30 @@ public class MainActivity extends AppCompatActivity {
                         String successMessage = jsonObject.getString("msg");
                         Toast.makeText(getApplicationContext(), successMessage, Toast.LENGTH_LONG).show();
                         JSONObject result = jsonObject.getJSONObject("result");
-                        int idUser = result.getInt("id_user");
+                        String userName = result.getString("username");
+                        String name = result.getString("name");
+                        String fisrtName = result.getString("firstname");
+                        String email = result.getString("email");
+                        String address = result.getString("address");
+                        String city = result.getString("city");
+                        int id_user = result.getInt("id_user");
 
+                        User user= new User();
+                        user.setId_user(id_user);
+                        user.setAddress(address);
+                        user.setCity(city);
+                        user.setFisrtname(fisrtName);
+                        user.setName(name);
+                        user.setEmail(email);
+                        user.setUsername(username);
 
-                        // Stocker l'ID utilisateur dans SharedPreferences
                         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putInt("userId", idUser);
+                        Gson gson = new Gson();
+                        String json = gson.toJson(user);
+                        editor.putString("user", json);
                         editor.apply();
+
 
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);

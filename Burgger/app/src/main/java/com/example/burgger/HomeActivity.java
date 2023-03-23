@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
+
 public class HomeActivity extends AppCompatActivity {
 
     private int userId;
@@ -29,7 +31,12 @@ public class HomeActivity extends AppCompatActivity {
 
         // Récupérer l'ID utilisateur depuis SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-        userId = sharedPreferences.getInt("userId", -1);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("user", "");
+        User user = gson.fromJson(json, User.class);
+
+        System.out.println(user);
+
 
         if (userId == -1) {
             // L'ID utilisateur n'a pas été trouvé dans SharedPreferences, renvoyer l'utilisateur à l'écran de connexion
