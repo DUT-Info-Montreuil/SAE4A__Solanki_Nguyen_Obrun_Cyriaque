@@ -44,4 +44,14 @@ public class Burger {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
+    @Override
+    public String toString() {
+        return "Burger{" +
+                "id_burger=" + id_burger +
+                ", burgerNamme='" + burgerNamme + '\'' +
+                ", price=" + price +
+                ", photo='" + photo + '\'' +
+                '}';
+    }
 }
