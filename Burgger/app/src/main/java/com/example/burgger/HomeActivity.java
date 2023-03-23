@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -65,9 +66,40 @@ public class HomeActivity extends AppCompatActivity {
 
         burgers=new ArrayList<>();
         getAllBurgers();
-
         burgerListAdapter = new BurgerAdapter(this,R.layout.burger_list_item,burgers);
         burgersListView.setAdapter(burgerListAdapter);
+        burgersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Récupérer le burger sélectionné
+                Burger selectedBurger = burgers.get(position);
+                System.out.println(selectedBurger);
+                // Ouvrir une nouvelle activité avec les détails du burger sélectionné
+
+                SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(user);
+                editor.putString("burger_price", ""+selectedBurger.getPrice());
+                editor.putString("burger_name", selectedBurger.getBurgerNamme());
+                editor.putString("burger_photo", selectedBurger.getPhoto());
+                editor.apply();
+
+
+                Intent burgerDetailIntent = new Intent(getApplicationContext(), BurgerDetailActivity.class);
+                startActivity(burgerDetailIntent);
+            }
+        });
+
+
+        profilImawgeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerActivity = new Intent(getApplicationContext(), ProfilActivity.class);
+                startActivity(registerActivity);
+
+            }
+        });
     }
 
     public interface ApiInterface {
