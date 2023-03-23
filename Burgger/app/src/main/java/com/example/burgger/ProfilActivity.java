@@ -6,6 +6,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -20,6 +22,9 @@ public class ProfilActivity extends AppCompatActivity {
     private TextView mAddressTextView;
     private TextView mCityTextView;
 
+    private Button mEditProfilButton;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +33,7 @@ public class ProfilActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("user", "");
-        User user = gson.fromJson(json, User.class);
+        user = gson.fromJson(json, User.class);
 
         mUserNameTextView = findViewById(R.id.textViewUserName);
         mUserNameTextView.setText("Pseudo : " + user.getUsername());
@@ -46,9 +51,9 @@ public class ProfilActivity extends AppCompatActivity {
         mAddressTextView.setText("Adresse : "+user.getAddress());
 
         mCityTextView = findViewById(R.id.textViewCity);
-        mCityTextView.setText("City : "+user.getCity());
+        mCityTextView.setText("Ville : "+user.getCity());
 
-
+        mEditProfilButton = findViewById(R.id.editButton);
 
 
         if (user.getId_user() == -1) {
@@ -57,6 +62,14 @@ public class ProfilActivity extends AppCompatActivity {
             startActivity(intent);
         }
         System.out.println(user);
+
+        mEditProfilButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registerActivity = new Intent(getApplicationContext(), ModifierProfilActivity.class);
+                startActivity(registerActivity);
+            }
+        });
 
     }
 
