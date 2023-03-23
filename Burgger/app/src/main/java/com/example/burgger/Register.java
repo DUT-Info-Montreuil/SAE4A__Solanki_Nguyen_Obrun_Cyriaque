@@ -117,6 +117,7 @@ public class Register extends AppCompatActivity {
                 @Field("address") String address,
                 @Field("city") String city
         );
+
     }
 
     public void RegisterUser(String username, String password, String email,String city,String adress,String name , String firtName) {
