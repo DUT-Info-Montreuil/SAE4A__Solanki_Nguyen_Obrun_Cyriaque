@@ -6,11 +6,14 @@ public class Burger {
     private double price;
     private  String photo;
 
-    public Burger(int id_burger, String burgerNamme, double price, String photo) {
+    private String desription;
+
+    public Burger(int id_burger, String burgerNamme, double price, String photo,String desription) {
         this.id_burger = id_burger;
         this.burgerNamme = burgerNamme;
         this.price = price;
         this.photo = photo;
+        this.desription = desription;
     }
 
     public int getId_burger() {
@@ -44,6 +47,18 @@ public class Burger {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
+
+    public String getDesription() {
+        return desription;
+    }
+
+    public void setDesription(String desription) {
+        this.desription = desription;
+    }
+
+
+
 
     @Override
     public String toString() {

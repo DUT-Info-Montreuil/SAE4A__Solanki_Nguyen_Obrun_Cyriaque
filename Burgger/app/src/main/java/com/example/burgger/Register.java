@@ -137,8 +137,10 @@ public class Register extends AppCompatActivity {
                         // Inscription réussie
                         String successMessage = jsonObject.getString("msg");
                         Toast.makeText(getApplicationContext(), successMessage, Toast.LENGTH_LONG).show();
+                        finish();
                         Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                         startActivity(intent);
+
                     }
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();

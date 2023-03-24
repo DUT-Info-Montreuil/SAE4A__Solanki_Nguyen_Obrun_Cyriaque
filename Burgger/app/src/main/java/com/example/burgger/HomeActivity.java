@@ -16,7 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -83,6 +82,7 @@ public class HomeActivity extends AppCompatActivity {
                 editor.putString("burger_price", ""+selectedBurger.getPrice());
                 editor.putString("burger_name", selectedBurger.getBurgerNamme());
                 editor.putString("burger_photo", selectedBurger.getPhoto());
+                editor.putString("burger_description", selectedBurger.getDesription());
                 editor.apply();
 
 
@@ -126,8 +126,8 @@ public class HomeActivity extends AppCompatActivity {
                         String burgerName = burgerObject.getString("burgername");
                         Double burgerPrice = burgerObject.getDouble("price");
                         String burgerPhoto = burgerObject.getString("photo");
-
-                        burgers.add(new Burger(burgerId,burgerName,burgerPrice,burgerPhoto));
+                        String burgerDescription = burgerObject.getString("description");
+                        burgers.add(new Burger(burgerId,burgerName,burgerPrice,burgerPhoto,burgerDescription));
 
                     }
 

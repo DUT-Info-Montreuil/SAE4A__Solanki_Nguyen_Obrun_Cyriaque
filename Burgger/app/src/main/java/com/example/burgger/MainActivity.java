@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("user", json);
                         editor.apply();
 
-
+                        finish();
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);
                     }
