@@ -130,6 +130,20 @@ public class ModifierProfilActivity extends AppCompatActivity {
                         mErrorMessage.setText(jsonObject.getString("msg"));
                     } else {
                         // modification réussite
+                        JSONObject result = jsonObject.getJSONObject("result");
+                        String name = result.getString("name");
+                        String fisrtName = result.getString("firstname");
+                        String address = result.getString("address");
+                        String city = result.getString("city");
+                        int id_user = result.getInt("id_user");
+
+                        user.setId_user(id_user);
+                        user.setAddress(address);
+                        user.setCity(city);
+                        user.setFisrtname(fisrtName);
+                        user.setName(name);
+
+
                         String successMessage = jsonObject.getString("msg");
                         Toast.makeText(getApplicationContext(), successMessage, Toast.LENGTH_LONG).show();
                         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
@@ -140,9 +154,9 @@ public class ModifierProfilActivity extends AppCompatActivity {
                         String json = gson.toJson(user);
                         editor.putString("user", json);
                         editor.apply();
-                        finish();
                         Intent registerActivity = new Intent(getApplicationContext(), ProfilActivity.class);
                         startActivity(registerActivity);
+                        finish();
 
                     }
                 } catch (IOException | JSONException e) {

@@ -1,20 +1,14 @@
 package com.example.burgger;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
@@ -24,23 +18,18 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public class HomeActivity extends AppCompatActivity {
 
     private User user;
-    private ImageView profilImawgeView;
 
     private BurgerAdapter burgerListAdapter;
-    private ListView burgersListView;
 
     private ArrayList<Burger> burgers;
 
@@ -60,8 +49,8 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        profilImawgeView=findViewById(R.id.imageViewProfil);
-        burgersListView = findViewById(R.id.burger_list_view);
+        ImageView profilImageView = findViewById(R.id.imageViewProfil);
+        ListView burgersListView = findViewById(R.id.burger_list_view);
 
         burgers=new ArrayList<>();
         getAllBurgers();
@@ -92,7 +81,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-        profilImawgeView.setOnClickListener(new View.OnClickListener() {
+        profilImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent registerActivity = new Intent(getApplicationContext(), ProfilActivity.class);

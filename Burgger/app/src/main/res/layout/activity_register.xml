@@ -23,8 +23,8 @@
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/logoburgr"
-                android:layout_marginTop="20sp"/>
+                android:layout_marginTop="20sp"
+                app:srcCompat="@drawable/logoburgr" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -117,8 +117,6 @@
                 android:textColorHint="@color/gray" />
 
 
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -162,7 +160,7 @@
 
                 android:background="@color/backGroundApp"
                 android:hint="Entrez votre Ville"
-                 android:padding="16dp"
+                android:padding="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gray" />
 
@@ -190,8 +188,6 @@
                 android:textColorHint="@color/gray" />
 
 
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -200,7 +196,6 @@
                 android:textColor="@color/orange"
                 android:textSize="20sp"
                 android:textStyle="bold" />
-
 
 
             <EditText
@@ -237,14 +232,14 @@
                 android:padding="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gray" />
+
             <CheckBox
                 android:id="@+id/acceptConditionsCheckBox"
-                android:layout_marginStart="30sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="I agree to the Terms of Services and Privacy  policy"
+                android:layout_marginStart="30sp"
                 android:checked="false"
-                />
+                android:text="I agree to the Terms of Services and Privacy  policy" />
 
             <Button
                 android:id="@+id/register_button"
@@ -252,16 +247,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
-                android:text="S'inscrire"
                 android:backgroundTint="@color/orange"
+                android:text="S'inscrire"
                 android:textColor="@color/white" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="16dp"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
 
                 <TextView
@@ -269,9 +264,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
+                    android:layout_marginRight="50sp"
                     android:text="Déja inscrit ?"
-                    android:textColor="@color/gray"
-                    android:layout_marginRight="50sp" />
+                    android:textColor="@color/gray" />
 
 
                 <TextView
@@ -283,12 +278,10 @@
                     android:textColor="@color/orange" />
 
 
-
             </LinearLayout>
 
 
         </LinearLayout>
-
 
 
     </ScrollView>
