@@ -2,6 +2,8 @@ package com.example.burgger;
 
 public class Burger {
     private int id_burger;
+
+    private int quantity;
     private String burgerNamme;
     private double price;
     private  String photo;
@@ -14,6 +16,17 @@ public class Burger {
         this.price = price;
         this.photo = photo;
         this.desription = desription;
+    }
+
+
+
+    public Burger(int id_burger, String burgerNamme, double price, String photo,String desription,int quantity) {
+        this.id_burger = id_burger;
+        this.burgerNamme = burgerNamme;
+        this.price = price;
+        this.photo = photo;
+        this.desription = desription;
+        this.quantity = quantity;
     }
 
     public int getId_burger() {
@@ -58,7 +71,13 @@ public class Burger {
     }
 
 
+    public int getQuantity() {
+        return quantity;
+    }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     @Override
     public String toString() {
