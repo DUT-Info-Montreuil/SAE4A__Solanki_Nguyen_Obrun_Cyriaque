@@ -33,15 +33,9 @@
         android:layout_width="match_parent"
         android:layout_height="553dp" />
 
-    </ListView>
 
-    <ImageView
-        android:id="@+id/imageViewPromotion"
-        android:layout_width="139dp"
-        android:layout_height="78dp"
-        android:layout_gravity="start"
-        app:srcCompat="@drawable/promo" 
-        android:layout_height="538dp"/>
+
+
         
 
 
@@ -49,15 +43,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-
+        <ImageView
+            android:id="@+id/imageViewPromotion"
+            android:layout_width="139dp"
+            android:layout_height="78dp"
+            android:layout_gravity="start"
+            app:srcCompat="@drawable/promo"/>
 
         <ImageView
             android:id="@+id/cartimageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="350sp"
             android:layout_weight="0"
             app:srcCompat="@drawable/cart" />
+
     </LinearLayout>
 
 

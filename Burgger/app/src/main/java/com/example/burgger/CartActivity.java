@@ -119,8 +119,16 @@ public class CartActivity extends AppCompatActivity {
                         Double burgerPrice = burgerObject.getDouble("price");
                         String burgerPhoto = burgerObject.getString("photo");
                         String burgerDescription = burgerObject.getString("description");
-                        cart.add(new Burger(burgerId,burgerName,burgerPrice,burgerPhoto,burgerDescription,burgerObject.getInt("quantity")));
-                        total += burgerObject.getInt("quantity")*burgerPrice;
+                        Double reduction = burgerObject.getDouble("COALESCE(reduction, 0)");
+                        if(reduction == 0){
+                            cart.add(new Burger(burgerId,burgerName,burgerPrice,burgerPhoto,burgerDescription,burgerObject.getInt("quantity")));
+                            total += burgerObject.getInt("quantity")*burgerPrice;
+                        }else{
+                            Double prixReduction = burgerPrice - ( (reduction/100)*burgerPrice );
+                            cart.add(new Burger(burgerId,burgerName,prixReduction,burgerPhoto,burgerDescription,burgerObject.getInt("quantity")));
+                            total += burgerObject.getInt("quantity")*prixReduction;
+                        }
+
                     }
 
                     burgerListAdapter.notifyDataSetChanged();
