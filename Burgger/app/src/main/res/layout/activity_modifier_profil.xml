@@ -10,13 +10,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
@@ -26,9 +23,12 @@
                 android:text="Modification du profil  "
                 android:textColor="@color/white"
                 android:textSize="32sp"
-                android:textStyle="bold"
-                tools:ignore="MissingConstraints" />
+                android:textStyle="bold"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <TextView
                 android:id="@+id/text_username"
                 android:layout_width="wrap_content"
@@ -46,12 +46,16 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textView"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_toRightOf="@id/text_username"
+                android:layout_marginLeft="20dp"
+                android:layout_alignBaseline="@id/text_username"
                 android:text=""
                 android:textColor="@color/orange"
                 android:textSize="18sp" />
-
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <TextView
                 android:id="@+id/text_name"
                 android:layout_width="wrap_content"
@@ -75,6 +79,11 @@
                 android:background="@color/backGroundApp"
                 android:text=""
                 android:textColor="@color/white" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/text_firstName"
@@ -99,6 +108,11 @@
                 android:background="@color/backGroundApp"
                 android:text=""
                 android:textColor="@color/white" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/text_email"
@@ -122,6 +136,11 @@
                 android:layout_toRightOf="@id/text_email"
                 android:text=""
                 android:textColor="@color/orange" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/text_address"
@@ -146,6 +165,11 @@
                 android:background="@color/backGroundApp"
                 android:text=""
                 android:textColor="@color/white" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/text_city"
@@ -170,6 +194,8 @@
                 android:background="@color/backGroundApp"
                 android:text=""
                 android:textColor="@color/white" />
+        </LinearLayout>
+
 
             <TextView
                 android:id="@+id/text_oldpass"
@@ -195,6 +221,7 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/gray" />
 
+
             <TextView
                 android:id="@+id/text_newpass"
                 android:layout_width="wrap_content"
@@ -218,6 +245,7 @@
                 android:inputType="textPassword"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gray" />
+
 
             <TextView
                 android:id="@+id/text_newCpass"
@@ -243,6 +271,8 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/gray" />
 
+
+
             <Button
                 android:id="@+id/confirmationButton"
                 android:layout_width="match_parent"
@@ -254,14 +284,6 @@
                 android:backgroundTint="@color/orange"
                 android:text="Confirmation"
                 android:textColor="@color/white" />
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme" />
 
             <TextView
                 android:id="@+id/errorMsg_textView"
@@ -276,9 +298,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-
         </LinearLayout>
-
 
     </ScrollView>
 

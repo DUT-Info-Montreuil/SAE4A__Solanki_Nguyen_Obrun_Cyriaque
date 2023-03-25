@@ -1,5 +1,7 @@
 package com.example.burgger;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,9 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
@@ -26,7 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.POST;
 
-public class HomeActivity extends AppCompatActivity {
+public class PromotionActivity extends AppCompatActivity {
 
     private User user;
 
@@ -34,12 +33,11 @@ public class HomeActivity extends AppCompatActivity {
 
     private ArrayList<Burger> burgers;
 
-    private ImageView mPromotionImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_promotion);
 
         // Récupérer l'ID utilisateur depuis SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
@@ -93,25 +91,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        mPromotionImageView = findViewById(R.id.imageViewPromotion);
-        mPromotionImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent registerActivity = new Intent(getApplicationContext(), PromotionActivity.class);
-                startActivity(registerActivity);
-            }
-        });
     }
 
     public interface ApiInterface {
-
-        @POST("getBurgers.php")
+        @POST("getBurgersPromotion.php")
         Call<ResponseBody> getBurgers();
-
     }
 
     public void getAllBurgers(){
-        HomeActivity.ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(HomeActivity.ApiInterface.class);
+        ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
         Call<ResponseBody> call = apiInterface.getBurgers();
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -126,17 +114,11 @@ public class HomeActivity extends AppCompatActivity {
                         int burgerId = burgerObject.getInt("id_burger");
                         String burgerName = burgerObject.getString("burgername");
                         Double burgerPrice = burgerObject.getDouble("price");
+                        Double reduction = burgerObject.getDouble("reduction");
+                        Double prixReduction = burgerPrice - ( (reduction/100)*burgerPrice );
                         String burgerPhoto = burgerObject.getString("photo");
                         String burgerDescription = burgerObject.getString("description");
-                        Double reduction = burgerObject.getDouble("COALESCE(reduction, 0)");
-                        System.out.println(reduction);
-                        if(reduction == 0){
-                            burgers.add(new Burger(burgerId,burgerName,burgerPrice,burgerPhoto,burgerDescription));
-                        }else{
-                            Double prixReduction = burgerPrice - ( (reduction/100)*burgerPrice );
-                            burgers.add(new Burger(burgerId,burgerName,prixReduction,burgerPhoto,burgerDescription));
-                        }
-
+                        burgers.add(new Burger(burgerId,burgerName,prixReduction,burgerPhoto,burgerDescription));
 
                     }
 
@@ -154,4 +136,3 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 }
-
