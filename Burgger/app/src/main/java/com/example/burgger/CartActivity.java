@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -38,6 +39,9 @@ public class CartActivity extends AppCompatActivity {
 
     private ListView burgersListView;
 
+    private TextView totalTextView;
+
+    private double total=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +56,8 @@ public class CartActivity extends AppCompatActivity {
 
     private void setOnclick(){
         profilImageView = findViewById(R.id.imageViewProfil);
+
+        totalTextView = findViewById(R.id.TotaltextView);
         profilImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +70,7 @@ public class CartActivity extends AppCompatActivity {
 
 
     public   void initializeCart(){
+
         cart=new ArrayList<>();
         Gson gson = new Gson();
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
@@ -71,7 +78,7 @@ public class CartActivity extends AppCompatActivity {
         User user = gson.fromJson(json, User.class);
         getCart(user.getId_user());
 
-        burgerListAdapter = new CartBurgerAdapter(this,R.layout.cart_list_item,cart,user.getId_user());
+        burgerListAdapter = new CartBurgerAdapter(this,R.layout.cart_list_item,cart,user.getId_user(),totalTextView,cart);
         burgersListView.setAdapter(burgerListAdapter);
         burgersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -81,6 +88,7 @@ public class CartActivity extends AppCompatActivity {
                 System.out.println(selectedBurger);
             }
         });
+
     }
     public interface ApiInterface {
         @FormUrlEncoded
@@ -112,10 +120,11 @@ public class CartActivity extends AppCompatActivity {
                         String burgerPhoto = burgerObject.getString("photo");
                         String burgerDescription = burgerObject.getString("description");
                         cart.add(new Burger(burgerId,burgerName,burgerPrice,burgerPhoto,burgerDescription,burgerObject.getInt("quantity")));
-
+                        total += burgerObject.getInt("quantity")*burgerPrice;
                     }
 
                     burgerListAdapter.notifyDataSetChanged();
+                    totalTextView.setText("total : "+total);
 
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();

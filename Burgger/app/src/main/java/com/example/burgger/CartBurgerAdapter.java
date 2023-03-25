@@ -1,8 +1,6 @@
 package com.example.burgger;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
-import org.json.JSONException;
-
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -33,12 +27,17 @@ public class CartBurgerAdapter extends ArrayAdapter<Burger> {
 
     private int id_user;
 
+    private  TextView totalTextView;
 
-    public CartBurgerAdapter(Context context, int resource, List<Burger> burgers,int id_user) {
+    private ArrayList<Burger> cart;
+
+    public CartBurgerAdapter(Context context, int resource, List<Burger> burgers, int id_user, TextView totalTextView, ArrayList<Burger> cart) {
         super(context, resource, burgers);
         mContext = context;
         mResource = resource;
         this.id_user=id_user;
+        this.totalTextView=totalTextView;
+        this.cart=cart;
     }
 
     @Override
@@ -78,6 +77,7 @@ public class CartBurgerAdapter extends ArrayAdapter<Burger> {
                         burger.setQuantity(burger.getQuantity()+1);
                         quantityTextView.setText("qté: "+burger.getQuantity());
                         priceTextView.setText(""+burger.getPrice()* burger.getQuantity());
+                        refreshTotal();
                     }
 
                     @Override
@@ -100,8 +100,10 @@ public class CartBurgerAdapter extends ArrayAdapter<Burger> {
                         quantityTextView.setText("qté: "+burger.getQuantity());
                         priceTextView.setText(""+burger.getPrice()* burger.getQuantity());
 
+                        refreshTotal();
                         if (burger.getQuantity()<1){
                             remove(burger);
+
                             notifyDataSetChanged();
                         }
                     }
@@ -134,5 +136,14 @@ public class CartBurgerAdapter extends ArrayAdapter<Burger> {
                 @Field("id_user") int id_user,
                 @Field("id_burger") int id_burger
         );
+    }
+
+    private void refreshTotal(){
+        double total=0;
+        for (Burger b: cart){
+            total += b.getQuantity()*b.getPrice();
+
+        }
+        totalTextView.setText("total : "+total);
     }
 }
