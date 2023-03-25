@@ -33,6 +33,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private ArrayList<Burger> burgers;
 
+    private  ListView burgersListView;
+
+    private  ImageView profilImageView,cartImageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,46 +52,16 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        ImageView profilImageView = findViewById(R.id.imageViewProfil);
-        ListView burgersListView = findViewById(R.id.burger_list_view);
+         profilImageView = findViewById(R.id.imageViewProfil);
+         cartImageView = findViewById(R.id.cartimageView);
+         burgersListView = findViewById(R.id.burger_list_view);
 
-        burgers=new ArrayList<>();
-        getAllBurgers();
-        burgerListAdapter = new BurgerAdapter(this,R.layout.burger_list_item,burgers);
-        burgersListView.setAdapter(burgerListAdapter);
-        burgersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Récupérer le burger sélectionné
-                Burger selectedBurger = burgers.get(position);
-                System.out.println(selectedBurger);
-                // Ouvrir une nouvelle activité avec les détails du burger sélectionné
-
-                SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(user);
-                editor.putString("burger_price", ""+selectedBurger.getPrice());
-                editor.putString("burger_name", selectedBurger.getBurgerNamme());
-                editor.putString("burger_photo", selectedBurger.getPhoto());
-                editor.putString("burger_description", selectedBurger.getDesription());
-                editor.apply();
+         setOnclick();
+         initializeBurger();
 
 
-                Intent burgerDetailIntent = new Intent(getApplicationContext(), BurgerDetailActivity.class);
-                startActivity(burgerDetailIntent);
-            }
-        });
 
 
-        profilImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent registerActivity = new Intent(getApplicationContext(), ProfilActivity.class);
-                startActivity(registerActivity);
-
-            }
-        });
     }
 
     public interface ApiInterface {
@@ -133,5 +106,55 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
+    private  void initializeBurger(){
+        burgers=new ArrayList<>();
+        getAllBurgers();
+        burgerListAdapter = new BurgerAdapter(this,R.layout.burger_list_item,burgers);
+        burgersListView.setAdapter(burgerListAdapter);
+        burgersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Récupérer le burger sélectionné
+                Burger selectedBurger = burgers.get(position);
+                System.out.println(selectedBurger);
+                // Ouvrir une nouvelle activité avec les détails du burger sélectionné
+
+                SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(user);
+                editor.putString("burger_price", ""+selectedBurger.getPrice());
+                editor.putString("burger_name", selectedBurger.getBurgerNamme());
+                editor.putString("burger_photo", selectedBurger.getPhoto());
+                editor.putString("burger_description", selectedBurger.getDesription());
+                editor.putInt("burger_id",selectedBurger.getId_burger());
+                editor.apply();
+                finish();
+                Intent burgerDetailIntent = new Intent(getApplicationContext(), BurgerDetailActivity.class);
+                startActivity(burgerDetailIntent);
+            }
+        });
+    }
+
+    private void setOnclick(){
+        profilImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profilActivity = new Intent(getApplicationContext(), ProfilActivity.class);
+                startActivity(profilActivity);
+
+            }
+        });  cartImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cartActivity = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(cartActivity);
+
+            }
+        });
+    }
+
+
 }
 
