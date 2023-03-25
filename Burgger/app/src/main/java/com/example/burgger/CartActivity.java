@@ -63,7 +63,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
 
-    private  void initializeCart(){
+    public   void initializeCart(){
         cart=new ArrayList<>();
         Gson gson = new Gson();
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
@@ -71,7 +71,7 @@ public class CartActivity extends AppCompatActivity {
         User user = gson.fromJson(json, User.class);
         getCart(user.getId_user());
 
-        burgerListAdapter = new CartBurgerAdapter(this,R.layout.burger_list_item,cart);
+        burgerListAdapter = new CartBurgerAdapter(this,R.layout.cart_list_item,cart,user.getId_user());
         burgersListView.setAdapter(burgerListAdapter);
         burgersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -89,7 +89,6 @@ public class CartActivity extends AppCompatActivity {
                 @Field("id_user") int id_user
 
         );
-
     }
 
     public void getCart(int id_user){
