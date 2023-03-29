@@ -111,10 +111,16 @@ public class MainActivity extends AppCompatActivity {
                         if(result.getInt("id_role")==3){
                             showNavigationDialog();
 
-                        }else
+                        }else if(result.getInt("id_role")==2){
+                            Intent intent = new Intent(getApplicationContext(), CuisineActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else
                         {
                             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                             startActivity(intent);
+                            finish();
                         }
 
 
