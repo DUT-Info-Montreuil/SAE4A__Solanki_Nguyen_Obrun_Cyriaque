@@ -62,13 +62,15 @@ public class PromotionActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Récupérer le burger sélectionné
                 Burger selectedBurger = burgers.get(position);
-                System.out.println(selectedBurger);
+
+                System.out.println(selectedBurger.toString());
                 // Ouvrir une nouvelle activité avec les détails du burger sélectionné
 
                 SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(user);
+                editor.putInt("burger_id",selectedBurger.getId_burger());
                 editor.putString("burger_price", ""+selectedBurger.getPrice());
                 editor.putString("burger_name", selectedBurger.getBurgerNamme());
                 editor.putString("burger_photo", selectedBurger.getPhoto());

@@ -64,6 +64,8 @@ public class BurgerDetailActivity extends AppCompatActivity {
         burgerNameTextView.setText(burger_name);
         burgerPriceTextView.setText(burger_price+"€");
         burgerDescriptionTextView.setText(burger_description);
+
+        System.out.println(burger_id);
         addBurgerToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

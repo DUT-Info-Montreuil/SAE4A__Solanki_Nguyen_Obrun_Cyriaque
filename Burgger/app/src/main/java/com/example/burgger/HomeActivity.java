@@ -158,7 +158,7 @@ public class HomeActivity extends AppCompatActivity {
                 editor.putString("burger_description", selectedBurger.getDesription());
                 editor.putInt("burger_id",selectedBurger.getId_burger());
                 editor.apply();
-                finish();
+
                 Intent burgerDetailIntent = new Intent(getApplicationContext(), BurgerDetailActivity.class);
                 startActivity(burgerDetailIntent);
             }
