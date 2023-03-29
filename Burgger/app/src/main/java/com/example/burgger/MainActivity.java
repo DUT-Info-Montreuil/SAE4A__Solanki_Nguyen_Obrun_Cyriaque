@@ -1,5 +1,7 @@
 package com.example.burgger;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -106,9 +108,16 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("user", json);
                         editor.apply();
 
-                        finish();
-                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                        startActivity(intent);
+                        if(result.getInt("id_role")==3){
+                            showNavigationDialog();
+
+                        }else
+                        {
+                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                            startActivity(intent);
+                        }
+
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -134,7 +143,12 @@ public class MainActivity extends AppCompatActivity {
                 @Field("password") String password
         );
     }
+    private void showNavigationDialog() {
 
+            NavigationDialogFragment dialogFragment = new NavigationDialogFragment();
+            dialogFragment.show(getSupportFragmentManager(), "navigationDialog");
+
+    }
 
 }
 
