@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class AdminActivity extends AppCompatActivity {
 
-    private Button manageUser;
+    private Button manageUser,mangeBurger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,16 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent manageActivity = new Intent(getApplicationContext(), ManageUserActivity.class);
+                startActivity(manageActivity);
+            }
+        });
+
+        mangeBurger = findViewById(R.id.manageBurger_button);
+
+        mangeBurger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent manageActivity = new Intent(getApplicationContext(), ManageBurgerActivity.class);
                 startActivity(manageActivity);
             }
         });
