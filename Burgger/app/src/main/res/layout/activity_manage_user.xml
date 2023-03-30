@@ -26,7 +26,8 @@
         android:layout_height="wrap_content"
         android:alwaysDrawnWithCache="false"
         android:animateLayoutChanges="false"
-        android:background="@color/white" />
+        android:background="@color/white"
+        android:layout_marginBottom="10dp"/>
 
     <ListView
         android:id="@+id/users_list_view"

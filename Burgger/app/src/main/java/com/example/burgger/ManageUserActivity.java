@@ -126,14 +126,11 @@ public class ManageUserActivity extends AppCompatActivity {
                 try {
                     String jsonString = response.body().string();
                     JSONObject jsonObject = new JSONObject(jsonString);
-
                     // Vider la liste des utilisateurs
                     users.clear();
-
                     // Vérifier si la valeur est nulle
                     if (!jsonObject.isNull("result")) {
                         JSONArray jsonArray = jsonObject.getJSONArray("result");
-
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject userObject = jsonArray.getJSONObject(i);
                             int userid = userObject.getInt("id_user");
