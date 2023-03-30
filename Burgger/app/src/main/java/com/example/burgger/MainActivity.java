@@ -81,40 +81,53 @@ public class MainActivity extends AppCompatActivity {
                         errorMsgTextView.setText(jsonObject.getString("msg"));
                     } else {
                         // Connexion réussie
+
                         String successMessage = jsonObject.getString("msg");
                         Toast.makeText(getApplicationContext(), successMessage, Toast.LENGTH_LONG).show();
                         JSONObject result = jsonObject.getJSONObject("result");
-                        String userName = result.getString("username");
-                        String name = result.getString("name");
-                        String fisrtName = result.getString("firstname");
-                        String email = result.getString("email");
-                        String address = result.getString("address");
-                        String city = result.getString("city");
-                        int id_user = result.getInt("id_user");
 
-                        User user= new User();
-                        user.setId_user(id_user);
-                        user.setAddress(address);
-                        user.setCity(city);
-                        user.setFisrtname(fisrtName);
-                        user.setName(name);
-                        user.setEmail(email);
-                        user.setUsername(username);
+                        if (result.getInt("ban") == 1 && result.getInt("id_role")!=3) {
+                            errorMsgTextView.setText("impossible vous êtes banni");
+                        } else {
+                            String userName = result.getString("username");
+                            String name = result.getString("name");
+                            String fisrtName = result.getString("firstname");
+                            String email = result.getString("email");
+                            String address = result.getString("address");
+                            String city = result.getString("city");
+                            int id_user = result.getInt("id_user");
 
-                        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        Gson gson = new Gson();
-                        String json = gson.toJson(user);
-                        editor.putString("user", json);
-                        editor.apply();
+                            User user = new User();
+                            user.setId_user(id_user);
+                            user.setAddress(address);
+                            user.setCity(city);
+                            user.setFisrtname(fisrtName);
+                            user.setName(name);
+                            user.setEmail(email);
+                            user.setUsername(username);
 
-                        if(result.getInt("id_role")==3){
-                            showNavigationDialog();
+                            if (result.getInt("ban") == 1)
+                                user.setBan(true);
+                            else
+                                user.setBan(false);
 
-                        }else
-                        {
-                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                            startActivity(intent);
+
+                            SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            Gson gson = new Gson();
+                            String json = gson.toJson(user);
+                            editor.putString("user", json);
+                            editor.apply();
+
+                            if (result.getInt("id_role") == 3) {
+                                showNavigationDialog();
+
+                            } else {
+                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                startActivity(intent);
+
+
+                            }
                         }
 
 

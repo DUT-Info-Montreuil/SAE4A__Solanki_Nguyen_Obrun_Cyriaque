@@ -109,18 +109,34 @@ private  int mResource;
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setTitle("Confirmation");
-                builder.setMessage("Voulez vous vraiment bannir l'utilisateur id:"+user.getId_user()+" "+user.getUsername());
-
+                if (!user.isBan())
+                    builder.setMessage("Voulez vous vraiment bannir l'utilisateur id:" + user.getId_user() + " " + user.getUsername());
+                else
+                    builder.setMessage("Voulez vous vraiment débannir l'utilisateur id:" + user.getId_user() + " " + user.getUsername());
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        int ban;
+                        if (user.isBan())
+                            ban = 0;
+                        else
+                            ban = 1;
+
                         UserAdapter.ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(UserAdapter.ApiInterface.class);
-                        Call<ResponseBody> call = apiInterface.banUser(user.getId_user());
+                        Call<ResponseBody> call = apiInterface.banUser(user.getId_user(), ban);
                         call.enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                Toast.makeText(mContext, "Utilisateur banni", Toast.LENGTH_LONG).show();
-                                remove(user);
+                                // Mettre à jour l'état de l'utilisateur et le texte du bouton
+                                user.setBan(!user.isBan());
+                                if (user.isBan()) {
+                                    Toast.makeText(mContext,"Utilisateur banni ",Toast.LENGTH_LONG);
+                                    banUserButton.setText("Débannir utilisateur");
+                                } else {
+                                    Toast.makeText(mContext,"Utilisateur débanni ",Toast.LENGTH_LONG);
+                                    banUserButton.setText("Bannir utilisateur");
+                                }
+
                                 notifyDataSetChanged();
                             }
 
@@ -159,7 +175,8 @@ private  int mResource;
         @FormUrlEncoded
         @POST("banUser.php")
         Call<ResponseBody> banUser(
-                @Field("id_user") int id_user
+                @Field("id_user") int id_user,
+                @Field("ban") int ban
         );
     }
 }
