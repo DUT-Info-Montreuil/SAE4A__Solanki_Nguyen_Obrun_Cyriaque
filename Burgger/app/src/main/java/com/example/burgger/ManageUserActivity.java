@@ -99,6 +99,10 @@ public class ManageUserActivity extends AppCompatActivity {
                         User user  = new User();
                         user.setId_user(userid);
                         user.setUsername(User_username);
+                        if (userObject.getInt("ban")==1)
+                            user.setBan(true);
+                        else
+                            user.setBan(false);
                         users.add(user);
                     }
 

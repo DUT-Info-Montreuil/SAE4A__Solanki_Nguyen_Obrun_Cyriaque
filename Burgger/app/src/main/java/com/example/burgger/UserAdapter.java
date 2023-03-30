@@ -44,9 +44,17 @@ private  int mResource;
             view = inflater.inflate(mResource, parent, false);
         }
 
+
         Button dellUserButton = view.findViewById(R.id.dellUserButton);
+        Button banUserButton = view.findViewById(R.id.banUserButton);
 
         User user = getItem(position);
+
+        if (user.isBan()){
+            banUserButton.setText("DEBANNIR UTILISATEUR");
+        }else {
+            banUserButton.setText("BANNIR UTILISATEUR");
+        }
 
         TextView nameTextView = view.findViewById(R.id.nameTextView);
         TextView priceTextView = view.findViewById(R.id.priceTextView);
@@ -96,6 +104,47 @@ private  int mResource;
         });
 
 
+        banUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Confirmation");
+                builder.setMessage("Voulez vous vraiment bannir l'utilisateur id:"+user.getId_user()+" "+user.getUsername());
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        UserAdapter.ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(UserAdapter.ApiInterface.class);
+                        Call<ResponseBody> call = apiInterface.banUser(user.getId_user());
+                        call.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                Toast.makeText(mContext, "Utilisateur banni", Toast.LENGTH_LONG).show();
+                                remove(user);
+                                notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Toast.makeText(mContext, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
+
         return view;
 
     }
@@ -104,6 +153,12 @@ private  int mResource;
         @FormUrlEncoded
         @POST("dellUser.php")
         Call<ResponseBody> dellUser(
+                @Field("id_user") int id_user
+        );
+
+        @FormUrlEncoded
+        @POST("banUser.php")
+        Call<ResponseBody> banUser(
                 @Field("id_user") int id_user
         );
     }

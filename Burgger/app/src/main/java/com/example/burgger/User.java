@@ -4,6 +4,9 @@ public class User {
 
     private int id_user;
 
+
+
+    private boolean ban;
     public User(int id_user, String username, String name, String fisrtname, String email, String city, String address) {
         this.id_user = id_user;
         this.username = username;
@@ -76,6 +79,15 @@ public class User {
     }
     public String getAddress() {
         return address;
+    }
+
+
+    public boolean isBan() {
+        return ban;
+    }
+
+    public void setBan(boolean ban) {
+        this.ban = ban;
     }
     @Override
     public String toString() {
