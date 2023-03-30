@@ -17,26 +17,13 @@
             android:layout_height="100dp"
             android:layout_weight="10"
             app:srcCompat="@drawable/logoburgr" />
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView2"
+    <ListView
+        android:id="@+id/users_list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Bienvenue sur l'espace administrateur"
-        android:textSize="20dp"
-        android:textColor="@color/orange"
-        />
-
-    <Button
-        android:id="@+id/manageUser_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="gérer Utilisateurs"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/orange" />
-
+        android:layout_height="0dp"
+        android:layout_weight="10" />
 
 </LinearLayout>
