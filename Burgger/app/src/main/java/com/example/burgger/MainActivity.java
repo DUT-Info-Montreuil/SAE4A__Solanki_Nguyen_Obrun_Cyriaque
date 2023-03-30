@@ -106,12 +106,6 @@ public class MainActivity extends AppCompatActivity {
                             user.setEmail(email);
                             user.setUsername(username);
 
-                            if (result.getInt("ban") == 1)
-                                user.setBan(true);
-                            else
-                                user.setBan(false);
-
-
                             SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             Gson gson = new Gson();
