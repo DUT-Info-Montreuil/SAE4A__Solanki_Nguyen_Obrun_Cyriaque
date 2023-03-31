@@ -4,6 +4,7 @@ import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -27,14 +29,23 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
-public class CuisineActivity extends AppCompatActivity {
+
+public class CuisineActivity extends AppCompatActivity  {
 
     private User user;
     private ArrayList<Commande> commandes;
+    private ArrayList<Commande> commandesPrete;
     private CommandeAdapter mCommandeAdapter;
+    private CommandeAdapter mCommandeAdapterPret;
     private ListView commandeList;
+    private ListView commandeListPrete;
+    private ImageView refresh;
+    private ImageView supprimer;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +63,44 @@ public class CuisineActivity extends AppCompatActivity {
         }
 
         commandeList = findViewById(R.id.commande_list_view);
+        commandeListPrete = findViewById(R.id.commande_list_view_prete);
+        refresh = findViewById(R.id.refresh_commande);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                startActivity(new Intent(getApplicationContext(), CuisineActivity.class));
+            }
+        });
 
-        initializeBurger();
+        supprimer = findViewById(R.id.supprimer_commande_prete);
+        supprimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                supprimerCommandePrete();
+                finish();
+                startActivity(new Intent(getApplicationContext(), CuisineActivity.class));
+            }
+        });
+
+        initializeCommande();
     }
 
+
+
     public interface ApiInterface {
+        @POST("getCommandesPrete.php")
+        Call<ResponseBody> getCommandesPrete();
         @POST("getCommandes.php")
         Call<ResponseBody> getCommandes();
+
+        @POST("supprimerCommandePrete.php")
+        Call<ResponseBody> supprimerCommandePrete();
+
+        @FormUrlEncoded
+        @POST("majCommandePret.php")
+        Call<ResponseBody> majPret(@Field("idCommande") int idCommande);
+
     }
 
     public void getAllCommandes(){
@@ -70,23 +112,72 @@ public class CuisineActivity extends AppCompatActivity {
                 try {
                     String jsonString = response.body().string();
                     JSONObject jsonObject = new JSONObject(jsonString);
-                    JSONArray jsonArray = jsonObject.getJSONArray("result");
+                    boolean success = jsonObject.getBoolean("success");
+                    if (!success) {
+                        System.out.println(jsonObject.getString("msg"));
+                    } else {
 
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject burgerObject = jsonArray.getJSONObject(i);
-                        int commandeId = burgerObject.getInt("id_commande");
-                        int burgerId = burgerObject.getInt("id_burger");
-                        String modification = burgerObject.getString("modification");
-                        int pret = burgerObject.getInt("pret");
-                        boolean p;
-                        if(pret==0)
-                            p=false;
-                        else
-                            p=true;
+                        JSONArray jsonArray = jsonObject.getJSONArray("result");
 
-                        commandes.add(new Commande(commandeId,burgerId,modification,p));
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject burgerObject = jsonArray.getJSONObject(i);
+                            int commandeId = burgerObject.getInt("id_commande");
+                            String burgerName = burgerObject.getString("burgername");
+                            String modification = burgerObject.getString("modification");
+                            int pret = burgerObject.getInt("pret");
+                            boolean p;
+                            if (pret == 0)
+                                p = false;
+                            else
+                                p = true;
+
+                            commandes.add(new Commande(commandeId, burgerName, modification, p));
+                        }
+                        mCommandeAdapter.notifyDataSetChanged();
+
                     }
-                    mCommandeAdapter.notifyDataSetChanged();
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void getAllCommandesPrete(){
+        ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
+        Call<ResponseBody> call = apiInterface.getCommandesPrete();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String jsonString = response.body().string();
+                    JSONObject jsonObject = new JSONObject(jsonString);
+
+                    boolean success = jsonObject.getBoolean("success");
+                    if (!success) {
+                        System.out.println(jsonObject.getString("msg"));
+                    } else {
+                        JSONArray jsonArray = jsonObject.getJSONArray("result");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject burgerObject = jsonArray.getJSONObject(i);
+                            int commandeId = burgerObject.getInt("id_commande");
+                            String burgerName = burgerObject.getString("burgername");
+                            String modification = burgerObject.getString("modification");
+                            int pret = burgerObject.getInt("pret");
+                            boolean p;
+                            if(pret==0)
+                                p=false;
+                            else
+                                p=true;
+
+                            commandesPrete.add(new Commande(commandeId,burgerName,modification,p));
+                        }
+                        mCommandeAdapterPret.notifyDataSetChanged();
+                    }
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
@@ -99,24 +190,51 @@ public class CuisineActivity extends AppCompatActivity {
     }
 
 
-    private  void initializeBurger(){
+    private  void initializeCommande(){
         commandes=new ArrayList<>();
+        commandesPrete = new ArrayList<>();
         getAllCommandes();
+        getAllCommandesPrete();
         mCommandeAdapter = new CommandeAdapter(this,R.layout.commande_list_item,commandes);
+        mCommandeAdapterPret = new CommandeAdapter(this,R.layout.commande_list_item_pret,commandesPrete);
         commandeList.setAdapter(mCommandeAdapter);
+        commandeListPrete.setAdapter(mCommandeAdapterPret);
         commandeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Récupérer la commande sélectionné
                 Commande selectedCommande = commandes.get(position);
                 System.out.println(selectedCommande);
-                LinearLayout ln = (LinearLayout) parent.getChildAt(position);
-                Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_rounded_corners_vert);
-                ln.setBackground(drawable);
-                
-                // Ouvrir une nouvelle activité avec les détails du burger sélectionné
+                Bundle args = new Bundle();
+                args.putInt("ouiouioui", selectedCommande.getIdCommande());
 
 
+
+                showNavigationDialog(args);
+            }
+        });
+    }
+
+
+
+    private void showNavigationDialog(Bundle args) {
+        ValidationDialogFragment dialogFragment = new ValidationDialogFragment();
+        dialogFragment.setArguments(args);
+        dialogFragment.show(getSupportFragmentManager(), "validationDialog");
+    }
+
+
+    public void supprimerCommandePrete(){
+        ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
+        Call<ResponseBody> call = apiInterface.supprimerCommandePrete();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                System.out.println("les commandes pretes sont supprimer");
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
             }
         });
     }

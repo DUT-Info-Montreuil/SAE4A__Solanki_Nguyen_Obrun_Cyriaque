@@ -3,13 +3,13 @@ package com.example.burgger;
 public class Commande {
 
     private int idCommande;
-    private int idBurger;
+    private String burger;
     private String modification;
     private boolean pret;
 
-    public Commande(int idCommande, int idBurger, String modification, boolean pret){
+    public Commande(int idCommande, String burger, String modification, boolean pret){
         this.idCommande = idCommande;
-        this.idBurger = idBurger;
+        this.burger = burger;
         this.modification = modification;
         this.pret = pret;
     }
@@ -22,13 +22,7 @@ public class Commande {
         this.idCommande = idCommande;
     }
 
-    public int getIdBurger() {
-        return idBurger;
-    }
 
-    public void setIdBurger(int idBurger) {
-        this.idBurger = idBurger;
-    }
 
     public String getModification() {
         return modification;
@@ -46,11 +40,19 @@ public class Commande {
         this.pret = pret;
     }
 
+    public String getBurger() {
+        return burger;
+    }
+
+    public void setBurger(String burger) {
+        this.burger = burger;
+    }
+
     @Override
     public String toString() {
         return "Commande{" +
                 "idCommande=" + idCommande +
-                ", idBurger=" + idBurger +
+                ", burger='" + burger + '\'' +
                 ", modification='" + modification + '\'' +
                 ", pret=" + pret +
                 '}';
