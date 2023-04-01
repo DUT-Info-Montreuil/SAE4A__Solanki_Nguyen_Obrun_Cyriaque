@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,18 +31,14 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public class CartActivity extends AppCompatActivity {
-
     private ImageView profilImageView;
-
-
     private CartBurgerAdapter burgerListAdapter;
-
     private ArrayList<Burger> cart;
-
     private ListView burgersListView;
-
     private TextView totalTextView, textAucuneCommande;
     private ImageView burgerList, promotion;
+
+    private Button buttonContinuer;
 
     private double total=0;
     @SuppressLint("MissingInflatedId")
@@ -50,12 +47,14 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         setOnclick();
+        buttonContinuer = findViewById(R.id.continuer_button);
         burgersListView = findViewById(R.id.burger_list_view);
-         initializeCart();
+        textAucuneCommande = findViewById(R.id.aucuneCommandeCart);
+        initializeCart();
 
         burgerList = findViewById(R.id.imageViewBurger);
 
-        textAucuneCommande = findViewById(R.id.aucuneCommandeCart);
+
         burgerList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,7 +102,7 @@ public class CartActivity extends AppCompatActivity {
         User user = gson.fromJson(json, User.class);
         getCart(user.getId_user());
 
-        burgerListAdapter = new CartBurgerAdapter(this,R.layout.cart_list_item,cart,user.getId_user(),totalTextView,cart);
+        burgerListAdapter = new CartBurgerAdapter(this,R.layout.cart_list_item,cart,user.getId_user(),totalTextView,cart, textAucuneCommande);
         burgersListView.setAdapter(burgerListAdapter);
         burgersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -166,7 +165,7 @@ public class CartActivity extends AppCompatActivity {
                         }
 
                         burgerListAdapter.notifyDataSetChanged();
-                        totalTextView.setText("total : " + total);
+                        totalTextView.setText("Total : " + total + " €");
                     }
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();

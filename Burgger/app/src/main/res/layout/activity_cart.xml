@@ -35,7 +35,7 @@
         <ListView
             android:id="@+id/burger_list_view"
             android:layout_width="match_parent"
-            android:layout_height="500dp">
+            android:layout_height="470dp">
         </ListView>
         <TextView
             android:id="@+id/aucuneCommandeCart"
@@ -57,8 +57,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25dp"
+        android:layout_marginLeft="30dp"
         android:text="Total :"
         android:textColor="@color/orange"/>
+    <Button
+        android:id="@+id/continuer_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="CONTINUER"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/orange" />
 
     <LinearLayout
         android:layout_width="match_parent"

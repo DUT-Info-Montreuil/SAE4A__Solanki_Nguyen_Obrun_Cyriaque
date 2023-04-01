@@ -30,17 +30,18 @@ public class CartBurgerAdapter extends ArrayAdapter<Burger> {
 
     private int id_user;
 
-    private  TextView totalTextView;
+    private  TextView totalTextView, aucuneCommande;
 
     private ArrayList<Burger> cart;
 
-    public CartBurgerAdapter(Context context, int resource, List<Burger> burgers, int id_user, TextView totalTextView, ArrayList<Burger> cart) {
+    public CartBurgerAdapter(Context context, int resource, List<Burger> burgers, int id_user, TextView totalTextView, ArrayList<Burger> cart, TextView aucuneCommande) {
         super(context, resource, burgers);
         mContext = context;
         mResource = resource;
         this.id_user=id_user;
         this.totalTextView=totalTextView;
         this.cart=cart;
+        this.aucuneCommande = aucuneCommande;
     }
 
     @Override
@@ -64,7 +65,7 @@ public class CartBurgerAdapter extends ArrayAdapter<Burger> {
         priceTextView.setText(""+burger.getPrice()* burger.getQuantity());
         photoImageView.setImageResource(mContext.getResources().getIdentifier(burger.getPhoto(), "drawable", mContext.getPackageName()));
         quantityTextView.setText("qté: "+burger.getQuantity());
-        
+
 
 
         addbtn.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +148,7 @@ public class CartBurgerAdapter extends ArrayAdapter<Burger> {
         }
         if(total == 0){
             totalTextView.setText("Total : ");
+            aucuneCommande.setText("Aucune commande");
         }else
             totalTextView.setText("Total : "+total + " €");
 
