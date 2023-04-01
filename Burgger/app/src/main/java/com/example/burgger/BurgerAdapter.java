@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.POST;
+
 public class BurgerAdapter extends ArrayAdapter<Burger> {
 
     private Context mContext;
@@ -41,4 +45,6 @@ public class BurgerAdapter extends ArrayAdapter<Burger> {
 
         return view;
     }
+
+
 }

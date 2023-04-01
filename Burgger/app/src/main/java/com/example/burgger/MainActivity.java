@@ -116,12 +116,17 @@ public class MainActivity extends AppCompatActivity {
                             if (result.getInt("id_role") == 3) {
                                 showNavigationDialog();
 
-                            } else {
-                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                                startActivity(intent);
+                            
+                        }else if(result.getInt("id_role")==2){
+                            Intent intent = new Intent(getApplicationContext(), CuisineActivity.class);
+                            startActivity(intent);
 
-
-                            }
+                        }
+                        else
+                        {
+                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
 
 
@@ -151,10 +156,8 @@ public class MainActivity extends AppCompatActivity {
         );
     }
     private void showNavigationDialog() {
-
             NavigationDialogFragment dialogFragment = new NavigationDialogFragment();
             dialogFragment.show(getSupportFragmentManager(), "navigationDialog");
-
     }
 
 }

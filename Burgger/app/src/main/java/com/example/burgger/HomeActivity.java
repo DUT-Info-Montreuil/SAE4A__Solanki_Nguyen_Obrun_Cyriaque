@@ -86,7 +86,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public interface ApiInterface {
 
-        @POST("getBurgers.php")
+        @POST("getBurgerDetail.php")
         Call<ResponseBody> getBurgers();
 
     }
