@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -45,6 +46,8 @@ public class CuisineActivity extends AppCompatActivity  {
     private ListView commandeListPrete;
     private ImageView refresh;
     private ImageView supprimer;
+
+    private TextView textAucuneCommande;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,7 @@ public class CuisineActivity extends AppCompatActivity  {
             }
         });
 
+        textAucuneCommande = findViewById(R.id.aucuneCommande);
         supprimer = findViewById(R.id.supprimer_commande_prete);
         supprimer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,8 +119,9 @@ public class CuisineActivity extends AppCompatActivity  {
                     boolean success = jsonObject.getBoolean("success");
                     if (!success) {
                         System.out.println(jsonObject.getString("msg"));
+                        textAucuneCommande.setText("Aucune commande");
                     } else {
-
+                        textAucuneCommande.setText("");
                         JSONArray jsonArray = jsonObject.getJSONArray("result");
 
                         for (int i = 0; i < jsonArray.length(); i++) {

@@ -28,19 +28,36 @@
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/burger_list_view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="497dp">
+        android:layout_height="wrap_content">
 
-    </ListView>
+        <ListView
+            android:id="@+id/burger_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+        </ListView>
+        <TextView
+            android:id="@+id/aucuneCommandeCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:textAlignment="center"
+            android:text=""
+            android:textColor="@color/gray"
+            android:textSize="20dp"
+            android:textStyle="bold"></TextView>
+
+
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/TotaltextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25dp"
-        android:text="Totale :"
+        android:text="Total :"
         android:textColor="@color/orange"/>
 
     <LinearLayout

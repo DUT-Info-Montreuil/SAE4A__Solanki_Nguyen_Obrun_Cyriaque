@@ -15,14 +15,34 @@
         android:textSize="50dp"
         android:textStyle="bold"></TextView>
 
-    <ListView
-        android:id="@+id/commande_list_view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="27dp"
-        android:layout_weight="10"
-        android:layout_margin="20dp"
-        >
-    </ListView>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/aucuneCommande"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:textAlignment="center"
+            android:text=""
+            android:textColor="@color/gray"
+            android:textSize="20dp"
+            android:textStyle="bold"></TextView>
+
+
+        <ListView
+            android:id="@+id/commande_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_weight="10"
+            android:layout_margin="20dp"
+            >
+        </ListView>
+
+    </RelativeLayout>
+
+
 
     <View
         android:layout_width="match_parent"

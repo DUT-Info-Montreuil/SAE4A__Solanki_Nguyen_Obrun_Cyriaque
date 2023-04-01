@@ -1,5 +1,6 @@
 package com.example.burgger;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +64,7 @@ public class CartBurgerAdapter extends ArrayAdapter<Burger> {
         priceTextView.setText(""+burger.getPrice()* burger.getQuantity());
         photoImageView.setImageResource(mContext.getResources().getIdentifier(burger.getPhoto(), "drawable", mContext.getPackageName()));
         quantityTextView.setText("qté: "+burger.getQuantity());
-
-
+        
 
 
         addbtn.setOnClickListener(new View.OnClickListener() {
@@ -142,8 +144,12 @@ public class CartBurgerAdapter extends ArrayAdapter<Burger> {
         double total=0;
         for (Burger b: cart){
             total += b.getQuantity()*b.getPrice();
-
         }
-        totalTextView.setText("total : "+total);
+        if(total == 0){
+            totalTextView.setText("Total : ");
+        }else
+            totalTextView.setText("Total : "+total + " €");
+
+
     }
 }

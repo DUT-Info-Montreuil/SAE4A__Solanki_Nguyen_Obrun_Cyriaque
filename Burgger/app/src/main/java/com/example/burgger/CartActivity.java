@@ -2,6 +2,7 @@ package com.example.burgger;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -39,10 +40,11 @@ public class CartActivity extends AppCompatActivity {
 
     private ListView burgersListView;
 
-    private TextView totalTextView;
+    private TextView totalTextView, textAucuneCommande;
     private ImageView burgerList, promotion;
 
     private double total=0;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,8 @@ public class CartActivity extends AppCompatActivity {
          initializeCart();
 
         burgerList = findViewById(R.id.imageViewBurger);
+
+        textAucuneCommande = findViewById(R.id.aucuneCommandeCart);
         burgerList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,34 +131,43 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    String jsonString = response.body().string();
-                    System.out.println(jsonString);
-                    JSONObject jsonObject = new JSONObject(jsonString);
-                    JSONArray jsonArray = jsonObject.getJSONArray("result");
 
-                    System.out.println(jsonString);
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject burgerObject = jsonArray.getJSONObject(i);
-                        int burgerId = burgerObject.getInt("id_burger");
-                        String burgerName = burgerObject.getString("burgername");
-                        Double burgerPrice = burgerObject.getDouble("price");
-                        String burgerPhoto = burgerObject.getString("photo");
-                        String burgerDescription = burgerObject.getString("description");
-                        Double reduction = burgerObject.getDouble("COALESCE(reduction, 0)");
-                        if(reduction == 0){
-                            cart.add(new Burger(burgerId,burgerName,burgerPrice,burgerPhoto,burgerDescription,burgerObject.getInt("quantity")));
-                            total += burgerObject.getInt("quantity")*burgerPrice;
-                        }else{
-                            Double prixReduction = burgerPrice - ( (reduction/100)*burgerPrice );
-                            cart.add(new Burger(burgerId,burgerName,prixReduction,burgerPhoto,burgerDescription,burgerObject.getInt("quantity")));
-                            total += burgerObject.getInt("quantity")*prixReduction;
+                    String jsonString = response.body().string();
+                    JSONObject jsonObject = new JSONObject(jsonString);
+                    boolean success = jsonObject.getBoolean("success");
+                    if (!success) {
+                        System.out.println(jsonObject.getString("msg"));
+                        textAucuneCommande.setText("Aucune commande");
+                    } else {
+                        textAucuneCommande.setText("");
+
+                        System.out.println(jsonString);
+
+                        JSONArray jsonArray = jsonObject.getJSONArray("result");
+
+                        System.out.println(jsonString);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject burgerObject = jsonArray.getJSONObject(i);
+                            int burgerId = burgerObject.getInt("id_burger");
+                            String burgerName = burgerObject.getString("burgername");
+                            Double burgerPrice = burgerObject.getDouble("price");
+                            String burgerPhoto = burgerObject.getString("photo");
+                            String burgerDescription = burgerObject.getString("description");
+                            Double reduction = burgerObject.getDouble("COALESCE(reduction, 0)");
+                            if (reduction == 0) {
+                                cart.add(new Burger(burgerId, burgerName, burgerPrice, burgerPhoto, burgerDescription, burgerObject.getInt("quantity")));
+                                total += burgerObject.getInt("quantity") * burgerPrice;
+                            } else {
+                                Double prixReduction = burgerPrice - ((reduction / 100) * burgerPrice);
+                                cart.add(new Burger(burgerId, burgerName, prixReduction, burgerPhoto, burgerDescription, burgerObject.getInt("quantity")));
+                                total += burgerObject.getInt("quantity") * prixReduction;
+                            }
+
                         }
 
+                        burgerListAdapter.notifyDataSetChanged();
+                        totalTextView.setText("total : " + total);
                     }
-
-                    burgerListAdapter.notifyDataSetChanged();
-                    totalTextView.setText("total : "+total);
-
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
