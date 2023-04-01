@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -23,6 +24,8 @@ public class ProfilActivity extends AppCompatActivity {
     private TextView mCityTextView;
 
     private Button mEditProfilButton;
+
+    private ImageView mRetour;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -70,6 +73,14 @@ public class ProfilActivity extends AppCompatActivity {
                 Intent registerActivity = new Intent(getApplicationContext(), ModifierProfilActivity.class);
                 startActivity(registerActivity);
 
+            }
+        });
+
+        mRetour = findViewById(R.id.imageViewRetour);
+        mRetour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 

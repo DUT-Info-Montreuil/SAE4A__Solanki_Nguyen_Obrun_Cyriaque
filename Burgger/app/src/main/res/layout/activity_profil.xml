@@ -125,6 +125,15 @@
                 android:textColor="@color/white"
                 android:backgroundTint="@color/orange" />
 
+            <ImageView
+                android:id="@+id/imageViewRetour"
+                android:layout_width="61dp"
+                android:layout_height="50dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                app:srcCompat="@drawable/retour" />
+
         </LinearLayout>
     </ScrollView>
 
