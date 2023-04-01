@@ -22,6 +22,8 @@
             android:exported="false" />
         <activity
             android:name=".ManageUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".CuisineActivity"
             android:exported="false" />
         <activity

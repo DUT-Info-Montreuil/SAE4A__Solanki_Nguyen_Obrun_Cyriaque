@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), successMessage, Toast.LENGTH_LONG).show();
                         JSONObject result = jsonObject.getJSONObject("result");
 
-                        if (result.getInt("ban") == 1 && result.getInt("id_role")!=3) {
+                        if (result.getInt("ban") == 1 && result.getInt("id_role") != 3) {
                             errorMsgTextView.setText("impossible vous êtes banni");
                         } else {
                             String userName = result.getString("username");
@@ -115,21 +115,17 @@ public class MainActivity extends AppCompatActivity {
 
                             if (result.getInt("id_role") == 3) {
                                 showNavigationDialog();
+                            } else if (result.getInt("id_role") == 2) {
+                                Intent intent = new Intent(getApplicationContext(), CuisineActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
 
-                            
-                        }else if(result.getInt("id_role")==2){
-                            Intent intent = new Intent(getApplicationContext(), CuisineActivity.class);
-                            startActivity(intent);
 
                         }
-                        else
-                        {
-                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
