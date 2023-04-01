@@ -29,7 +29,7 @@ public class PromotionActivity extends AppCompatActivity {
 
     private User user;
 
-    private BurgerAdapter burgerListAdapter;
+    private BurgerAdapterPromotion burgerListAdapter;
 
     private ArrayList<Burger> burgers;
 
@@ -57,7 +57,7 @@ public class PromotionActivity extends AppCompatActivity {
 
         burgers=new ArrayList<>();
         getAllBurgers();
-        burgerListAdapter = new BurgerAdapter(this,R.layout.burger_list_item,burgers);
+        burgerListAdapter = new BurgerAdapterPromotion(this,R.layout.burger_list_item_promotion,burgers);
         burgersListView.setAdapter(burgerListAdapter);
         burgersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -142,7 +142,7 @@ public class PromotionActivity extends AppCompatActivity {
                         Double prixReduction = burgerPrice - ( (reduction/100)*burgerPrice );
                         String burgerPhoto = burgerObject.getString("photo");
                         String burgerDescription = burgerObject.getString("description");
-                        burgers.add(new Burger(burgerId,burgerName,prixReduction,burgerPhoto,burgerDescription));
+                        burgers.add(new Burger(burgerId,burgerName,prixReduction,burgerPhoto,burgerDescription, burgerPrice));
 
                     }
 

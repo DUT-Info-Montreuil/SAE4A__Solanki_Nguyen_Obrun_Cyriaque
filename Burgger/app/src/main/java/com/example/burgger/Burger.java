@@ -5,7 +5,7 @@ public class Burger {
 
     private int quantity;
     private String burgerNamme;
-    private double price;
+    private double price , prix_initial;
     private  String photo;
 
     private String desription;
@@ -16,6 +16,15 @@ public class Burger {
         this.price = price;
         this.photo = photo;
         this.desription = desription;
+    }
+
+    public Burger(int id_burger, String burgerNamme, double price, String photo,String desription, double prix_initial) {
+        this.id_burger = id_burger;
+        this.burgerNamme = burgerNamme;
+        this.price = price;
+        this.photo = photo;
+        this.desription = desription;
+        this.prix_initial = prix_initial;
     }
 
 
@@ -31,6 +40,14 @@ public class Burger {
 
     public int getId_burger() {
         return id_burger;
+    }
+
+    public double getPrix_initial() {
+        return prix_initial;
+    }
+
+    public void setPrix_initial(double prix_initial) {
+        this.prix_initial = prix_initial;
     }
 
     public void setId_burger(int id_burger) {
