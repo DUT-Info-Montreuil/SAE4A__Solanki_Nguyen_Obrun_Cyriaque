@@ -40,6 +40,7 @@ public class CartActivity extends AppCompatActivity {
     private ListView burgersListView;
 
     private TextView totalTextView;
+    private ImageView burgerList, promotion;
 
     private double total=0;
     @Override
@@ -49,6 +50,26 @@ public class CartActivity extends AppCompatActivity {
         setOnclick();
         burgersListView = findViewById(R.id.burger_list_view);
          initializeCart();
+
+        burgerList = findViewById(R.id.imageViewBurger);
+        burgerList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registerActivity = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(registerActivity);
+                finish();
+            }
+        });
+
+        promotion = findViewById(R.id.imageViewPromotion);
+        promotion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registerActivity = new Intent(getApplicationContext(), PromotionActivity.class);
+                startActivity(registerActivity);
+                finish();
+            }
+        });
 
     }
 

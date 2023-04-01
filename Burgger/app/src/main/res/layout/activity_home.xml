@@ -46,6 +46,13 @@
             android:layout_weight="1"
             android:layout_gravity="start"
             app:srcCompat="@drawable/promo"/>
+        <ImageView
+            android:id="@+id/imageViewBurger"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="start"
+            app:srcCompat="@drawable/burger"/>
 
         <ImageView
             android:id="@+id/cartimageView"

@@ -33,6 +33,8 @@ public class PromotionActivity extends AppCompatActivity {
 
     private ArrayList<Burger> burgers;
 
+    private ImageView burgerList , cartList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +92,26 @@ public class PromotionActivity extends AppCompatActivity {
                 Intent registerActivity = new Intent(getApplicationContext(), ProfilActivity.class);
                 startActivity(registerActivity);
 
+            }
+        });
+
+        burgerList = findViewById(R.id.imageViewBurger);
+        burgerList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registerActivity = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(registerActivity);
+                finish();
+            }
+        });
+
+        cartList = findViewById(R.id.cartimageView);
+        cartList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registerActivity = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(registerActivity);
+                finish();
             }
         });
 
