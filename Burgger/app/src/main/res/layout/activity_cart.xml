@@ -14,14 +14,14 @@
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="35sp"
-            android:layout_height="100sp"
+            android:layout_width="35dp"
+            android:layout_height="100dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/logoburgr" />
 
         <ImageView
             android:id="@+id/imageViewProfil"
-            android:layout_width="50sp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
             app:srcCompat="@drawable/userlogo" />
@@ -91,12 +91,7 @@
             android:layout_gravity="start"
             app:srcCompat="@drawable/burger"/>
 
-        <ImageView
-            android:id="@+id/cartimageView"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/cart" />
+
     </LinearLayout>
 
 

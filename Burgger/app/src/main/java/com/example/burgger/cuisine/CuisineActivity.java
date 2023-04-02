@@ -14,9 +14,10 @@ import android.widget.TextView;
 
 import com.example.burgger.MainActivity;
 import com.example.burgger.R;
-import com.example.burgger.RetrofitClientInstance;
+import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.object.Commande;
 import com.example.burgger.object.User;
+import com.example.burgger.api.ApiInterface;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -88,23 +89,6 @@ public class CuisineActivity extends AppCompatActivity  {
         });
 
         initializeCommande();
-    }
-
-
-
-    public interface ApiInterface {
-        @POST("getCommandesPrete.php")
-        Call<ResponseBody> getCommandesPrete();
-        @POST("getCommandes.php")
-        Call<ResponseBody> getCommandes();
-
-        @POST("supprimerCommandePrete.php")
-        Call<ResponseBody> supprimerCommandePrete();
-
-        @FormUrlEncoded
-        @POST("majCommandePret.php")
-        Call<ResponseBody> majPret(@Field("idCommande") int idCommande);
-
     }
 
     public void getAllCommandes(){

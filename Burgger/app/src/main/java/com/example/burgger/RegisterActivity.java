@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.burgger.api.ApiInterface;
+import com.example.burgger.api.RetrofitClientInstance;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -101,20 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
         return matcher.matches();
     }
 
-    public interface ApiInterface {
-        @FormUrlEncoded
-        @POST("register.php")
-        Call<ResponseBody> register(
-                @Field("username") String username,
-                @Field("password") String password,
-                @Field("name") String name,
-                @Field("firstName") String firstName,
-                @Field("email") String email,
-                @Field("address") String address,
-                @Field("city") String city
-        );
 
-    }
 
     public void RegisterUser(String username, String password, String email,String city,String adress,String name , String firtName) {
         ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);

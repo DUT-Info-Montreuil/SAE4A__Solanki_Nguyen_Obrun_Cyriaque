@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.example.burgger.R;
-import com.example.burgger.RetrofitClientInstance;
+import com.example.burgger.api.ApiInterface;
+import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.object.User;
 
 import org.json.JSONArray;
@@ -61,14 +62,7 @@ public class ManageUserActivity extends AppCompatActivity {
         });
     }
 
-    public interface ApiInterface {
-        @FormUrlEncoded
-        @POST("searchUser.php")
-        Call<ResponseBody> searchUser(@Field("username") String username);
 
-        @POST("getUsers.php")
-        Call<ResponseBody> getUsers();
-    }
 
     public void getAllUsers() {
         users.clear();

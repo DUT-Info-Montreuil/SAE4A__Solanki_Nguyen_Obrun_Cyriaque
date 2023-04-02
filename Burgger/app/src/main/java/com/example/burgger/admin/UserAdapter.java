@@ -13,9 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.burgger.R;
-import com.example.burgger.RetrofitClientInstance;
+import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.object.User;
-
+import com.example.burgger.api.ApiInterface;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -77,7 +77,7 @@ private  int mResource;
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        UserAdapter.ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(UserAdapter.ApiInterface.class);
+                        ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
                         Call<ResponseBody> call = apiInterface.dellUser(user.getId_user());
                         call.enqueue(new Callback<ResponseBody>() {
                             @Override
@@ -126,7 +126,7 @@ private  int mResource;
                         else
                             ban = 1;
 
-                        UserAdapter.ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(UserAdapter.ApiInterface.class);
+                        ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
                         Call<ResponseBody> call = apiInterface.banUser(user.getId_user(), ban);
                         call.enqueue(new Callback<ResponseBody>() {
                             @Override
@@ -167,20 +167,5 @@ private  int mResource;
 
         return view;
 
-    }
-
-    public interface ApiInterface {
-        @FormUrlEncoded
-        @POST("dellUser.php")
-        Call<ResponseBody> dellUser(
-                @Field("id_user") int id_user
-        );
-
-        @FormUrlEncoded
-        @POST("banUser.php")
-        Call<ResponseBody> banUser(
-                @Field("id_user") int id_user,
-                @Field("ban") int ban
-        );
     }
 }

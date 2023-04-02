@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.burgger.api.ApiInterface;
+import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.home.HomeActivity;
 import com.example.burgger.object.User;
 import com.google.gson.Gson;
@@ -76,17 +78,10 @@ public class BurgerDetailActivity extends AppCompatActivity {
         });
     }
 
-    public interface ApiInterface {
-        @FormUrlEncoded
-        @POST("addBurgerToCart.php")
-        Call<ResponseBody> addBurgerToCart(
-                @Field("id_user") int id_user,
-                @Field("id_burger") int id_burger
-        );
-    }
+
 
     private void addBurgerToCart(int id_burger,int id_user){
-        BurgerDetailActivity.ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(BurgerDetailActivity.ApiInterface.class);
+        ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
         Call<ResponseBody> call = apiInterface.addBurgerToCart(id_user,id_burger);
         call.enqueue(new Callback<ResponseBody>() {
             @Override

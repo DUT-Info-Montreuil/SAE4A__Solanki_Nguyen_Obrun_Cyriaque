@@ -10,8 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.burgger.RetrofitClientInstance;
-import com.example.burgger.cuisine.CuisineActivity;
+import com.example.burgger.api.ApiInterface;
+import com.example.burgger.api.RetrofitClientInstance;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -23,20 +23,8 @@ import retrofit2.http.POST;
 
 public class ValidationDialogFragment  extends DialogFragment {
 
-
-
-
-
-    public interface ApiInterface {
-
-        @FormUrlEncoded
-        @POST("majCommandePret.php")
-        Call<ResponseBody> majPret(@Field("idCommande") int idCommande);
-
-    }
-
     public void majCommandePrete(int idCommande){
-        CuisineActivity.ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(CuisineActivity.ApiInterface.class);
+        ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
         Call<ResponseBody> call = apiInterface.majPret(idCommande);
         call.enqueue(new Callback<ResponseBody>() {
             @Override

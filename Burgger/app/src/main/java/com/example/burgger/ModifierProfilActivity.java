@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.burgger.api.ApiInterface;
+import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.object.User;
 import com.google.gson.Gson;
 
@@ -169,20 +171,6 @@ public class ModifierProfilActivity extends AppCompatActivity {
         });
     }
 
-    public interface ApiInterface {
-        @FormUrlEncoded
-        @POST("modification.php")
-        Call<ResponseBody> modification(
-                @Field("username") String username,
-                @Field("newpass") String newpass,
-                @Field("name") String name,
-                @Field("firstName") String firstName,
-                @Field("address") String address,
-                @Field("city") String city,
-                @Field("oldpass") String oldpass,
-                @Field("newCpass") String newCpass
-        );
-    }
 
     public boolean checkForm(String password, String oldpassword,String city,String address,String name,String firstname){
 

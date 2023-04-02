@@ -14,9 +14,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.burgger.ProfilActivity;
+import com.example.burgger.api.ApiInterface;
 import com.example.burgger.promotion.PromotionActivity;
 import com.example.burgger.R;
-import com.example.burgger.RetrofitClientInstance;
+import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.home.HomeActivity;
 import com.example.burgger.object.Burger;
 import com.example.burgger.object.User;
@@ -121,17 +122,10 @@ public class CartActivity extends AppCompatActivity {
         });
 
     }
-    public interface ApiInterface {
-        @FormUrlEncoded
-        @POST("getCart.php")
-        Call<ResponseBody> getCart(
-                @Field("id_user") int id_user
 
-        );
-    }
 
     public void getCart(int id_user){
-        CartActivity.ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(CartActivity.ApiInterface.class);
+        ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
         Call<ResponseBody> call = apiInterface.getCart(id_user);
         call.enqueue(new Callback<ResponseBody>() {
             @Override

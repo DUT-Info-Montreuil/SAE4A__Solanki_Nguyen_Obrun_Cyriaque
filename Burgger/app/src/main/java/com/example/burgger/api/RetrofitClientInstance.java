@@ -1,4 +1,4 @@
-package com.example.burgger;
+package com.example.burgger.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

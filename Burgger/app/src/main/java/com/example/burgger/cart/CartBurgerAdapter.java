@@ -10,7 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.burgger.R;
-import com.example.burgger.RetrofitClientInstance;
+import com.example.burgger.api.ApiInterface;
+import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.object.Burger;
 
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class CartBurgerAdapter extends ArrayAdapter<Burger> {
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CartBurgerAdapter.ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(CartBurgerAdapter.ApiInterface.class);
+                ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
                 Call<ResponseBody> call = apiInterface.addQte(id_user,burger.getId_burger());
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
@@ -94,7 +95,7 @@ public class CartBurgerAdapter extends ArrayAdapter<Burger> {
         rmbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CartBurgerAdapter.ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(CartBurgerAdapter.ApiInterface.class);
+                ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
                 Call<ResponseBody> call = apiInterface.rmQte(id_user,burger.getId_burger());
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
@@ -125,22 +126,7 @@ public class CartBurgerAdapter extends ArrayAdapter<Burger> {
         return view;
     }
 
-    public interface ApiInterface {
-        @FormUrlEncoded
-        @POST("addQte.php")
-        Call<ResponseBody> addQte(
-                @Field("id_user") int id_user,
-                @Field("id_burger") int id_burger
-        );
 
-
-        @FormUrlEncoded
-        @POST("rmQte.php")
-        Call<ResponseBody> rmQte(
-                @Field("id_user") int id_user,
-                @Field("id_burger") int id_burger
-        );
-    }
 
     private void refreshTotal(){
         double total=0;

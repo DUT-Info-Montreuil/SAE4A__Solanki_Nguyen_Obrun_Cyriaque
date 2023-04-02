@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.burgger.admin.NavigationDialogFragment;
+import com.example.burgger.api.ApiInterface;
+import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.cuisine.CuisineActivity;
 import com.example.burgger.home.HomeActivity;
 import com.example.burgger.object.User;
@@ -145,14 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public interface ApiInterface {
-        @FormUrlEncoded
-        @POST("login.php")
-        Call<ResponseBody> login(
-                @Field("username") String username,
-                @Field("password") String password
-        );
-    }
+
     private void showNavigationDialog() {
             NavigationDialogFragment dialogFragment = new NavigationDialogFragment();
             dialogFragment.show(getSupportFragmentManager(), "navigationDialog");
