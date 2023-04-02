@@ -88,7 +88,7 @@ public class EditBurgerActivity extends AppCompatActivity {
                 descriptionEditText.getText().toString(),
                 Double.parseDouble(priceEditText.getText().toString()),
                 Double.parseDouble(reductionEditText.getText().toString()),
-                "chedarlover",
+                burger.getPhoto(),
                 burger.getId_burger()
         );
 
