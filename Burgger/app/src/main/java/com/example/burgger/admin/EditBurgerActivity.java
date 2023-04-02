@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +24,9 @@ import com.example.burgger.object.Burger;
 import com.example.burgger.object.User;
 import com.google.gson.Gson;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -59,6 +64,17 @@ public class EditBurgerActivity extends AppCompatActivity {
         reductionEditText.setText(String.valueOf(burger.getReduction()));
         descriptionEditText.setText(burger.getDesription());
         photoImageView.setImageResource(this.getResources().getIdentifier(burger.getPhoto(), "drawable", this.getPackageName()));
+
+        Button photoButton = findViewById(R.id.edit_burger_select_photo);
+
+        photoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, 1);
+            }
+        });
+
 
         Button updateButton = findViewById(R.id.edit_burger_save_button);
         updateButton.setOnClickListener(new View.OnClickListener() {
@@ -112,5 +128,21 @@ public class EditBurgerActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            Uri selectedImageUri = data.getData();
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                photoImageView.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 }
