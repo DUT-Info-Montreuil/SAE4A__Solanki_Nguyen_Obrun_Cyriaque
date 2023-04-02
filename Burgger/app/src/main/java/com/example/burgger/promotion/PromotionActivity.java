@@ -1,4 +1,4 @@
-package com.example.burgger;
+package com.example.burgger.promotion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,15 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.burgger.BurgerDetailActivity;
+import com.example.burgger.MainActivity;
+import com.example.burgger.ProfilActivity;
+import com.example.burgger.R;
+import com.example.burgger.RetrofitClientInstance;
+import com.example.burgger.cart.CartActivity;
+import com.example.burgger.home.HomeActivity;
+import com.example.burgger.object.Burger;
+import com.example.burgger.object.User;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;

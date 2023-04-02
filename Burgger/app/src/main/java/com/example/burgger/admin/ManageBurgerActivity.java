@@ -1,8 +1,10 @@
-package com.example.burgger;
+package com.example.burgger.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.burgger.R;
 
 public class ManageBurgerActivity extends AppCompatActivity {
 

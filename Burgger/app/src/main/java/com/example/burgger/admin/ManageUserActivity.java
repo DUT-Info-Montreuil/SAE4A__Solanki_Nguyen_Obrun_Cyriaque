@@ -1,10 +1,14 @@
-package com.example.burgger;
+package com.example.burgger.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 
 import android.os.Bundle;
 import android.widget.ListView;
+
+import com.example.burgger.R;
+import com.example.burgger.RetrofitClientInstance;
+import com.example.burgger.object.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;

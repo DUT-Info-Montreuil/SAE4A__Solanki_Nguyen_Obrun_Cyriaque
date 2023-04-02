@@ -11,9 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.burgger.home.HomeActivity;
+import com.example.burgger.object.User;
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -91,12 +92,11 @@ public class BurgerDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    System.out.println("ajoutttt");
                     String jsonString = response.body().string();
                     JSONObject jsonObject = new JSONObject(jsonString);
                     Toast.makeText(getApplicationContext(),"burger ajouter au paniere",Toast.LENGTH_LONG);
                     finish();
-                    Intent HomeIntent = new Intent(getApplicationContext(),HomeActivity.class);
+                    Intent HomeIntent = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(HomeIntent);
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();

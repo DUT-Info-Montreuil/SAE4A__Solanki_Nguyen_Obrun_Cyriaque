@@ -1,4 +1,4 @@
-package com.example.burgger;
+package com.example.burgger.admin;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.burgger.home.HomeActivity;
 
 public class NavigationDialogFragment extends DialogFragment {
 

@@ -1,4 +1,4 @@
-package com.example.burgger;
+package com.example.burgger.home;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,11 +8,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import com.example.burgger.R;
+import com.example.burgger.object.Burger;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.POST;
+import java.util.List;
 
 public class BurgerAdapter extends ArrayAdapter<Burger> {
 

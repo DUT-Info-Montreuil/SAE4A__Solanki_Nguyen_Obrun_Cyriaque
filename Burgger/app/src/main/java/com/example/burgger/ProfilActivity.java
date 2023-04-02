@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.burgger.object.User;
 import com.google.gson.Gson;
 
 public class ProfilActivity extends AppCompatActivity {

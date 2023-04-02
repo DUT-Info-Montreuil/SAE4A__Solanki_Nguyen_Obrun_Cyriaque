@@ -18,25 +18,25 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ManageBurgerActivity"
+            android:name=".admin.ManageBurgerActivity"
             android:exported="false" />
         <activity
-            android:name=".ManageUserActivity"
+            android:name=".admin.ManageUserActivity"
             android:exported="false" />
         <activity
-            android:name=".CuisineActivity"
+            android:name=".cuisine.CuisineActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminActivity"
+            android:name=".admin.AdminActivity"
             android:exported="false" />
         <activity
             android:name=".TESTDRIVE"
             tools:targetApi="31" />
         <activity
-            android:name=".PromotionActivity"
+            android:name=".promotion.PromotionActivity"
             tools:targetApi="31" />
         <activity
-            android:name=".CartActivity"
+            android:name=".cart.CartActivity"
             android:exported="false" />
         <activity
             android:name=".ModifierProfilActivity"
@@ -48,10 +48,10 @@
             android:name=".ProfilActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".home.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Register"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

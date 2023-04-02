@@ -1,22 +1,22 @@
-package com.example.burgger;
+package com.example.burgger.cuisine;
 
-import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.burgger.MainActivity;
+import com.example.burgger.R;
+import com.example.burgger.RetrofitClientInstance;
+import com.example.burgger.object.Commande;
+import com.example.burgger.object.User;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;

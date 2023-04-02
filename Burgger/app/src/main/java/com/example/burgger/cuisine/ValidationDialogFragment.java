@@ -1,29 +1,17 @@
-package com.example.burgger;
-
-import static android.content.Context.MODE_PRIVATE;
+package com.example.burgger.cuisine;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.content.SharedPreferences;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
+import com.example.burgger.RetrofitClientInstance;
+import com.example.burgger.cuisine.CuisineActivity;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

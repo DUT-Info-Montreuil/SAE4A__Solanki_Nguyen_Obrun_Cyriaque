@@ -1,7 +1,5 @@
 package com.example.burgger;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +11,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.burgger.admin.NavigationDialogFragment;
+import com.example.burgger.cuisine.CuisineActivity;
+import com.example.burgger.home.HomeActivity;
+import com.example.burgger.object.User;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerActivity = new Intent(getApplicationContext(), Register.class);
+                Intent registerActivity = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(registerActivity);
             }
         });

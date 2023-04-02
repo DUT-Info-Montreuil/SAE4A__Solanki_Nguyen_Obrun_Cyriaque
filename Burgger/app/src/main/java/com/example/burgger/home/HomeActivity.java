@@ -1,4 +1,4 @@
-package com.example.burgger;
+package com.example.burgger.home;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,9 +8,17 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.burgger.BurgerDetailActivity;
+import com.example.burgger.cart.CartActivity;
+import com.example.burgger.MainActivity;
+import com.example.burgger.ProfilActivity;
+import com.example.burgger.promotion.PromotionActivity;
+import com.example.burgger.R;
+import com.example.burgger.RetrofitClientInstance;
+import com.example.burgger.object.Burger;
+import com.example.burgger.object.User;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;

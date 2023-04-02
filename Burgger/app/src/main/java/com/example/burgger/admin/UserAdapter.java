@@ -1,4 +1,4 @@
-package com.example.burgger;
+package com.example.burgger.admin;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.burgger.R;
+import com.example.burgger.RetrofitClientInstance;
+import com.example.burgger.object.User;
 
 import java.util.List;
 

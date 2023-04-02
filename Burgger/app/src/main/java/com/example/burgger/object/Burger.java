@@ -1,4 +1,4 @@
-package com.example.burgger;
+package com.example.burgger.object;
 
 public class Burger {
     private int id_burger;
