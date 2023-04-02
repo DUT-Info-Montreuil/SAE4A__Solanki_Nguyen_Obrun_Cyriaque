@@ -4,13 +4,26 @@ public class Burger {
     private int id_burger;
 
     private int quantity;
+
+
+
+
     private String burgerNamme;
-    private double price , prix_initial;
+    private double price , prix_initial,reduction;
     private  String photo;
 
     private String desription;
 
-    public Burger(int id_burger, String burgerNamme, double price, String photo,String desription) {
+    public Burger(int id_burger, double reduction, String burgerNamme, double price, String photo, String desription) {
+        this.id_burger = id_burger;
+        this.reduction = reduction;
+        this.burgerNamme = burgerNamme;
+        this.price = price;
+        this.photo = photo;
+        this.desription = desription;
+    }
+
+    public Burger(int id_burger, String burgerNamme, double price, String photo, String desription) {
         this.id_burger = id_burger;
         this.burgerNamme = burgerNamme;
         this.price = price;
@@ -37,6 +50,8 @@ public class Burger {
         this.desription = desription;
         this.quantity = quantity;
     }
+
+
 
     public int getId_burger() {
         return id_burger;
@@ -96,6 +111,14 @@ public class Burger {
         this.quantity = quantity;
     }
 
+
+    public double getReduction() {
+        return reduction;
+    }
+
+    public void setReduction(double reduction) {
+        this.reduction = reduction;
+    }
     @Override
     public String toString() {
         return "Burger{" +

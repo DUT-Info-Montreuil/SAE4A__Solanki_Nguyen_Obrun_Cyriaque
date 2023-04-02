@@ -1,0 +1,141 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backGroundApp">
+
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="10"
+                app:srcCompat="@drawable/logoburgr" />
+
+        </LinearLayout>
+
+
+        <!-- Titre -->
+    <TextView
+    android:id="@+id/edit_burger_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Modification de burger"
+    android:textSize="24dp"
+    android:gravity="center_horizontal"
+    android:textColor="@color/orange"
+    android:padding="16dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <!-- Champ de saisie pour le nom du burger -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nom du Burger"
+                android:textColor="@color/orange"
+                android:padding="8dp"/>
+
+            <EditText
+                android:id="@+id/edit_burger_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Saisissez le nom du burger"
+                android:inputType="text"
+                android:padding="16dp"/>
+
+            <!-- Champ de saisie pour le prix du burger -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Prix du Burger"
+                android:textColor="@color/orange"
+                android:padding="8dp"/>
+
+            <EditText
+                android:id="@+id/edit_burger_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Saisissez le prix du burger"
+                android:inputType="numberDecimal"
+                android:padding="16dp"/>
+
+
+            <!-- Champ de saisie pour le prix du burger -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Réduction du Burger"
+                android:textColor="@color/orange"
+                android:padding="8dp"/>
+
+            <EditText
+                android:id="@+id/edit_burger_reduction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Saisissez la réductioon du burger"
+                android:inputType="numberDecimal"
+                android:padding="16dp"/>
+
+
+            <!-- Champ de saisie pour la description du burger -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description du Burger"
+                android:textColor="@color/orange"
+                android:padding="8dp"/>
+
+            <EditText
+                android:id="@+id/edit_burger_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Saisissez la description du burger"
+                android:inputType="textMultiLine"
+                android:minLines="3"
+                android:maxLines="5"
+                android:scrollbars="vertical"
+                android:padding="16dp"/>
+
+            <!-- Bouton pour sélectionner une photo -->
+            <Button
+                android:id="@+id/edit_burger_select_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="changer la photo"/>
+
+            <!-- Aperçu de la photo sélectionnée -->
+            <ImageView
+                android:id="@+id/edit_burger_photo_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:padding="16dp"/>
+
+            <!-- Bouton pour enregistrer les modifications -->
+
+            <Button
+                android:id="@+id/edit_burger_save_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="sauvegarder"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

@@ -104,4 +104,17 @@ public interface ApiInterface {
     );
 
 
+    @FormUrlEncoded
+    @POST("editBurger.php")
+    Call<ResponseBody> editBurger(
+            @Field("burgerName") String burgerName,
+            @Field("burgerDescription") String burgerDescription,
+            @Field("burgerPrice") double BurgerPrice,
+            @Field("BurgerReduction") double BurgerReduction,
+            @Field("burgerPhoto") String BurgerPhoto,
+            @Field("id_burger") int id_burger
+    );
+
+
+
 }

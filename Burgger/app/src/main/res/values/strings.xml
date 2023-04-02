@@ -93,5 +93,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="modifier_le_burger">Modifier le Burger</string>
+    <string name="supprimer_le_burger">Supprimer le burger</string>
 
 </resources>

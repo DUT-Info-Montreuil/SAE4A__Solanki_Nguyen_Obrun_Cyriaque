@@ -172,6 +172,17 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+
+        if (isTaskRoot()) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else {
+            super.onBackPressed();
+        }
+        finish();
+    }
 
     private void setOnclick(){
         profilImageView.setOnClickListener(new View.OnClickListener() {
