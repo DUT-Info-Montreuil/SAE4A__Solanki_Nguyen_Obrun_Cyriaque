@@ -153,6 +153,7 @@ public class CommandeActivity extends AppCompatActivity {
                 // Récupérer le burger sélectionné
                 Burger selectedBurger = burgerListCart.get(position);
                 System.out.println(selectedBurger);
+
             }
         });
     }
