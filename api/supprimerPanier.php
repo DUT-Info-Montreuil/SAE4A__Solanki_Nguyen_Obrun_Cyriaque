@@ -2,12 +2,10 @@
 header('Content-Type: application/json');
 include('pdo.php');
 
-    if(null!=$_POST['idBurger']){
-        $requete = $pdo->prepare("SELECT * FROM `burger` WHERE id_burger= ?;");
-        $requete->execute(array($idBurger));
-        $result = $requete->fetch();
-
-
+    if(null!=$_POST['idUser']){
+        $idUser = $_POST['idUser'];
+        $requete = $pdo->prepare("DELETE FROM `cart` WHERE id_user= ?;");
+        $requete->execute(array($idUser));
     if($result) {
         reponse_json(true, "Voici les burger en promotion",$result);
     } else {

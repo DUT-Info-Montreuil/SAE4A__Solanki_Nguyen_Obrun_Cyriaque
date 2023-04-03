@@ -26,6 +26,12 @@ public interface ApiInterface {
             @Field("id_user") int id_user,
             @Field("ban") int ban
     );
+
+    @FormUrlEncoded
+    @POST("supprimerPanier.php")
+    Call<ResponseBody> supprimerPanier(
+            @Field("id_user") int id_user
+    );
     @FormUrlEncoded
     @POST("getCart.php")
     Call<ResponseBody> getCart(
@@ -48,6 +54,12 @@ public interface ApiInterface {
             @Field("id_burger") int id_burger
     );
 
+    @FormUrlEncoded
+    @POST("passerCommande.php")
+    Call<ResponseBody> passerCommande(
+            @Field("id_burger") int id_burger,
+            @Field("modification") String modification
+    );
 
     @POST("getCommandesPrete.php")
     Call<ResponseBody> getCommandesPrete();
@@ -102,6 +114,8 @@ public interface ApiInterface {
             @Field("address") String address,
             @Field("city") String city
     );
+
+
 
 
 }

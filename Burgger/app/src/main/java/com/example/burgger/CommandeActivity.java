@@ -39,12 +39,18 @@ public class CommandeActivity extends AppCompatActivity {
     private ListView burgerCommandeList;
     private ArrayList<Burger> burgerListCart;
     private CommandeBurgerAdapter burgerListAdapter;
+    private User user;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commande);
+
+        Gson gson = new Gson();
+        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+        String json = sharedPreferences.getString("user", "");
+        user = gson.fromJson(json, User.class);
 
         imageRetour = findViewById(R.id.imageViewRetour);
         imageRetour.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +63,20 @@ public class CommandeActivity extends AppCompatActivity {
         buttonValider = findViewById(R.id.valider_button);
         burgerCommandeList = findViewById(R.id.burger_list_view_commande);
         initializeCart();
+
+        buttonValider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                supprimerPanier();
+                for (Burger b: burgerListCart) {
+                    ajouterCommande(b);
+                }
+                finish();
+            }
+        });
+
+
+
     }
 
 
@@ -80,6 +100,7 @@ public class CommandeActivity extends AppCompatActivity {
 
                         System.out.println(jsonString);
                         for (int i = 0; i < jsonArray.length(); i++) {
+
                             JSONObject burgerObject = jsonArray.getJSONObject(i);
                             int burgerId = burgerObject.getInt("id_burger");
                             String burgerName = burgerObject.getString("burgername");
@@ -87,11 +108,16 @@ public class CommandeActivity extends AppCompatActivity {
                             String burgerPhoto = burgerObject.getString("photo");
                             String burgerDescription = burgerObject.getString("description");
                             Double reduction = burgerObject.getDouble("COALESCE(reduction, 0)");
+                            int quantity = burgerObject.getInt("quantity");
+                            Double prix;
                             if (reduction == 0) {
-                                burgerListCart.add(new Burger(burgerId, burgerName, burgerPrice, burgerPhoto, burgerDescription, burgerObject.getInt("quantity")));
+                                prix = burgerPrice;
                             } else {
-                                Double prixReduction = burgerPrice - ((reduction / 100) * burgerPrice);
-                                burgerListCart.add(new Burger(burgerId, burgerName, prixReduction, burgerPhoto, burgerDescription, burgerObject.getInt("quantity")));
+                                prix = burgerPrice - ((reduction / 100) * burgerPrice);
+                            }
+
+                            for(int index=1 ; index<=quantity ; index++){
+                                burgerListCart.add(new Burger(burgerId, burgerName, prix, burgerPhoto, burgerDescription,quantity ));
                             }
 
                         }
@@ -111,14 +137,8 @@ public class CommandeActivity extends AppCompatActivity {
 
 
     public void initializeCart(){
-
         burgerListCart=new ArrayList<>();
-        Gson gson = new Gson();
-        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-        String json = sharedPreferences.getString("user", "");
-        User user = gson.fromJson(json, User.class);
         getCart(user.getId_user());
-
         burgerListAdapter = new CommandeBurgerAdapter(this,R.layout.activity_commande_burger_adapter,burgerListCart,user.getId_user(), burgerListCart);
         burgerCommandeList.setAdapter(burgerListAdapter);
         burgerCommandeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -127,9 +147,50 @@ public class CommandeActivity extends AppCompatActivity {
                 // Récupérer le burger sélectionné
                 Burger selectedBurger = burgerListCart.get(position);
                 System.out.println(selectedBurger);
-
             }
         });
+    }
 
+    public void supprimerPanier(){
+        ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
+        Call<ResponseBody> call = apiInterface.supprimerPanier(user.getId_user());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String jsonString = response.body().string();
+                    System.out.println(jsonString);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void ajouterCommande(Burger burger){
+        String modification = "Aucune modification";
+        ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
+        Call<ResponseBody> call = apiInterface.passerCommande(burger.getId_burger(), modification);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String jsonString = response.body().string();
+                    System.out.println(jsonString);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }
