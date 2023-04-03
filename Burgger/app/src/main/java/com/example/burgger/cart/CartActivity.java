@@ -12,9 +12,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.burgger.CommandeActivity;
 import com.example.burgger.ProfilActivity;
 import com.example.burgger.api.ApiInterface;
+import com.example.burgger.object.Commande;
 import com.example.burgger.promotion.PromotionActivity;
 import com.example.burgger.R;
 import com.example.burgger.api.RetrofitClientInstance;
@@ -49,6 +52,8 @@ public class CartActivity extends AppCompatActivity {
     private Button buttonContinuer;
 
     private double total=0;
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,13 +87,16 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
+
+
+
     }
 
 
 
     private void setOnclick(){
         profilImageView = findViewById(R.id.imageViewProfil);
-
+        buttonContinuer = findViewById(R.id.continuer_button);
         totalTextView = findViewById(R.id.TotaltextView);
         profilImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +104,19 @@ public class CartActivity extends AppCompatActivity {
                 Intent profilActivity = new Intent(getApplicationContext(), ProfilActivity.class);
                 startActivity(profilActivity);
 
+            }
+        });
+
+        buttonContinuer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(cart.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Vous n'avez pas de commandes", Toast.LENGTH_LONG).show();
+                    System.out.println("oui");
+                }else{
+                    Intent profilActivity = new Intent(getApplicationContext(), CommandeActivity.class);
+                    startActivity(profilActivity);
+                }
             }
         });
     }

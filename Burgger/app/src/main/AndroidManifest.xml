@@ -18,6 +18,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ModifierBurgerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CommandeBurgerAdapter"
+            android:exported="false" />
+        <activity
             android:name=".admin.ManageBurgerActivity"
             android:exported="false" />
         <activity
@@ -52,6 +58,9 @@
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CommandeActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
