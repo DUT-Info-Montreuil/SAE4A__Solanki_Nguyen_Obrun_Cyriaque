@@ -19,6 +19,7 @@ import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.cart.CartActivity;
 import com.example.burgger.object.Burger;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,11 @@ public class EditBurgerAdapter extends ArrayAdapter<Burger> {
 
         nameTextView.setText(burger.getBurgerNamme());
         priceTextView.setText(String.format("%.2f €", burger.getPrice()));
-        photoImageView.setImageResource(mContext.getResources().getIdentifier(burger.getPhoto(), "drawable", mContext.getPackageName()));
+        String imageUrl = "https://burgerr7.000webhostapp.com/img/"+burger.getBurgerNamme().replaceAll("\\s", "%20")+".png";
+
+        System.out.println(imageUrl);
+
+        Picasso.get().load(imageUrl).into(photoImageView);
 
         Button editBugerBUtton = view.findViewById(R.id.EditBurgerbutton);
 
@@ -80,7 +85,6 @@ public class EditBurgerAdapter extends ArrayAdapter<Burger> {
     public void goToEditBurgerActivity() {
         Intent EditBurgerActivity = new Intent(mContext, EditBurgerActivity.class);
         mContext.startActivity(EditBurgerActivity);
-        mManageBurgerActivity.finish();
     }
 
 }
