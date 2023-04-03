@@ -116,6 +116,7 @@ public class CartActivity extends AppCompatActivity {
                 }else{
                     Intent profilActivity = new Intent(getApplicationContext(), CommandeActivity.class);
                     startActivity(profilActivity);
+                    finish();
                 }
             }
         });

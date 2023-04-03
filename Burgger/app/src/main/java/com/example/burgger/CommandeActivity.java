@@ -2,6 +2,7 @@ package com.example.burgger;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.burgger.api.ApiInterface;
 import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.cart.CartBurgerAdapter;
+import com.example.burgger.cuisine.CuisineActivity;
+import com.example.burgger.home.HomeActivity;
 import com.example.burgger.object.Burger;
 import com.example.burgger.object.User;
 import com.google.gson.Gson;
@@ -72,6 +75,9 @@ public class CommandeActivity extends AppCompatActivity {
                     ajouterCommande(b);
                 }
                 finish();
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent);
+
             }
         });
 
