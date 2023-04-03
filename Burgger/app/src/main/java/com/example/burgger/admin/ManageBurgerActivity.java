@@ -47,6 +47,7 @@ public class ManageBurgerActivity extends AppCompatActivity {
 
 
     public void getAllBurgers(){
+        burgers.clear();
         HomeActivity.ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(HomeActivity.ApiInterface.class);
         Call<ResponseBody> call = apiInterface.getBurgers();
         call.enqueue(new Callback<ResponseBody>() {
@@ -96,4 +97,6 @@ public class ManageBurgerActivity extends AppCompatActivity {
         burgersListView.setAdapter(burgerListAdapter);
 
     }
+
+
 }

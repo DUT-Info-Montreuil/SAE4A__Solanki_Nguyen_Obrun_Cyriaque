@@ -2,6 +2,7 @@ package com.example.burgger.admin;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,10 +35,10 @@ public class EditBurgerAdapter extends ArrayAdapter<Burger> {
     private Context mContext;
     private int mResource;
 
-    private ManageBurgerActivity mManageBurgerActivity;
+    private Activity mManageBurgerActivity;
 
     private ArrayList<Burger> burgers;
-    public EditBurgerAdapter(Context context, int resource, List<Burger> burgers , ManageBurgerActivity manageBurgerActivity) {
+    public EditBurgerAdapter(Context context, int resource, List<Burger> burgers ,  Activity manageBurgerActivity) {
         super(context, resource, burgers);
         mContext = context;
         mResource = resource;
@@ -85,6 +86,8 @@ public class EditBurgerAdapter extends ArrayAdapter<Burger> {
     public void goToEditBurgerActivity() {
         Intent EditBurgerActivity = new Intent(mContext, EditBurgerActivity.class);
         mContext.startActivity(EditBurgerActivity);
+        mManageBurgerActivity.finish();
+
     }
 
 }
