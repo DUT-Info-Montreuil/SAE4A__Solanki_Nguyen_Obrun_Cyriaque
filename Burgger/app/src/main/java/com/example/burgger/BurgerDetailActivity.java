@@ -16,11 +16,13 @@ import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.home.HomeActivity;
 import com.example.burgger.object.User;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Random;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -63,7 +65,23 @@ public class BurgerDetailActivity extends AppCompatActivity {
         User user = gson.fromJson(json, User.class);
 
         System.out.println(burger_name+"\n\n\n\n\n");
-        burgerImageView.setImageResource(this.getResources().getIdentifier(burger_photo, "drawable", this.getPackageName()));
+
+        String imageUrl = "https://burgerr7.000webhostapp.com/img/" + burger_name.replaceAll("\\s", "%20") + ".png";
+// Ajouter un paramètre aléatoire à l'URL de l'image
+        imageUrl += "?random=" + new Random().nextInt();
+        Picasso.get().load(imageUrl).into(burgerImageView, new com.squareup.picasso.Callback() {
+            @Override
+            public void onSuccess() {
+                // Appeler invalidate() pour rafraîchir l'image
+                burgerImageView.invalidate();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                // Gérer les erreurs de chargement de l'image
+            }
+        });
+
         burgerNameTextView.setText(burger_name);
         burgerPriceTextView.setText(burger_price+"€");
         burgerDescriptionTextView.setText(burger_description);

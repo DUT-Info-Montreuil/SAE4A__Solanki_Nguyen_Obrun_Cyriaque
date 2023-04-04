@@ -10,8 +10,11 @@ import android.widget.TextView;
 
 import com.example.burgger.R;
 import com.example.burgger.object.Burger;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Random;
 
 public class BurgerAdapter extends ArrayAdapter<Burger> {
 
@@ -40,8 +43,21 @@ public class BurgerAdapter extends ArrayAdapter<Burger> {
 
         nameTextView.setText(burger.getBurgerNamme());
         priceTextView.setText(String.format("%.2f €", burger.getPrice()));
-        photoImageView.setImageResource(mContext.getResources().getIdentifier(burger.getPhoto(), "drawable", mContext.getPackageName()));
+      String imageUrl = "https://burgerr7.000webhostapp.com/img/" + burger.getBurgerNamme().replaceAll("\\s", "%20") + ".png";
+// Ajouter un paramètre aléatoire à l'URL de l'image
+        imageUrl += "?random=" + new Random().nextInt();
+        Picasso.get().load(imageUrl).into(photoImageView, new Callback() {
+            @Override
+            public void onSuccess() {
+                // Appeler invalidate() pour rafraîchir l'image
+                photoImageView.invalidate();
+            }
 
+            @Override
+            public void onError(Exception e) {
+                // Gérer les erreurs de chargement de l'image
+            }
+        });
         return view;
     }
 
