@@ -28,6 +28,16 @@ public class User {
     private String city;
     private String address;
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    private String photo;
+
 
 
     public int getId_user() {

@@ -134,4 +134,9 @@ public interface ApiInterface {
     @retrofit2.http.POST("upload-picture.php")
      Call<ResponseBody> uploadImage(@retrofit2.http.Part MultipartBody.Part image,@retrofit2.http.Part ("photoName") RequestBody photoName);
 
+    @retrofit2.http.Multipart
+    @retrofit2.http.POST("upload-picture.php")
+    Call<ResponseBody> uploadImageProfil(@retrofit2.http.Part MultipartBody.Part image, @retrofit2.http.Part ("photoName") RequestBody photoName, @retrofit2.http.Part ("id_user") RequestBody id_user);
+
+
 }

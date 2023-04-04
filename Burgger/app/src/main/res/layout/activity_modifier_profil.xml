@@ -25,6 +25,19 @@
                 android:textSize="32sp"
                 android:textStyle="bold"/>
 
+            <ImageView
+                android:id="@+id/photo_preview"
+                android:layout_width="391dp"
+                android:layout_height="148dp"
+                android:layout_weight="1"
+                />
+
+            <Button
+                android:id="@+id/select_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="changer la photo" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
