@@ -41,6 +41,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Random;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -84,8 +85,21 @@ public class EditBurgerActivity extends AppCompatActivity {
         priceEditText.setText(String.valueOf(burger.getPrice()));
         reductionEditText.setText(String.valueOf(burger.getReduction()));
         descriptionEditText.setText(burger.getDesription());
-        String imageUrl = "https://burgerr7.000webhostapp.com/img/"+burger.getBurgerNamme().replaceAll("\\s", "%20")+".png";
+        String imageUrl = "https://burgerr7.000webhostapp.com/img/" + burger.getBurgerNamme().replaceAll("\\s", "%20") + ".png";
+// Ajouter un paramètre aléatoire à l'URL de l'image
+        imageUrl += "?random=" + new Random().nextInt();
+        Picasso.get().load(imageUrl).into(photoImageView, new com.squareup.picasso.Callback() {
+            @Override
+            public void onSuccess() {
+                // Appeler invalidate() pour rafraîchir l'image
+                photoImageView.invalidate();
+            }
 
+            @Override
+            public void onError(Exception e) {
+                // Gérer les erreurs de chargement de l'image
+            }
+        });
         System.out.println(imageUrl);
 
         Picasso.get().load(imageUrl).into(photoImageView);
