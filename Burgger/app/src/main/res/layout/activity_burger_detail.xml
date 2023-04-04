@@ -15,14 +15,10 @@
 
             <ImageView
                 android:id="@+id/burger_detail_photo"
-                android:layout_width="380dp"
-                android:layout_height="146dp"
-
-                android:layout_marginStart="20sp"
-                android:layout_marginTop="20sp"
-                android:layout_marginEnd="20sp"
-                android:layout_marginBottom="20sp"
-                android:scaleType="centerCrop" />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                 />
 
             <TextView
                 android:id="@+id/burger_detail_price"

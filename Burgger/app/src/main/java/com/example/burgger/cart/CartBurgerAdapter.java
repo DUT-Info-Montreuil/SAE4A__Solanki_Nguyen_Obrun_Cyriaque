@@ -13,9 +13,11 @@ import com.example.burgger.R;
 import com.example.burgger.api.ApiInterface;
 import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.object.Burger;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -65,8 +67,21 @@ public class CartBurgerAdapter extends ArrayAdapter<Burger> {
         TextView quantityTextView = view.findViewById(R.id.quantityTextView);
         nameTextView.setText(burger.getBurgerNamme());
         priceTextView.setText(""+burger.getPrice()* burger.getQuantity());
-        photoImageView.setImageResource(mContext.getResources().getIdentifier(burger.getPhoto(), "drawable", mContext.getPackageName()));
-        quantityTextView.setText("qté: "+burger.getQuantity());
+        String imageUrl = "https://burgerr7.000webhostapp.com/img/" + burger.getBurgerNamme().replaceAll("\\s", "%20") + ".png";
+// Ajouter un paramètre aléatoire à l'URL de l'image
+        imageUrl += "?random=" + new Random().nextInt();
+        Picasso.get().load(imageUrl).into(photoImageView, new com.squareup.picasso.Callback() {
+            @Override
+            public void onSuccess() {
+                // Appeler invalidate() pour rafraîchir l'image
+                photoImageView.invalidate();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                // Gérer les erreurs de chargement de l'image
+            }
+        });quantityTextView.setText("qté: "+burger.getQuantity());
 
 
 
