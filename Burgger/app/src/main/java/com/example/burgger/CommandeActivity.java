@@ -153,7 +153,9 @@ public class CommandeActivity extends AppCompatActivity {
                 // Récupérer le burger sélectionné
                 Burger selectedBurger = burgerListCart.get(position);
                 System.out.println(selectedBurger);
-
+                Intent intent = new Intent(getApplicationContext(), ModifierIngredientActivity.class);
+                intent.putExtra("burger",  selectedBurger.getId_burger());
+                startActivity(intent);
             }
         });
     }

@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backGroundApp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="INGREDIENTS"
+        android:textSize="54dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:paddingBottom="50dp"
+        ></TextView>
+
+    <ListView
+        android:id="@+id/ingredient_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="470dp">
+    </ListView>
+
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:text="VALIDER"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/orange" />
+
+
+
+
+</LinearLayout>
