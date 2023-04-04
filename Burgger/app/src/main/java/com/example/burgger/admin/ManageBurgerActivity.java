@@ -42,6 +42,7 @@ public class ManageBurgerActivity extends AppCompatActivity {
         burgersListView = findViewById(R.id.burger_list_view);
         burgers=new ArrayList<>();
         initializeBurger();
+        burgerListAdapter.notifyDataSetChanged();
 
     }
 
@@ -66,7 +67,6 @@ public class ManageBurgerActivity extends AppCompatActivity {
                         String burgerPhoto = burgerObject.getString("photo");
                         String burgerDescription = burgerObject.getString("description");
                         Double reduction = burgerObject.getDouble("COALESCE(reduction, 0)");
-                        System.out.println(reduction);
                         if(reduction == 0){
                             burgers.add(new Burger(burgerId,0,burgerName,burgerPrice,burgerPhoto,burgerDescription));
                         }else{

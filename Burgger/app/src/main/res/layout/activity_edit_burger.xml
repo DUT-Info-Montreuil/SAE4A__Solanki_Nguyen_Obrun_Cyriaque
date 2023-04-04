@@ -56,7 +56,10 @@
                 android:layout_height="wrap_content"
                 android:hint="Saisissez le nom du burger"
                 android:inputType="text"
-                android:padding="16dp"/>
+                android:padding="16dp"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                />
 
             <!-- Champ de saisie pour le prix du burger -->
             <TextView
@@ -72,6 +75,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Saisissez le prix du burger"
                 android:inputType="numberDecimal"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:padding="16dp"/>
 
 
@@ -88,6 +93,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Saisissez la réductioon du burger"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:inputType="numberDecimal"
                 android:padding="16dp"/>
 
@@ -105,6 +112,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Saisissez la description du burger"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:inputType="textMultiLine"
                 android:minLines="3"
                 android:maxLines="5"
