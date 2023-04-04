@@ -146,6 +146,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        if (isTaskRoot()) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
 
     private void showNavigationDialog() {

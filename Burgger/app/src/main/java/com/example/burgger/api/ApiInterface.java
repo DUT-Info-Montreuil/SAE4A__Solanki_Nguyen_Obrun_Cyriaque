@@ -1,5 +1,7 @@
 package com.example.burgger.api;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -117,5 +119,19 @@ public interface ApiInterface {
 
 
 
+    @FormUrlEncoded
+    @POST("editBurger.php")
+    Call<ResponseBody> editBurger(
+            @Field("burgerName") String burgerName,
+            @Field("burgerDescription") String burgerDescription,
+            @Field("burgerPrice") double BurgerPrice,
+            @Field("BurgerReduction") double BurgerReduction,
+            @Field("burgerPhoto") String BurgerPhoto,
+            @Field("id_burger") int id_burger
+    );
+
+    @retrofit2.http.Multipart
+    @retrofit2.http.POST("upload-picture.php")
+     Call<ResponseBody> uploadImage(@retrofit2.http.Part MultipartBody.Part image,@retrofit2.http.Part ("photoName") RequestBody photoName);
 
 }
