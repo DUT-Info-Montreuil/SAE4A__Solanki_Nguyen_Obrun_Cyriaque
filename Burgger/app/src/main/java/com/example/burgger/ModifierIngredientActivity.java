@@ -3,6 +3,7 @@ package com.example.burgger;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -58,9 +59,12 @@ public class ModifierIngredientActivity extends AppCompatActivity {
         validerModif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println(ingredients.toString());
+                System.out.println(getModificationString(ingredients));
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("burger"+idBurgerUnique, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("burger"+idBurgerUnique, getModificationString(ingredients));
+                editor.apply();
                 finish();
-                System.out.println(idBurgerUnique +"                dojvdnjnncejfbvnefjvnfnjvkndvjnvjknfdjvnjvfndjkvndf");
             }
         });
 
@@ -79,7 +83,17 @@ public class ModifierIngredientActivity extends AppCompatActivity {
 
     private int getIngredientState(Ingredient ingredient) {
         SharedPreferences sharedPreferences = getSharedPreferences("burger"+idBurgerUnique, MODE_PRIVATE);
-        return sharedPreferences.getInt(ingredient.getName()+ingredient.getPosition(), 0);
+        return sharedPreferences.getInt(ingredient.getName()+ingredient.getPosition(), 1);
+    }
+
+    private String getModificationString(ArrayList<Ingredient> ingr){
+        String modification = "";
+        for (Ingredient i : ingr) {
+            if(i.getPresent()==0){
+                modification = modification + "sans " + i.getName() + "\n";
+            }
+        }
+        return modification;
     }
 
 

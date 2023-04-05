@@ -56,6 +56,7 @@ public class CommandeBurgerAdapter extends ArrayAdapter<Burger> {
 
         TextView nameTextView = view.findViewById(R.id.nameTextView);
         ImageView photoImageView = view.findViewById(R.id.photoImageView);
+        TextView modification = view.findViewById(R.id.modificationTextView);
         nameTextView.setText(burger.getBurgerNamme());
         photoImageView.setImageResource(mContext.getResources().getIdentifier(burger.getPhoto(), "drawable", mContext.getPackageName()));
 

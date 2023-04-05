@@ -22,7 +22,8 @@ public class Burger {
         this.price = price;
         this.photo = photo;
         this.desription = desription;
-
+        this.BurgerIDUnique = autoIncrement;
+        autoIncrement++;
     }
 
     public Burger(int id_burger, String burgerNamme, double price, String photo,String desription, double prix_initial) {
@@ -32,7 +33,8 @@ public class Burger {
         this.photo = photo;
         this.desription = desription;
         this.prix_initial = prix_initial;
-
+        this.BurgerIDUnique = autoIncrement;
+        autoIncrement++;
     }
 
 
@@ -44,7 +46,8 @@ public class Burger {
         this.photo = photo;
         this.desription = desription;
         this.quantity = quantity;
-
+        this.BurgerIDUnique = autoIncrement;
+        autoIncrement++;
     }
 
     public Burger(int id_burger, String burgerNamme, double price, String photo, String desription, int quantity, ArrayList<Ingredient> ingr) {

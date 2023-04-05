@@ -186,7 +186,9 @@ public class CommandeActivity extends AppCompatActivity {
     }
 
     public void ajouterCommande(Burger burger){
-        String modification = "Aucune modification";
+        String modification = getModificationBurger(burger.getBurgerIDUnique());
+        if(getModificationBurger(burger.getBurgerIDUnique()) != null)
+            modification = "aucune modification";
         ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
         Call<ResponseBody> call = apiInterface.passerCommande(burger.getId_burger(), modification);
         call.enqueue(new Callback<ResponseBody>() {
@@ -261,5 +263,10 @@ public class CommandeActivity extends AppCompatActivity {
         });
     }
 
-    //réussir à récuperer un string des modification du burger
+    public String getModificationBurger(int idBurgerUnique){
+        SharedPreferences sharedPreferences = getSharedPreferences("burger"+idBurgerUnique, MODE_PRIVATE);
+        return sharedPreferences.getString("burger"+idBurgerUnique, null);
+    }
+
+
 }

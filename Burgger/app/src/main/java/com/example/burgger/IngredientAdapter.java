@@ -71,7 +71,6 @@ public class IngredientAdapter extends ArrayAdapter<Ingredient> {
                 nameTextView.setTextColor(Color.WHITE);
                 ingredient.setPresent(1);
                 saveIngredientState(ingredient);
-                System.out.println(ingredient.toString());
             }
         });
 
@@ -83,7 +82,6 @@ public class IngredientAdapter extends ArrayAdapter<Ingredient> {
                 nameTextView.setTextColor(Color.GRAY);
                 ingredient.setPresent(0);
                 saveIngredientState(ingredient);
-                System.out.println(ingredient.toString());
             }
         });
 
