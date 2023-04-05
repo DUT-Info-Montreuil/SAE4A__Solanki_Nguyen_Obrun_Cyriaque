@@ -79,6 +79,7 @@ public class ProfilActivity extends AppCompatActivity {
 
             @Override
             public void onError(Exception e) {
+                mProfilPhoto.setImageResource(getApplicationContext().getResources().getIdentifier("userlogo", "drawable", getApplicationContext().getPackageName()));
 
             }
         });

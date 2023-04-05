@@ -16,7 +16,10 @@ import com.example.burgger.R;
 import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.object.User;
 import com.example.burgger.api.ApiInterface;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
+import java.util.Random;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -65,7 +68,26 @@ private  int mResource;
         ImageView photoImageView = view.findViewById(R.id.photoImageView);
 
         nameTextView.setText(user.getUsername());
-        photoImageView.setImageResource(mContext.getResources().getIdentifier("userlogo", "drawable", mContext.getPackageName()));
+
+
+
+
+        String imageUrl = "https://burgerr7.000webhostapp.com/img/"+user.getUsername()+".png";
+        System.out.println(imageUrl);
+        imageUrl += "?random=" + new Random().nextInt();
+        Picasso.get().load(imageUrl).into(photoImageView, new com.squareup.picasso.Callback() {
+            @Override
+            public void onSuccess() {
+                // Appeler invalidate() pour rafraîchir l'image
+                photoImageView.invalidate();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                photoImageView.setImageResource(mContext.getResources().getIdentifier("userlogo", "drawable", mContext.getPackageName()));
+
+            }
+        });
 
         dellUserButton.setOnClickListener(new View.OnClickListener() {
             @Override

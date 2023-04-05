@@ -97,7 +97,8 @@ public class ModifierProfilActivity extends AppCompatActivity {
 
             @Override
             public void onError(Exception e) {
-                // Gérer les erreurs de chargement de l'image
+                mImageView.setImageResource(getApplicationContext().getResources().getIdentifier("userlogo", "drawable", getApplicationContext().getPackageName()));
+
             }
         });
 
