@@ -5,6 +5,8 @@
     android:background="@color/backGroundApp"
     android:orientation="vertical">
 
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,14 +15,27 @@
         android:textSize="54dp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:paddingBottom="50dp"
+        android:paddingBottom="10dp"
         ></TextView>
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="100dp"
+        app:srcCompat="@drawable/pain_haut"></ImageView>
 
     <ListView
         android:id="@+id/ingredient_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="470dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     </ListView>
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="100dp"
+        app:srcCompat="@drawable/pain_bas"></ImageView>
+    modifier l'opacité
 
     <Button
         android:id="@+id/valideIngrButton"

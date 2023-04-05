@@ -48,18 +48,19 @@ public class IngredientAdapter extends ArrayAdapter<Ingredient> {
         }
 
         Ingredient ingredient = getItem(position);
-        TextView nameTextView = view.findViewById(R.id.nameTextView);
+        ImageView imageIngredient = view.findViewById(R.id.imageIngredient);
         Button addButton = view.findViewById(R.id.addIngr);
         Button rmButton = view.findViewById(R.id.rmIngr);
-        nameTextView.setText(ingredient.getName());
+        imageIngredient.setImageResource(mContext.getResources().getIdentifier(ingredient.getName(), "drawable", mContext.getPackageName()));
+
 
         if(ingredient.getPresent() == 1){
             addButton.setEnabled(false);
-            nameTextView.setTextColor(Color.WHITE);
+            imageIngredient.setAlpha(1f);
             ingredient.setPresent(1);
         } else if (ingredient.getPresent() == 0) {
             rmButton.setEnabled(false);
-            nameTextView.setTextColor(Color.GRAY);
+            imageIngredient.setAlpha(0.3f);
             ingredient.setPresent(0);
         }
 
@@ -68,7 +69,7 @@ public class IngredientAdapter extends ArrayAdapter<Ingredient> {
             public void onClick(View view) {
                 rmButton.setEnabled(true);
                 addButton.setEnabled(false);
-                nameTextView.setTextColor(Color.WHITE);
+                imageIngredient.setAlpha(1f);
                 ingredient.setPresent(1);
                 saveIngredientState(ingredient);
             }
@@ -79,7 +80,7 @@ public class IngredientAdapter extends ArrayAdapter<Ingredient> {
             public void onClick(View view) {
                 rmButton.setEnabled(false);
                 addButton.setEnabled(true);
-                nameTextView.setTextColor(Color.GRAY);
+                imageIngredient.setAlpha(0.3f);
                 ingredient.setPresent(0);
                 saveIngredientState(ingredient);
             }
