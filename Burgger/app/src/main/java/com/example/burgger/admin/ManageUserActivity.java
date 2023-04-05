@@ -114,23 +114,33 @@ public class ManageUserActivity extends AppCompatActivity {
                 try {
                     String jsonString = response.body().string();
                     JSONObject jsonObject = new JSONObject(jsonString);
-                    users.clear();
 
                     if (!jsonObject.isNull("result")) {
                         JSONArray jsonArray = jsonObject.getJSONArray("result");
+                        users.clear();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject userObject = jsonArray.getJSONObject(i);
-                            int userid = userObject.getInt("id_user");
-                            String User_username = userObject.getString("username");
-                            User user = new User();
-                            user.setId_user(userid);
-                            user.setUsername(User_username);
-                            if (userObject.getInt("ban") == 1) {
-                                user.setBan(true);
-                            } else {
-                                user.setBan(false);
+                            int userId = userObject.getInt("id_user");
+                            String userName = userObject.getString("username");
+                            boolean isBanned = userObject.getInt("ban") == 1;
+
+                            // Vérifier si l'utilisateur existe déjà dans la liste
+                            boolean userExists = false;
+                            for (User user : users) {
+                                if (user.getId_user() == userId) {
+                                    userExists = true;
+                                    break;
+                                }
                             }
-                            users.add(user);
+
+                            // Ajouter l'utilisateur à la liste s'il n'existe pas déjà
+                            if (!userExists) {
+                                User user = new User();
+                                user.setId_user(userId);
+                                user.setUsername(userName);
+                                user.setBan(isBanned);
+                                users.add(user);
+                            }
                         }
                     }
 
