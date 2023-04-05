@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.burgger.BurgerDetailActivity;
 import com.example.burgger.cart.CartActivity;
 import com.example.burgger.MainActivity;
-import com.example.burgger.ProfilActivity;
+import com.example.burgger.profil.ProfilActivity;
 import com.example.burgger.promotion.PromotionActivity;
 import com.example.burgger.R;
 import com.example.burgger.api.RetrofitClientInstance;

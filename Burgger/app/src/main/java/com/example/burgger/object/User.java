@@ -99,18 +99,22 @@ public class User {
     public void setBan(boolean ban) {
         this.ban = ban;
     }
+
     @Override
     public String toString() {
         return "User{" +
                 "id_user=" + id_user +
+                ", ban=" + ban +
                 ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", fisrtname='" + fisrtname + '\'' +
                 ", email='" + email + '\'' +
                 ", city='" + city + '\'' +
                 ", address='" + address + '\'' +
+                ", photo='" + photo + '\'' +
                 '}';
     }
+
     public void setAddress(String address) {
         this.address = address;
     }

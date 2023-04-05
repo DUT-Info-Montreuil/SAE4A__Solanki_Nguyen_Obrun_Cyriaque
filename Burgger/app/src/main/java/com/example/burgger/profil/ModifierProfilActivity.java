@@ -1,4 +1,4 @@
-package com.example.burgger;
+package com.example.burgger.profil;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,10 +25,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.burgger.R;
 import com.example.burgger.api.ApiInterface;
 import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.object.User;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +39,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Random;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -45,9 +48,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.POST;
 
 public class ModifierProfilActivity extends AppCompatActivity {
 
@@ -82,9 +82,27 @@ public class ModifierProfilActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String json = sharedPreferences.getString("user", "");
         user = gson.fromJson(json, User.class);
-        System.out.println(user.toString());
+
 
         mImageView = findViewById(R.id.photo_preview);
+
+        String imageUrl = "https://burgerr7.000webhostapp.com/img/"+user.getUsername()+".png";
+        imageUrl += "?random=" + new Random().nextInt();
+        Picasso.get().load(imageUrl).into(mImageView, new com.squareup.picasso.Callback() {
+            @Override
+            public void onSuccess() {
+                // Appeler invalidate() pour rafraîchir l'image
+                mImageView.invalidate();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                // Gérer les erreurs de chargement de l'image
+            }
+        });
+
+
+
         mchangePhoto = findViewById(R.id.select_photo);
         mchangePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,8 +149,11 @@ public class ModifierProfilActivity extends AppCompatActivity {
                 String firstname= mFirstNameEditText.getText().toString();
 
 
-                if(checkForm( newpass,oldpass, city, address, name, firstname))
+                if(checkForm( newpass,oldpass, city, address, name, firstname)){
+                    uploadImage();
                     modificationProfil(username,newpass,city,address,name,firstname, oldpass, newCpass);
+                }
+
             }
 
 
@@ -165,6 +186,7 @@ public class ModifierProfilActivity extends AppCompatActivity {
                         mErrorMessage.setText(jsonObject.getString("msg"));
                     } else {
                         // modification réussite
+
                         JSONObject result = jsonObject.getJSONObject("result");
                         String name = result.getString("name");
                         String fisrtName = result.getString("firstname");
@@ -184,15 +206,16 @@ public class ModifierProfilActivity extends AppCompatActivity {
                         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.clear();
-                        editor.apply();
                         Gson gson = new Gson();
+
                         String json = gson.toJson(user);
                         editor.putString("user", json);
                         editor.apply();
-                        uploadImage();
+                        finish();
+
                         Intent registerActivity = new Intent(getApplicationContext(), ProfilActivity.class);
                         startActivity(registerActivity);
-                        finish();
+
 
                     }
                 } catch (IOException | JSONException e) {
@@ -275,7 +298,7 @@ public class ModifierProfilActivity extends AppCompatActivity {
     private void uploadImage() {
         if (mImageUri == null) {
             Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show();
-            return;
+            return ;
         }
 
         try {
@@ -314,11 +337,7 @@ public class ModifierProfilActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(getApplicationContext(), "Error uploading image", Toast.LENGTH_SHORT).show();
                     }
-                    try {
-                        System.out.println(response.body().string());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+
                 }
 
                 @Override

@@ -15,9 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.burgger.CommandeActivity;
-import com.example.burgger.ProfilActivity;
+import com.example.burgger.profil.ProfilActivity;
 import com.example.burgger.api.ApiInterface;
-import com.example.burgger.object.Commande;
 import com.example.burgger.promotion.PromotionActivity;
 import com.example.burgger.R;
 import com.example.burgger.api.RetrofitClientInstance;
@@ -37,9 +36,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.POST;
 
 public class CartActivity extends AppCompatActivity {
     private ImageView profilImageView;

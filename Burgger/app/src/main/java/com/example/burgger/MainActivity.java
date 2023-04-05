@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void loginUser(String username, String password) {
+    public  void loginUser(String username, String password) {
         ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
         Call<ResponseBody> call = apiInterface.login(username, password);
         call.enqueue(new Callback<ResponseBody>() {
@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                             user.setName(name);
                             user.setEmail(email);
                             user.setUsername(username);
+
 
                             SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();

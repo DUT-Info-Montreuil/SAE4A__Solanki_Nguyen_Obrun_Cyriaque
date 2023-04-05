@@ -48,13 +48,13 @@
             android:name=".cart.CartActivity"
             android:exported="false" />
         <activity
-            android:name=".ModifierProfilActivity"
+            android:name=".profil.ModifierProfilActivity"
             android:exported="false" />
         <activity
             android:name=".BurgerDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfilActivity"
+            android:name=".profil.ProfilActivity"
             android:exported="false" />
         <activity
             android:name=".home.HomeActivity"

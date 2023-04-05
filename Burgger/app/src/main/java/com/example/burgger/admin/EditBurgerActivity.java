@@ -15,7 +15,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
@@ -26,14 +25,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.burgger.MainActivity;
-import com.example.burgger.ProfilActivity;
 import com.example.burgger.R;
-import com.example.burgger.TESTDRIVE;
 import com.example.burgger.api.ApiInterface;
 import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.object.Burger;
-import com.example.burgger.object.User;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -50,7 +45,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class EditBurgerActivity extends AppCompatActivity {
 
@@ -100,9 +94,7 @@ public class EditBurgerActivity extends AppCompatActivity {
                 // Gérer les erreurs de chargement de l'image
             }
         });
-        System.out.println(imageUrl);
 
-        Picasso.get().load(imageUrl).into(photoImageView);
 
         Button photoButton = findViewById(R.id.edit_burger_select_photo);
 

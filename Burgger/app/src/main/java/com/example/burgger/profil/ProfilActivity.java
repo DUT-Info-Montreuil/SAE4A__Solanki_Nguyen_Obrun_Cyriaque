@@ -1,4 +1,4 @@
-package com.example.burgger;
+package com.example.burgger.profil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,8 +11,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.burgger.MainActivity;
+import com.example.burgger.R;
 import com.example.burgger.object.User;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+
+import java.util.Random;
 
 public class ProfilActivity extends AppCompatActivity {
     private User user;
@@ -26,7 +31,7 @@ public class ProfilActivity extends AppCompatActivity {
 
     private Button mEditProfilButton;
 
-    private ImageView mRetour;
+    private ImageView mRetour,mProfilPhoto;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -59,13 +64,32 @@ public class ProfilActivity extends AppCompatActivity {
 
         mEditProfilButton = findViewById(R.id.editButton);
 
+        mProfilPhoto = findViewById(R.id.imageViewPP);
+
+
+        String imageUrl = "https://burgerr7.000webhostapp.com/img/"+user.getUsername()+".png";
+        System.out.println(imageUrl);
+        imageUrl += "?random=" + new Random().nextInt();
+        Picasso.get().load(imageUrl).into(mProfilPhoto, new com.squareup.picasso.Callback() {
+            @Override
+            public void onSuccess() {
+                // Appeler invalidate() pour rafraîchir l'image
+                mProfilPhoto.invalidate();
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+
 
         if (user.getId_user() == -1) {
             // L'ID utilisateur n'a pas été trouvé dans SharedPreferences, renvoyer l'utilisateur à l'écran de connexion
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
-        System.out.println(user);
+
 
         mEditProfilButton.setOnClickListener(new View.OnClickListener() {
             @Override
