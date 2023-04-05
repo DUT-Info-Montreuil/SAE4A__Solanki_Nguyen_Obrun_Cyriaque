@@ -139,4 +139,19 @@ public interface ApiInterface {
     Call<ResponseBody> uploadImageProfil(@retrofit2.http.Part MultipartBody.Part image, @retrofit2.http.Part ("photoName") RequestBody photoName, @retrofit2.http.Part ("id_user") RequestBody id_user);
 
 
+    @FormUrlEncoded
+    @POST("addBurger.php")
+    Call<ResponseBody> addBurger(
+            @Field("burgerName") String burgerName,
+            @Field("burgerDescription") String burgerDescription,
+            @Field("burgerPrice") double BurgerPrice
+    );
+
+    @FormUrlEncoded
+    @POST("dellBurger.php")
+    Call<ResponseBody> dellBurger(
+            @Field("id_burger") int id_burger
+
+    );
+
 }

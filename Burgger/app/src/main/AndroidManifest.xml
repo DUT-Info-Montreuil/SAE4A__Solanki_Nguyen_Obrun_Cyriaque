@@ -18,7 +18,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".AddBurgerActivity"
+            android:name=".admin.AddBurgerActivity"
             android:exported="false" />
         <activity
             android:name=".admin.EditBurgerActivity"

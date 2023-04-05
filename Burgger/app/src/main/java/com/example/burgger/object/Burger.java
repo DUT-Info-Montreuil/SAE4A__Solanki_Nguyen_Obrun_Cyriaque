@@ -51,7 +51,11 @@ public class Burger {
         this.quantity = quantity;
     }
 
-
+    public Burger(String burgerNamme, double price, String desription) {
+        this.burgerNamme = burgerNamme;
+        this.price = price;
+        this.desription = desription;
+    }
 
     public int getId_burger() {
         return id_burger;

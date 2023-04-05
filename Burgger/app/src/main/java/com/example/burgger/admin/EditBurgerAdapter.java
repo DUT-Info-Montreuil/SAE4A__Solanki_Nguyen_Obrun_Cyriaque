@@ -3,7 +3,9 @@ package com.example.burgger.admin;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.burgger.R;
 import com.example.burgger.api.ApiInterface;
@@ -22,6 +25,11 @@ import com.example.burgger.object.Burger;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Callback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -74,7 +82,8 @@ public class EditBurgerAdapter extends ArrayAdapter<Burger> {
 
             @Override
             public void onError(Exception e) {
-                // Gérer les erreurs de chargement de l'image
+                photoImageView.setImageResource(mContext.getResources().getIdentifier("burgerdefault", "drawable", mContext.getPackageName()));
+
             }
         });
         Button editBugerBUtton = view.findViewById(R.id.EditBurgerbutton);
@@ -91,6 +100,49 @@ public class EditBurgerAdapter extends ArrayAdapter<Burger> {
                goToEditBurgerActivity();
             }
         });
+
+        Button dellBugerBUtton = view.findViewById(R.id.DellBUrgerbutton);
+
+        dellBugerBUtton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Confirmation");
+                builder.setMessage("Voulez vous vraiment supprimer le burger id:"+burger.getId_burger()+" "+burger.getBurgerNamme());
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
+                        Call<ResponseBody> call = apiInterface.dellBurger(burger.getId_burger());
+                        call.enqueue(new retrofit2.Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                Toast.makeText(mContext, "Burger supprimé", Toast.LENGTH_LONG).show();
+                                remove(burger);
+                                notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Toast.makeText(mContext, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
         return view;
     }
 
@@ -100,5 +152,9 @@ public class EditBurgerAdapter extends ArrayAdapter<Burger> {
         mManageBurgerActivity.finish();
 
     }
+
+
+
+
 
 }
