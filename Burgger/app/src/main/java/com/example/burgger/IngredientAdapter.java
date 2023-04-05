@@ -1,20 +1,25 @@
 package com.example.burgger;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.burgger.object.Burger;
 import com.example.burgger.object.Ingredient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientAdapter extends ArrayAdapter<Ingredient> {
@@ -22,11 +27,16 @@ public class IngredientAdapter extends ArrayAdapter<Ingredient> {
     private Context mContext;
     private int mResource;
 
+    private int shared;
+    private List<Ingredient> mIngredients;
 
-    public IngredientAdapter(Context context, int resource, List<Ingredient> ingr) {
+
+    public IngredientAdapter(Context context, int resource, List<Ingredient> ingr, int sharedId) {
         super(context, resource, ingr);
         mContext = context;
         mResource = resource;
+        mIngredients = ingr;
+        this.shared = sharedId;
     }
 
     @Override
@@ -38,14 +48,52 @@ public class IngredientAdapter extends ArrayAdapter<Ingredient> {
         }
 
         Ingredient ingredient = getItem(position);
-
-
         TextView nameTextView = view.findViewById(R.id.nameTextView);
-
-
+        Button addButton = view.findViewById(R.id.addIngr);
+        Button rmButton = view.findViewById(R.id.rmIngr);
         nameTextView.setText(ingredient.getName());
 
+        if(ingredient.getPresent() == 1){
+            addButton.setEnabled(false);
+            nameTextView.setTextColor(Color.WHITE);
+            ingredient.setPresent(1);
+        } else if (ingredient.getPresent() == 0) {
+            rmButton.setEnabled(false);
+            nameTextView.setTextColor(Color.GRAY);
+            ingredient.setPresent(0);
+        }
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rmButton.setEnabled(true);
+                addButton.setEnabled(false);
+                nameTextView.setTextColor(Color.WHITE);
+                ingredient.setPresent(1);
+                saveIngredientState(ingredient);
+                System.out.println(ingredient.toString());
+            }
+        });
+
+        rmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rmButton.setEnabled(false);
+                addButton.setEnabled(true);
+                nameTextView.setTextColor(Color.GRAY);
+                ingredient.setPresent(0);
+                saveIngredientState(ingredient);
+                System.out.println(ingredient.toString());
+            }
+        });
 
         return view;
+    }
+
+    private void saveIngredientState(Ingredient ingredient) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences("burger"+shared, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(ingredient.getName()+ingredient.getPosition(), ingredient.getPresent());
+        editor.apply();
     }
 }
