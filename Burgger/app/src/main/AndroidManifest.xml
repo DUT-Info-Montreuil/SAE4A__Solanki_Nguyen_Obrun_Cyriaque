@@ -18,22 +18,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".MdpOublieActivity"
+            android:name=".commande.ModifierIngredientActivity"
             android:exported="false" />
         <activity
-            android:name=".admin.AddBurgerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ModifierIngredientActivity"
-            android:exported="false" />
-        <activity
-            android:name=".admin.EditBurgerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ModifierBurgerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CommandeBurgerAdapter"
+            android:name=".commande.CommandeBurgerAdapter"
             android:exported="false" />
         <activity
             android:name=".admin.ManageBurgerActivity"
@@ -72,7 +60,7 @@
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".CommandeActivity"
+            android:name=".commande.CommandeActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

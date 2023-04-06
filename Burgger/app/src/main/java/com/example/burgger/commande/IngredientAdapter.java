@@ -1,4 +1,4 @@
-package com.example.burgger;
+package com.example.burgger.commande;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.burgger.R;
 import com.example.burgger.object.Burger;
 import com.example.burgger.object.Ingredient;
 

@@ -1,4 +1,4 @@
-package com.example.burgger;
+package com.example.burgger.commande;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,31 +8,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.burgger.api.ApiInterface;
-import com.example.burgger.api.RetrofitClientInstance;
-import com.example.burgger.object.Burger;
+import com.example.burgger.R;
+import com.example.burgger.commande.IngredientAdapter;
 import com.example.burgger.object.Ingredient;
-import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Map;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ModifierIngredientActivity extends AppCompatActivity {
 

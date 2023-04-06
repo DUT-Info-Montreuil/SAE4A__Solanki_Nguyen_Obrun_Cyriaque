@@ -1,4 +1,4 @@
-package com.example.burgger;
+package com.example.burgger.commande;
 
 import android.content.Context;
 import android.view.LayoutInflater;

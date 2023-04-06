@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.burgger.CommandeActivity;
+import com.example.burgger.commande.CommandeActivity;
 import com.example.burgger.profil.ProfilActivity;
 import com.example.burgger.api.ApiInterface;
 import com.example.burgger.promotion.PromotionActivity;

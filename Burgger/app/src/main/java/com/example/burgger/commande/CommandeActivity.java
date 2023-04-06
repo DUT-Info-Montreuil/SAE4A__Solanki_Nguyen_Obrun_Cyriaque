@@ -1,7 +1,6 @@
-package com.example.burgger;
+package com.example.burgger.commande;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -14,10 +13,9 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.burgger.R;
 import com.example.burgger.api.ApiInterface;
 import com.example.burgger.api.RetrofitClientInstance;
-import com.example.burgger.cart.CartBurgerAdapter;
-import com.example.burgger.cuisine.CuisineActivity;
 import com.example.burgger.home.HomeActivity;
 import com.example.burgger.object.Burger;
 import com.example.burgger.object.Ingredient;
@@ -32,7 +30,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
