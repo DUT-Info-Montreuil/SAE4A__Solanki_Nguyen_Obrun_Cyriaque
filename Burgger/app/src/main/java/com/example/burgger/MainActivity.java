@@ -1,5 +1,6 @@
 package com.example.burgger;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,15 +29,14 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.POST;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText usernameEditText;
     private EditText passwordEditText;
-    private TextView errorMsgTextView;
+    private TextView errorMsgTextView,forgotpsw;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.username_edittext);
         passwordEditText = findViewById(R.id.password_edittext);
         errorMsgTextView = findViewById(R.id.errorMsg_textView);
+        forgotpsw = findViewById(R.id.forgotpsw);
+        forgotpsw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(getApplicationContext(),MdpOublieActivity.class);
+                startActivity(intent);
+            }
+        });
         Button loginButton = findViewById(R.id.login_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
