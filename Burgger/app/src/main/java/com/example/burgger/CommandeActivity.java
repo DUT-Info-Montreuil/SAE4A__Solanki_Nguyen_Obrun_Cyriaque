@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -196,6 +197,10 @@ public class CommandeActivity extends AppCompatActivity {
                 try {
                     String jsonString = response.body().string();
                     System.out.println(jsonString);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        getApplicationContext().deleteSharedPreferences("burger"+burger.getBurgerIDUnique());
+                    }
 
                 } catch (IOException e) {
                     e.printStackTrace();

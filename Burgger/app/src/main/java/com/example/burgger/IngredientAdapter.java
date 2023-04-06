@@ -47,22 +47,36 @@ public class IngredientAdapter extends ArrayAdapter<Ingredient> {
             view = inflater.inflate(mResource, parent, false);
         }
 
+
+
         Ingredient ingredient = getItem(position);
         ImageView imageIngredient = view.findViewById(R.id.imageIngredient);
         Button addButton = view.findViewById(R.id.addIngr);
         Button rmButton = view.findViewById(R.id.rmIngr);
         imageIngredient.setImageResource(mContext.getResources().getIdentifier(ingredient.getName(), "drawable", mContext.getPackageName()));
 
-
-        if(ingredient.getPresent() == 1){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences("burger"+shared, Context.MODE_PRIVATE);
+        if(!sharedPreferences.contains("burger"+shared)){
             addButton.setEnabled(false);
             imageIngredient.setAlpha(1f);
             ingredient.setPresent(1);
-        } else if (ingredient.getPresent() == 0) {
-            rmButton.setEnabled(false);
-            imageIngredient.setAlpha(0.3f);
-            ingredient.setPresent(0);
+            rmButton.setEnabled(true);
+        }else{
+            if(ingredient.getPresent() == 1){
+                addButton.setEnabled(false);
+                imageIngredient.setAlpha(1f);
+                ingredient.setPresent(1);
+                rmButton.setEnabled(true);
+            } else if (ingredient.getPresent() == 0) {
+                rmButton.setEnabled(false);
+                imageIngredient.setAlpha(0.3f);
+                ingredient.setPresent(0);
+                addButton.setEnabled(true);
+            }
         }
+
+
+
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -59,7 +59,7 @@ public class ModifierIngredientActivity extends AppCompatActivity {
         validerModif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println(getModificationString(ingredients));
+                System.out.println("burger"+idBurgerUnique + " f            jirjfdijjdifjosfdoijifdsijfijdsifsjiofjs");
                 SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("burger"+idBurgerUnique, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("burger"+idBurgerUnique, getModificationString(ingredients));
