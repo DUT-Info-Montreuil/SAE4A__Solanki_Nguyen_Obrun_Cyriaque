@@ -24,6 +24,9 @@
             android:name=".admin.AddBurgerActivity"
             android:exported="false" />
         <activity
+            android:name=".ModifierIngredientActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin.EditBurgerActivity"
             android:exported="false" />
         <activity

@@ -1,5 +1,7 @@
 package com.example.burgger.object;
 
+import java.util.ArrayList;
+
 public class Burger {
     private int id_burger;
 
@@ -12,6 +14,10 @@ public class Burger {
     private double price , prix_initial,reduction;
     private  String photo;
 
+    private static int autoIncrement = 0;
+
+    private int BurgerIDUnique;
+    private ArrayList<Ingredient> mIngredients;
     private String desription;
 
     public Burger(int id_burger, double reduction, String burgerNamme, double price, String photo, String desription) {
@@ -29,6 +35,8 @@ public class Burger {
         this.price = price;
         this.photo = photo;
         this.desription = desription;
+        this.BurgerIDUnique = autoIncrement;
+        autoIncrement++;
     }
 
     public Burger(int id_burger, String burgerNamme, double price, String photo,String desription, double prix_initial) {
@@ -38,6 +46,8 @@ public class Burger {
         this.photo = photo;
         this.desription = desription;
         this.prix_initial = prix_initial;
+        this.BurgerIDUnique = autoIncrement;
+        autoIncrement++;
     }
 
 
@@ -49,6 +59,21 @@ public class Burger {
         this.photo = photo;
         this.desription = desription;
         this.quantity = quantity;
+        this.BurgerIDUnique = autoIncrement;
+        autoIncrement++;
+    }
+
+    public Burger(int id_burger, String burgerNamme, double price, String photo, String desription, int quantity, ArrayList<Ingredient> ingr) {
+        this.id_burger = id_burger;
+        this.burgerNamme = burgerNamme;
+        this.price = price;
+        this.photo = photo;
+        this.desription = desription;
+        this.quantity = quantity;
+        this.mIngredients = ingr;
+
+        this.BurgerIDUnique = autoIncrement;
+        autoIncrement++;
     }
 
     public Burger(String burgerNamme, double price, String desription) {
@@ -71,6 +96,15 @@ public class Burger {
 
     public void setId_burger(int id_burger) {
         this.id_burger = id_burger;
+    }
+
+
+    public ArrayList<Ingredient> getIngredients() {
+        return mIngredients;
+    }
+
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
+        mIngredients = ingredients;
     }
 
     public String getBurgerNamme() {
@@ -106,6 +140,14 @@ public class Burger {
         this.desription = desription;
     }
 
+
+    public int getBurgerIDUnique() {
+        return BurgerIDUnique;
+    }
+
+    public void setBurgerIDUnique(int burgerIDUnique) {
+        BurgerIDUnique = burgerIDUnique;
+    }
 
     public int getQuantity() {
         return quantity;

@@ -63,6 +63,12 @@ public interface ApiInterface {
             @Field("modification") String modification
     );
 
+    @FormUrlEncoded
+    @POST("getBurgerIngredient.php")
+    Call<ResponseBody> getBurgerIngredient(
+            @Field("id_burger") int id_burger
+    );
+
     @POST("getCommandesPrete.php")
     Call<ResponseBody> getCommandesPrete();
     @POST("getCommandes.php")
