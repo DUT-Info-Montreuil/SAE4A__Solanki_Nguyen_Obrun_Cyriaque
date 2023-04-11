@@ -31,7 +31,7 @@ public class ProfilActivity extends AppCompatActivity {
 
     private Button mEditProfilButton;
 
-    private ImageView mRetour,mProfilPhoto;
+    private ImageView mRetour,mProfilPhoto, mDeco;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -107,6 +107,21 @@ public class ProfilActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        mDeco = findViewById(R.id.imageViewDeco);
+        mDeco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.clear();
+                edit.apply();
+                finish();
+                Intent registerActivity = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(registerActivity);
+
             }
         });
 
