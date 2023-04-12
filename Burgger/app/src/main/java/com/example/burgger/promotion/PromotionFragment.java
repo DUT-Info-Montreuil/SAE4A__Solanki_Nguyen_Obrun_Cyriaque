@@ -1,22 +1,24 @@
 package com.example.burgger.promotion;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.burgger.BurgerDetailActivity;
+import com.example.burgger.BurgerDetailFragment;
 import com.example.burgger.MainActivity;
-import com.example.burgger.profil.ProfilActivity;
 import com.example.burgger.R;
 import com.example.burgger.api.RetrofitClientInstance;
-import com.example.burgger.cart.CartActivity;
-import com.example.burgger.home.HomeActivity;
 import com.example.burgger.object.Burger;
 import com.example.burgger.object.User;
 import com.google.gson.Gson;
@@ -34,7 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.POST;
 
-public class PromotionActivity extends AppCompatActivity {
+public class PromotionFragment extends Fragment {
 
     private User user;
 
@@ -42,31 +44,34 @@ public class PromotionActivity extends AppCompatActivity {
 
     private ArrayList<Burger> burgers;
 
-    private ImageView burgerList , cartList;
+    private ImageView burgerList, cartList;
 
+    public PromotionFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_promotion);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_promotion, container, false);
 
         // Récupérer l'ID utilisateur depuis SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPrefs", getActivity().MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("user", "");
         user = gson.fromJson(json, User.class);
         if (user.getId_user() == -1) {
             // L'ID utilisateur n'a pas été trouvé dans SharedPreferences, renvoyer l'utilisateur à l'écran de connexion
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
 
-        ImageView profilImageView = findViewById(R.id.imageViewProfil);
-        ListView burgersListView = findViewById(R.id.burger_list_view);
+        ListView burgersListView = view.findViewById(R.id.burgerPromotion_list_view);
 
-        burgers=new ArrayList<>();
+        burgers = new ArrayList<>();
         getAllBurgers();
-        burgerListAdapter = new BurgerAdapterPromotion(this,R.layout.burger_list_item_promotion,burgers);
+        burgerListAdapter = new BurgerAdapterPromotion(getActivity(), R.layout.burger_list_item_promotion, burgers);
         burgersListView.setAdapter(burgerListAdapter);
         burgersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,53 +82,26 @@ public class PromotionActivity extends AppCompatActivity {
                 System.out.println(selectedBurger.toString());
                 // Ouvrir une nouvelle activité avec les détails du burger sélectionné
 
-                SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPrefs", getActivity().MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(user);
-                editor.putInt("burger_id",selectedBurger.getId_burger());
-                editor.putString("burger_price", ""+selectedBurger.getPrice());
+                editor.putInt("burger_id", selectedBurger.getId_burger());
+                editor.putString("burger_price", "" + selectedBurger.getPrice());
                 editor.putString("burger_name", selectedBurger.getBurgerNamme());
                 editor.putString("burger_photo", selectedBurger.getPhoto());
                 editor.putString("burger_description", selectedBurger.getDesription());
                 editor.apply();
 
 
-                Intent burgerDetailIntent = new Intent(getApplicationContext(), BurgerDetailActivity.class);
-                startActivity(burgerDetailIntent);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.main_framelayout, new BurgerDetailFragment());
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
-
-
-        profilImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent registerActivity = new Intent(getApplicationContext(), ProfilActivity.class);
-                startActivity(registerActivity);
-
-            }
-        });
-
-        burgerList = findViewById(R.id.imageViewBurger);
-        burgerList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent registerActivity = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(registerActivity);
-                finish();
-            }
-        });
-
-        cartList = findViewById(R.id.cartimageView);
-        cartList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent registerActivity = new Intent(getApplicationContext(), CartActivity.class);
-                startActivity(registerActivity);
-                finish();
-            }
-        });
-
+        return view;
     }
 
     public interface ApiInterface {
@@ -131,7 +109,7 @@ public class PromotionActivity extends AppCompatActivity {
         Call<ResponseBody> getBurgers();
     }
 
-    public void getAllBurgers(){
+    public void getAllBurgers() {
         ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
         Call<ResponseBody> call = apiInterface.getBurgers();
         call.enqueue(new Callback<ResponseBody>() {
@@ -148,10 +126,10 @@ public class PromotionActivity extends AppCompatActivity {
                         String burgerName = burgerObject.getString("burgername");
                         Double burgerPrice = burgerObject.getDouble("price");
                         Double reduction = burgerObject.getDouble("reduction");
-                        Double prixReduction = burgerPrice - ( (reduction/100)*burgerPrice );
+                        Double prixReduction = burgerPrice - ((reduction / 100) * burgerPrice);
                         String burgerPhoto = burgerObject.getString("photo");
                         String burgerDescription = burgerObject.getString("description");
-                        burgers.add(new Burger(burgerId,burgerName,prixReduction,burgerPhoto,burgerDescription, burgerPrice));
+                        burgers.add(new Burger(burgerId, burgerName, prixReduction, burgerPhoto, burgerDescription, burgerPrice));
 
                     }
 

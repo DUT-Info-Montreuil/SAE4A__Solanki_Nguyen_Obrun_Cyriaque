@@ -1,12 +1,16 @@
 package com.example.burgger.cart;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static android.content.Context.MODE_PRIVATE;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,12 +18,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.burgger.commande.CommandeActivity;
-import com.example.burgger.profil.ProfilActivity;
-import com.example.burgger.api.ApiInterface;
-import com.example.burgger.promotion.PromotionActivity;
 import com.example.burgger.R;
+import com.example.burgger.api.ApiInterface;
 import com.example.burgger.api.RetrofitClientInstance;
+import com.example.burgger.commande.CommandeActivity;
 import com.example.burgger.home.HomeActivity;
 import com.example.burgger.object.Burger;
 import com.example.burgger.object.User;
@@ -37,7 +39,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CartActivity extends AppCompatActivity {
+
+public class CartFragment extends Fragment {
+
     private ImageView profilImageView;
     private CartBurgerAdapter burgerListAdapter;
     private ArrayList<Burger> cart;
@@ -49,70 +53,43 @@ public class CartActivity extends AppCompatActivity {
 
     private double total=0;
 
+    public CartFragment() {
+        // Required empty public constructor
+    }
 
-    @SuppressLint("MissingInflatedId")
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_cart, container, false);
+
+        buttonContinuer = view.findViewById(R.id.continuer_button);
+        burgersListView = view.findViewById(R.id.burger_list_view);
+        textAucuneCommande = view.findViewById(R.id.aucuneCommandeCart);
+        totalTextView = view.findViewById(R.id.TotaltextView);
+        // Inflate the layout for this fragment
         setOnclick();
-        buttonContinuer = findViewById(R.id.continuer_button);
-        burgersListView = findViewById(R.id.burger_list_view);
-        textAucuneCommande = findViewById(R.id.aucuneCommandeCart);
         initializeCart();
-
-        burgerList = findViewById(R.id.imageViewBurger);
-
-
-        burgerList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent registerActivity = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(registerActivity);
-                finish();
-            }
-        });
-
-        promotion = findViewById(R.id.imageViewPromotion);
-        promotion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent registerActivity = new Intent(getApplicationContext(), PromotionActivity.class);
-                startActivity(registerActivity);
-                finish();
-            }
-        });
-
-
-
-
+        return view;
     }
 
 
 
-    private void setOnclick(){
-        profilImageView = findViewById(R.id.imageViewProfil);
-        buttonContinuer = findViewById(R.id.continuer_button);
-        totalTextView = findViewById(R.id.TotaltextView);
-        profilImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent profilActivity = new Intent(getApplicationContext(), ProfilActivity.class);
-                startActivity(profilActivity);
 
-            }
-        });
+    private void setOnclick(){
+
+
 
         buttonContinuer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(cart.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Vous n'avez pas de commandes", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Vous n'avez pas de commandes", Toast.LENGTH_LONG).show();
                     System.out.println("oui");
                 }else{
-                    Intent profilActivity = new Intent(getApplicationContext(), CommandeActivity.class);
+                    Intent profilActivity = new Intent(getActivity().getApplicationContext(), CommandeActivity.class);
                     startActivity(profilActivity);
-                    finish();
+                    getActivity().finish();
                 }
             }
         });
@@ -123,12 +100,12 @@ public class CartActivity extends AppCompatActivity {
 
         cart=new ArrayList<>();
         Gson gson = new Gson();
-        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPrefs", MODE_PRIVATE);
         String json = sharedPreferences.getString("user", "");
         User user = gson.fromJson(json, User.class);
         getCart(user.getId_user());
 
-        burgerListAdapter = new CartBurgerAdapter(this,R.layout.cart_list_item,cart,user.getId_user(),totalTextView,cart, textAucuneCommande);
+        burgerListAdapter = new CartBurgerAdapter(getActivity().getApplicationContext(),R.layout.cart_list_item,cart,user.getId_user(),totalTextView,cart, textAucuneCommande);
         burgersListView.setAdapter(burgerListAdapter);
         burgersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

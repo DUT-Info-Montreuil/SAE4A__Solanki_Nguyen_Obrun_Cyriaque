@@ -10,9 +10,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.burgger.R;
 import com.example.burgger.api.ApiInterface;
 import com.example.burgger.api.RetrofitClientInstance;
@@ -60,8 +60,12 @@ public class CommandeActivity extends AppCompatActivity {
         imageRetour = findViewById(R.id.imageViewRetour);
         imageRetour.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view){
+
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent);
                 finish();
+
             }
         });
 
@@ -76,16 +80,16 @@ public class CommandeActivity extends AppCompatActivity {
                 for (Burger b: burgerListCart) {
                     ajouterCommande(b);
                 }
-                finish();
+
+                Toast.makeText(getApplicationContext(),"Votre commande a bien été validée",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
+                finish();
 
             }
         });
-
-
-
     }
+
 
 
     public void getCart(int id_user){
@@ -270,6 +274,11 @@ public class CommandeActivity extends AppCompatActivity {
         return sharedPreferences.getString("burger"+idBurgerUnique, "aucune modification");
 
     }
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
 }

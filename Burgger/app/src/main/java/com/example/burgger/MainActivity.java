@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.burgger.admin.NavigationDialogFragment;
 import com.example.burgger.api.ApiInterface;
@@ -32,6 +33,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
 
     private EditText usernameEditText;
     private EditText passwordEditText;

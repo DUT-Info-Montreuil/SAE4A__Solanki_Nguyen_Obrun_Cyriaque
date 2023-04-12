@@ -47,12 +47,7 @@
         <activity
             android:name=".TESTDRIVE"
             tools:targetApi="31" />
-        <activity
-            android:name=".promotion.PromotionActivity"
-            tools:targetApi="31" />
-        <activity
-            android:name=".cart.CartActivity"
-            android:exported="false" />
+
         <activity
             android:name=".profil.ModifierProfilActivity"
             android:exported="false" />
