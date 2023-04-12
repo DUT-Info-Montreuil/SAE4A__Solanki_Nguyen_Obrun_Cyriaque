@@ -44,9 +44,6 @@
         <activity
             android:name=".admin.AdminActivity"
             android:exported="false" />
-        <activity
-            android:name=".TESTDRIVE"
-            tools:targetApi="31" />
 
         <activity
             android:name=".profil.ModifierProfilActivity"
