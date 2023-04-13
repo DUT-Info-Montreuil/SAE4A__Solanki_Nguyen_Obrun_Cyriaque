@@ -66,7 +66,7 @@ public class AddBurgerActivity extends AppCompatActivity {
     private List<Ingredient> listIngredients;
     private TextView errorMsgTextView;
 
-    private AdminIngredientAdapter adapterIngr;
+    private AdminAddBurgerAdapter adapterIngr;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class AddBurgerActivity extends AppCompatActivity {
         addIngredient = findViewById(R.id.buttonAddIngredient);
         listIngrBurger = findViewById(R.id.listIngrBurger);
         listIngredients = new ArrayList<>();
-        adapterIngr = new AdminIngredientAdapter(this, R.layout.activity_ingredient_adapter2, listIngredients);
+        adapterIngr = new AdminAddBurgerAdapter(this, R.layout.list_item_ingredient_addburger, listIngredients);
         listIngrBurger.setAdapter(adapterIngr);
         InputFilter filter = new InputFilter() {
             public CharSequence filter(CharSequence source, int start, int end,

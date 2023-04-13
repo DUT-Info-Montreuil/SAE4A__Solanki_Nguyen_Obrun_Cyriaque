@@ -5,13 +5,19 @@
 
     <TextView
         android:id="@+id/nomIngredient"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text=""
         android:textColor="@color/white"
         android:textSize="40dp"
         android:textStyle="bold"></TextView>
+
+    <Button
+        android:id="@+id/suppIngr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="X"></Button>
 
 
 </LinearLayout>
