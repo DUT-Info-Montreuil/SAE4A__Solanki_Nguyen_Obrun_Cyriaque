@@ -55,7 +55,8 @@ public class BurgerAdapter extends ArrayAdapter<Burger> {
 
             @Override
             public void onError(Exception e) {
-                // Gérer les erreurs de chargement de l'image
+                photoImageView.setImageResource(mContext.getResources().getIdentifier("burgerdefault", "drawable", mContext.getPackageName()));
+
             }
         });
         return view;
