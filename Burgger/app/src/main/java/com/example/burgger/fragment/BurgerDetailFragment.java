@@ -1,8 +1,7 @@
-package com.example.burgger;
+package com.example.burgger.fragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -18,10 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.burgger.R;
 import com.example.burgger.api.ApiInterface;
 import com.example.burgger.api.RetrofitClientInstance;
-import com.example.burgger.home.BurgerFragment;
-import com.example.burgger.home.HomeActivity;
 import com.example.burgger.object.User;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;

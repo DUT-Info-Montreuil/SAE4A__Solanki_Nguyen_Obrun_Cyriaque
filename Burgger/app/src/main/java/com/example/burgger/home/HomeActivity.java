@@ -10,18 +10,20 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.burgger.BurgerDetailFragment;
-import com.example.burgger.CommandeUserFragment;
+import com.example.burgger.fragment.BurgerDetailFragment;
+import com.example.burgger.fragment.CommandeUserFragment;
 import com.example.burgger.MainActivity;
+import com.example.burgger.fragment.BurgerFragment;
 import com.example.burgger.cart.CartFragment;
 import com.example.burgger.profil.ProfilActivity;
 import com.example.burgger.R;
 import com.example.burgger.object.Burger;
 import com.example.burgger.object.User;
-import com.example.burgger.promotion.PromotionFragment;
+import com.example.burgger.fragment.PromotionFragment;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -119,27 +121,35 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle("Déconnexion")
-                .setMessage("Êtes-vous sûr de vouloir vous déconnecter ?")
-                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Déconnecter l'utilisateur et renvoyer à l'écran de connexion
-                        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-                        SharedPreferences.Editor edit = sharedPreferences.edit();
-                        edit.clear();
-                        edit.apply();
-                        finish();
-                        Intent registerActivity = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(registerActivity);
-                    }
-                })
-                .setNegativeButton("Non", null)
-                .show();
-
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment currentFragment = fragmentManager.findFragmentById(R.id.main_framelayout);
+        if (currentFragment instanceof BurgerDetailFragment) {
+            // If the current fragment is BurgerDetailFragment, go back to the previous fragment
+            fragmentManager.popBackStack();
+        } else {
+            // If the current fragment is not BurgerDetailFragment, show the logout dialog
+            new AlertDialog.Builder(this)
+                    .setTitle("Déconnexion")
+                    .setMessage("Êtes-vous sûr de vouloir vous déconnecter ?")
+                    .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Déconnecter l'utilisateur et renvoyer à l'écran de connexion
+                            SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                            SharedPreferences.Editor edit = sharedPreferences.edit();
+                            edit.clear();
+                            edit.apply();
+                            finish();
+                            Intent registerActivity = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(registerActivity);
+                        }
+                    })
+                    .setNegativeButton("Non", null)
+                    .show();
+        }
     }
 
     private void setOnclick(){

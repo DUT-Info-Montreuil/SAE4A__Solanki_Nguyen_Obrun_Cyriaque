@@ -1,4 +1,4 @@
-package com.example.burgger;
+package com.example.burgger.fragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -15,6 +15,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.burgger.MainActivity;
+import com.example.burgger.R;
 import com.example.burgger.api.ApiInterface;
 import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.cuisine.CommandeAdapter;

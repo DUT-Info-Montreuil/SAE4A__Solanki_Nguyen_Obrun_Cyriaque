@@ -1,25 +1,18 @@
 package com.example.burgger.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.burgger.BurgerDetailFragment;
 import com.example.burgger.R;
 import com.example.burgger.api.ApiInterface;
 import com.example.burgger.api.RetrofitClientInstance;
-import com.example.burgger.home.HomeActivity;
-import com.example.burgger.object.Burger;
 import com.example.burgger.object.Ingredient;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
