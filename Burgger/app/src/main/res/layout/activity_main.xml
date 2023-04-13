@@ -19,7 +19,7 @@
         android:layout_marginLeft="30sp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
-        android:text="connexion"
+        android:text="Connexion"
         android:textColor="@color/white"
         android:textSize="32sp"
         android:textStyle="bold" />
