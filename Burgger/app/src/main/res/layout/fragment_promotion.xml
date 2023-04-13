@@ -6,12 +6,29 @@
     tools:context=".promotion.PromotionFragment"
     android:id="@+id/fragment_promotion">
 
-
-        <ListView
-            android:id="@+id/burgerPromotion_list_view"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="10" />
+            android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25sp"
+                    android:layout_marginBottom="20sp"
+                    android:text="Nos burggers en promotion"
+                    android:textColor="@color/orange"
+                    android:textSize="25sp" />
+
+                <ListView
+                    android:id="@+id/burgerPromotion_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10">
+
+                </ListView>
+        </LinearLayout>
 
 
 </FrameLayout>
