@@ -84,8 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
         acceuilButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -125,9 +124,6 @@ public class RegisterActivity extends AppCompatActivity {
                         String successMessage = jsonObject.getString("msg");
                         Toast.makeText(getApplicationContext(), successMessage, Toast.LENGTH_LONG).show();
                         finish();
-                        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                        startActivity(intent);
-
                     }
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();

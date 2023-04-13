@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         forgotpsw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 Intent intent = new Intent(getApplicationContext(),MdpOublieActivity.class);
                 startActivity(intent);
             }
