@@ -79,7 +79,7 @@ public class AddBurgerActivity extends AppCompatActivity {
         addIngredient = findViewById(R.id.buttonAddIngredient);
         listIngrBurger = findViewById(R.id.listIngrBurger);
         listIngredients = new ArrayList<>();
-        adapterIngr = new AdminAddBurgerAdapter(this, R.layout.list_item_ingredient_addburger, listIngredients);
+        adapterIngr = new AdminAddBurgerAdapter(this, R.layout.list_item_ingredient_addburger, listIngredients, addIngredient);
         listIngrBurger.setAdapter(adapterIngr);
         InputFilter filter = new InputFilter() {
             public CharSequence filter(CharSequence source, int start, int end,
@@ -250,7 +250,9 @@ public class AddBurgerActivity extends AppCompatActivity {
                 Ingredient selectedIngredient = (Ingredient) data.getSerializableExtra("selectedIngredient");
                 listIngredients.add(selectedIngredient);
                 adapterIngr.notifyDataSetChanged();
-
+                if(listIngredients.size()==6){
+                    addIngredient.setEnabled(false);
+                }
             }
         }
     }
