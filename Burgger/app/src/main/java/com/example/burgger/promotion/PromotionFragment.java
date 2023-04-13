@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.burgger.BurgerDetailActivity;
 import com.example.burgger.BurgerDetailFragment;
 import com.example.burgger.MainActivity;
 import com.example.burgger.R;

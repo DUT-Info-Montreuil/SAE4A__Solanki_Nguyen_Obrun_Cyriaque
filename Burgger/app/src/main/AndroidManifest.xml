@@ -54,9 +54,6 @@
             android:name=".profil.ModifierProfilActivity"
             android:exported="false" />
         <activity
-            android:name=".BurgerDetailActivity"
-            android:exported="false" />
-        <activity
             android:name=".profil.ProfilActivity"
             android:exported="false" />
         <activity

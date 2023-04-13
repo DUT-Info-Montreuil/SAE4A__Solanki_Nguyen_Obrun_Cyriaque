@@ -17,14 +17,12 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.example.burgger.BurgerDetailActivity;
 import com.example.burgger.BurgerDetailFragment;
 import com.example.burgger.MainActivity;
 import com.example.burgger.R;
 import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.object.Burger;
 import com.example.burgger.object.User;
-import com.example.burgger.promotion.BurgerAdapterPromotion;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -102,12 +100,8 @@ public class BurgerFragment extends Fragment {
                             Double prixReduction = burgerPrice - ( (reduction/100)*burgerPrice );
                             burgers.add(new Burger(burgerId,burgerName,prixReduction,burgerPhoto,burgerDescription));
                         }
-
-
                     }
-
                     burgerListAdapter.notifyDataSetChanged();
-
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }

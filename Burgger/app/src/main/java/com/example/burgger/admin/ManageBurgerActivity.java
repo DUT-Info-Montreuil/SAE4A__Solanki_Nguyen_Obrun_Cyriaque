@@ -1,19 +1,12 @@
 package com.example.burgger.admin;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.burgger.BurgerDetailActivity;
-import com.example.burgger.MainActivity;
 import com.example.burgger.R;
 import com.example.burgger.api.RetrofitClientInstance;
-import com.example.burgger.home.BurgerAdapter;
 import com.example.burgger.home.HomeActivity;
 import com.example.burgger.object.Burger;
 
