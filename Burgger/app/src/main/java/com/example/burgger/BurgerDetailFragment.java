@@ -88,7 +88,8 @@ public class BurgerDetailFragment extends Fragment {
 
             @Override
             public void onError(Exception e) {
-                // Gérer les erreurs de chargement de l'image
+                burgerImageView.setImageResource(getActivity().getApplicationContext().getResources().getIdentifier("burgerdefault", "drawable", getActivity().getApplicationContext().getPackageName()));
+
             }
         });
 
