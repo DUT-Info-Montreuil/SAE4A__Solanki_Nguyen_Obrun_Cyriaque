@@ -156,4 +156,9 @@ public class ManageUserActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

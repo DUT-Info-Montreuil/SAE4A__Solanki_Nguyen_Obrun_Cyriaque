@@ -26,6 +26,7 @@ public class NavigationDialogFragment extends DialogFragment {
                             intent = new Intent(requireActivity(), AdminActivity.class);
                         }
                         startActivity(intent);
+                        getActivity().finish();
                     }
                 });
         return builder.create();

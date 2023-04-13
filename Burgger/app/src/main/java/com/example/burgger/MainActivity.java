@@ -179,12 +179,14 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+        finish();
     }
 
 
     private void showNavigationDialog() {
             NavigationDialogFragment dialogFragment = new NavigationDialogFragment();
             dialogFragment.show(getSupportFragmentManager(), "navigationDialog");
+
     }
 
 
