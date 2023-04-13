@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="16dp"
+    android:padding="8dp"
+    android:id="@+id/layout_commandUser" >
+
+    <LinearLayout
+        android:id="@+id/backgroundColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+
+        >
+
+        <TextView
+            android:id="@+id/commandeIdTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/burgerIdTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/modificationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+

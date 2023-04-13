@@ -191,7 +191,7 @@ public class CommandeActivity extends AppCompatActivity {
         String modification = getModificationBurger(burger.getBurgerIDUnique());
 
         ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
-        Call<ResponseBody> call = apiInterface.passerCommande(burger.getId_burger(), modification);
+        Call<ResponseBody> call = apiInterface.passerCommande(burger.getId_burger(), user.getId_user(), modification);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

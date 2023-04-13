@@ -100,7 +100,6 @@ public class BurgerDetailFragment extends Fragment {
         addBurgerToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 addBurgerToCart(burger_id,user.getId_user());
             }
         });

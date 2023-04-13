@@ -13,6 +13,14 @@
         android:gravity="center_horizontal">
 
         <ImageView
+            android:id="@+id/logo_commande"
+            android:layout_width="69dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/commande" />
+
+        <ImageView
             android:id="@+id/imageView1"
             android:layout_width="0dp"
             android:layout_height="100dp"
@@ -21,10 +29,10 @@
 
         <ImageView
             android:id="@+id/imageViewProfil"
-            android:layout_width="0dp"
+            android:layout_width="55dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_gravity="end"
+            android:layout_weight="1"
             app:srcCompat="@drawable/userlogo" />
     </LinearLayout>
 

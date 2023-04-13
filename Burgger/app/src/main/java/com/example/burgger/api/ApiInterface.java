@@ -60,6 +60,7 @@ public interface ApiInterface {
     @POST("passerCommande.php")
     Call<ResponseBody> passerCommande(
             @Field("id_burger") int id_burger,
+            @Field("id_user") int id_user,
             @Field("modification") String modification
     );
 
@@ -157,6 +158,12 @@ public interface ApiInterface {
     @POST("dellBurger.php")
     Call<ResponseBody> dellBurger(
             @Field("id_burger") int id_burger
+
+    );
+    @FormUrlEncoded
+    @POST("getUserCommandes.php")
+    Call<ResponseBody> getUserCommandes(
+            @Field("id_user") int id_user
 
     );
 
