@@ -3,6 +3,8 @@ package com.example.burgger.profil;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -95,7 +97,6 @@ public class ProfilActivity extends AppCompatActivity {
         mEditProfilButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
                 Intent registerActivity = new Intent(getApplicationContext(), ModifierProfilActivity.class);
                 startActivity(registerActivity);
 
@@ -114,14 +115,24 @@ public class ProfilActivity extends AppCompatActivity {
         mDeco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor edit = sharedPreferences.edit();
-                edit.clear();
-                edit.apply();
-                finish();
-                Intent registerActivity = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(registerActivity);
-
+                new AlertDialog.Builder(ProfilActivity.this)
+                        .setTitle("Déconnexion")
+                        .setMessage("Êtes-vous sûr de vouloir vous déconnecter ?")
+                        .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Déconnecter l'utilisateur et renvoyer à l'écran de connexion
+                                SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                                SharedPreferences.Editor edit = sharedPreferences.edit();
+                                edit.clear();
+                                edit.apply();
+                                finish();
+                                Intent registerActivity = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(registerActivity);
+                            }
+                        })
+                        .setNegativeButton("Non", null)
+                        .show();
             }
         });
 

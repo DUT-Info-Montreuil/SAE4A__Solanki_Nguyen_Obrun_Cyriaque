@@ -214,8 +214,7 @@ public class ModifierProfilActivity extends AppCompatActivity {
                         editor.apply();
                         finish();
 
-                        Intent registerActivity = new Intent(getApplicationContext(), ProfilActivity.class);
-                        startActivity(registerActivity);
+
 
 
                     }

@@ -1,5 +1,7 @@
 package com.example.burgger.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -113,16 +115,28 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Déconnexion")
+                .setMessage("Êtes-vous sûr de vouloir vous déconnecter ?")
+                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Déconnecter l'utilisateur et renvoyer à l'écran de connexion
+                        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                        SharedPreferences.Editor edit = sharedPreferences.edit();
+                        edit.clear();
+                        edit.apply();
+                        finish();
+                        Intent registerActivity = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(registerActivity);
+                    }
+                })
+                .setNegativeButton("Non", null)
+                .show();
 
-        if (isTaskRoot()) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else {
-            super.onBackPressed();
-        }
-        finish();
     }
 
     private void setOnclick(){
