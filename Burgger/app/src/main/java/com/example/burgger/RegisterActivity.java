@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -142,14 +143,17 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean checkForm(String username,String password,String email,String city,String adresse,String name,String firstname){
-
+        ScrollView scrollView = findViewById(R.id.scrollView_register);
         if (!isValidEmail(email)){
             errorMsgTextView.setText("Email invalide");
+            scrollView.scrollTo(0, 0);
         }else if (name.isEmpty()){
             errorMsgTextView.setText("veuillez votre nom");
+            scrollView.scrollTo(0, 0);
         }
         else if (firstname.isEmpty()){
             errorMsgTextView.setText("veuillez votre prénom");
+            scrollView.scrollTo(0, 0);
         }
         else if(!isPasswordValid(password)) {
             errorMsgTextView.setTextSize(15);
@@ -158,16 +162,22 @@ public class RegisterActivity extends AppCompatActivity {
                     "Contient au moins une minuscule\n" +
                     "Contient au moins un chiffre\n" +
                     "Contient au moins un caractère spécial");
+            scrollView.scrollTo(0, 0);
         } else if (city.isEmpty()) {
             errorMsgTextView.setText("veuillez entrer une ville");
+            scrollView.scrollTo(0, 0);
         } else if (adresse.isEmpty()) {
             errorMsgTextView.setText("veuillez entrez votre adresse");
+            scrollView.scrollTo(0, 0);
         } else if (!password.equals(ConfirmpasswordEditText.getText().toString())) {
             errorMsgTextView.setText("Vos mot de passes ne sont pas indentiques");
+            scrollView.scrollTo(0, 0);
         } else if (username.isEmpty()) {
             errorMsgTextView.setText("veuillez entrer un nom d'utilisateur");
+            scrollView.scrollTo(0, 0);
         } else if (!acceptConditionsCheckBox.isChecked()) {
             errorMsgTextView.setText("veuillez accepter les conditions d'utilisations");
+            scrollView.scrollTo(0, 0);
         }
         return true;
     }
