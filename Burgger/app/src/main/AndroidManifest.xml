@@ -18,6 +18,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".admin.IngredientsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.IngredientAdapter"
+            android:exported="false" />
+        <activity
             android:name=".admin.EditBurgerActivity"
             android:exported="false" />
         <activity
@@ -44,7 +50,6 @@
         <activity
             android:name=".admin.AdminActivity"
             android:exported="false" />
-
         <activity
             android:name=".profil.ModifierProfilActivity"
             android:exported="false" />

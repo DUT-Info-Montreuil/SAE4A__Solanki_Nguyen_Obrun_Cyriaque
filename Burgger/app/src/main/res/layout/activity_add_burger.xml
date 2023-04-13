@@ -1,9 +1,21 @@
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backGroundApp"
     android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,7 +74,7 @@
             <EditText
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:hint="Name"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"/>
@@ -76,7 +88,7 @@
             <EditText
                 android:id="@+id/editTextPrice"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:hint="Price"
                 android:inputType="numberDecimal"
                 android:textColor="@color/white"
@@ -97,6 +109,30 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"/>
 
+            <ImageView
+                android:layout_width="350dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/pain_haut">
+
+            </ImageView>
+
+            <ListView
+                android:id="@+id/listIngrBurger"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+            </ListView>
+
+            <ImageView
+                android:layout_width="350dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/pain_bas"></ImageView>
+
+            <Button
+                android:id="@+id/buttonAddIngredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add ingredient"/>
+
             <Button
                 android:id="@+id/buttonAddBurger"
                 android:layout_width="match_parent"
@@ -106,5 +142,7 @@
         </LinearLayout>
 
     </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

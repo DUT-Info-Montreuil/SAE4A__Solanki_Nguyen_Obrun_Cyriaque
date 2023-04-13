@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import com.example.burgger.R;
 import com.example.burgger.api.ApiInterface;
 import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.object.Burger;
+import com.example.burgger.object.Ingredient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +41,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -54,9 +58,16 @@ public class AddBurgerActivity extends AppCompatActivity {
     private EditText editTextPrice;
     private EditText editTextDescription;
 
+    private Button addIngredient;
+
+    private ListView listIngrBurger;
     private ImageView imgBuger;
 
+    private List<Ingredient> listIngredients;
     private TextView errorMsgTextView;
+
+    private AdminAddBurgerAdapter adapterIngr;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +76,11 @@ public class AddBurgerActivity extends AppCompatActivity {
         editTextName = findViewById(R.id.editTextName);
         editTextPrice = findViewById(R.id.editTextPrice);
         imgBuger = findViewById(R.id.imageViewBurgerADD);
+        addIngredient = findViewById(R.id.buttonAddIngredient);
+        listIngrBurger = findViewById(R.id.listIngrBurger);
+        listIngredients = new ArrayList<>();
+        adapterIngr = new AdminAddBurgerAdapter(this, R.layout.list_item_ingredient_addburger, listIngredients);
+        listIngrBurger.setAdapter(adapterIngr);
         InputFilter filter = new InputFilter() {
             public CharSequence filter(CharSequence source, int start, int end,
                                        Spanned dest, int dstart, int dend) {
@@ -103,9 +119,20 @@ public class AddBurgerActivity extends AppCompatActivity {
 
                     addBurger(name,price,description);
                     uploadImage();
+
+
                 }
 
 
+            }
+        });
+
+        addIngredient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(), IngredientsActivity.class);
+
+                startActivityForResult(intent, YOUR_REQUEST_CODE);
             }
         });
     }
@@ -127,9 +154,13 @@ public class AddBurgerActivity extends AppCompatActivity {
                         // Inscription réussie
                         String successMessage = jsonObject.getString("msg");
                         Toast.makeText(getApplicationContext(), successMessage, Toast.LENGTH_LONG).show();
+
                         finish();
                         Intent intent=new Intent(getApplicationContext(), AdminActivity.class);
                         startActivity(intent);
+                        for (int i=0 ; i<listIngredients.size(); i++) {
+                            addIngredients(listIngredients.get(i), name, i+1);
+                        }
 
                     }
                 } catch (IOException | JSONException e) {
@@ -171,6 +202,8 @@ public class AddBurgerActivity extends AppCompatActivity {
     private static final int REQUEST_STORAGE_PERMISSION = 100;
     private static final int REQUEST_IMAGE_PICK = 101;
 
+    private static final int YOUR_REQUEST_CODE = 102;
+
     private Uri mImageUri;
 
     private void openFileChooser() {
@@ -210,6 +243,15 @@ public class AddBurgerActivity extends AppCompatActivity {
             }
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
             imgBuger.setImageBitmap(bitmap);
+        }
+
+        if (requestCode == YOUR_REQUEST_CODE && resultCode == RESULT_OK) {
+            if (data != null && data.hasExtra("selectedIngredient")) {
+                Ingredient selectedIngredient = (Ingredient) data.getSerializableExtra("selectedIngredient");
+                listIngredients.add(selectedIngredient);
+                adapterIngr.notifyDataSetChanged();
+
+            }
         }
     }
 
@@ -287,6 +329,36 @@ public class AddBurgerActivity extends AppCompatActivity {
         }
         return result;
     }
+
+
+    public void addIngredients (Ingredient ingredient, String burgerName, int postition){
+        ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
+        Call<ResponseBody> call = apiInterface.addIngredientsBurger(ingredient.getName(), burgerName, postition);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String jsonString = response.body().string();
+                    System.out.println(jsonString);
+                    JSONObject jsonObject = new JSONObject(jsonString);
+                    boolean success = jsonObject.getBoolean("success");
+                    if (!success) {
+                        errorMsgTextView.setText(jsonObject.getString("msg"));
+                    } else {
+                        String successMessage = jsonObject.getString("msg");
+                        System.out.println(successMessage);
+                    }
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
 
 
 }
