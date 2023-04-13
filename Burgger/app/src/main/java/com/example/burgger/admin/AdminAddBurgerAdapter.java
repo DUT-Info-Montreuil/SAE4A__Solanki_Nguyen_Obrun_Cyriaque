@@ -21,13 +21,16 @@ public class AdminAddBurgerAdapter extends ArrayAdapter<Ingredient> {
 
     private Context mContext;
     private int mResource;
+
+    private Button addIngrediant;
     private List<Ingredient> ingrs;
 
-    public AdminAddBurgerAdapter(@NonNull Context context, int resource, List<Ingredient> listIngr) {
+    public AdminAddBurgerAdapter(@NonNull Context context, int resource, List<Ingredient> listIngr, Button addIngr) {
         super(context, resource, listIngr);
         mContext = context;
         mResource = resource;
         ingrs = listIngr;
+        addIngrediant = addIngr;
     }
 
     @Override
@@ -51,7 +54,9 @@ public class AdminAddBurgerAdapter extends ArrayAdapter<Ingredient> {
                 // Supprimer l'ingrédient de la liste
                 ingrs.remove(position);
                 notifyDataSetChanged();
-
+                if(ingrs.size()<6){
+                    addIngrediant.setEnabled(true);
+                }
             }
         });
 
