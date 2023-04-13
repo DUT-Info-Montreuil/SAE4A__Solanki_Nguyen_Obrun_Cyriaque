@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.burgger.BurgerDetailFragment;
+import com.example.burgger.CommandeUserFragment;
 import com.example.burgger.MainActivity;
 import com.example.burgger.cart.CartFragment;
 import com.example.burgger.profil.ProfilActivity;
@@ -46,6 +47,8 @@ public class HomeActivity extends AppCompatActivity {
     private PromotionFragment promotionFragment = new PromotionFragment();
     private BurgerFragment burgerFragment = new BurgerFragment();
     private CartFragment cartFragment = new CartFragment();
+
+    private CommandeUserFragment commandeUserFragment = new CommandeUserFragment();
 
     public BurgerDetailFragment burgerDetailFragment = new BurgerDetailFragment();
 
@@ -153,6 +156,18 @@ public class HomeActivity extends AppCompatActivity {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.main_framelayout, cartFragment);
+                fragmentTransaction.commit();
+
+            }
+        });
+
+        ImageView logoCOmmande= findViewById(R.id.logo_commande);
+        logoCOmmande.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.main_framelayout, commandeUserFragment);
                 fragmentTransaction.commit();
 
             }
