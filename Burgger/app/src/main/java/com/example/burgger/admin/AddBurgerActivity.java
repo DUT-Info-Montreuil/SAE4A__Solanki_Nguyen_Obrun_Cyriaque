@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import com.example.burgger.R;
 import com.example.burgger.api.ApiInterface;
 import com.example.burgger.api.RetrofitClientInstance;
 import com.example.burgger.object.Burger;
+import com.example.burgger.object.Ingredient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +41,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -54,9 +58,16 @@ public class AddBurgerActivity extends AppCompatActivity {
     private EditText editTextPrice;
     private EditText editTextDescription;
 
+    private Button addIngredient;
+
+    private ListView listIngrBurger;
     private ImageView imgBuger;
 
+    private List<Ingredient> listIngredients;
     private TextView errorMsgTextView;
+
+    private AdminIngredientAdapter adapterIngr;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +76,11 @@ public class AddBurgerActivity extends AppCompatActivity {
         editTextName = findViewById(R.id.editTextName);
         editTextPrice = findViewById(R.id.editTextPrice);
         imgBuger = findViewById(R.id.imageViewBurgerADD);
+        addIngredient = findViewById(R.id.buttonAddIngredient);
+        listIngrBurger = findViewById(R.id.listIngrBurger);
+        listIngredients = new ArrayList<>();
+        adapterIngr = new AdminIngredientAdapter(this, R.layout.activity_ingredient_adapter2, listIngredients);
+        listIngrBurger.setAdapter(adapterIngr);
         InputFilter filter = new InputFilter() {
             public CharSequence filter(CharSequence source, int start, int end,
                                        Spanned dest, int dstart, int dend) {
@@ -106,6 +122,15 @@ public class AddBurgerActivity extends AppCompatActivity {
                 }
 
 
+            }
+        });
+
+        addIngredient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(), IngredientsActivity.class);
+
+                startActivityForResult(intent, YOUR_REQUEST_CODE);
             }
         });
     }
@@ -171,6 +196,8 @@ public class AddBurgerActivity extends AppCompatActivity {
     private static final int REQUEST_STORAGE_PERMISSION = 100;
     private static final int REQUEST_IMAGE_PICK = 101;
 
+    private static final int YOUR_REQUEST_CODE = 102;
+
     private Uri mImageUri;
 
     private void openFileChooser() {
@@ -210,6 +237,14 @@ public class AddBurgerActivity extends AppCompatActivity {
             }
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
             imgBuger.setImageBitmap(bitmap);
+        }
+
+        if (requestCode == YOUR_REQUEST_CODE && resultCode == RESULT_OK) {
+            if (data != null && data.hasExtra("selectedIngredient")) {
+                Ingredient selectedIngredient = (Ingredient) data.getSerializableExtra("selectedIngredient");
+                listIngredients.add(selectedIngredient);
+                adapterIngr.notifyDataSetChanged();
+            }
         }
     }
 

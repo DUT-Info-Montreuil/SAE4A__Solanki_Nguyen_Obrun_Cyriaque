@@ -97,6 +97,18 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"/>
 
+            <ListView
+                android:id="@+id/listIngrBurger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </ListView>
+
+            <Button
+                android:id="@+id/buttonAddIngredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add ingredient"/>
+
             <Button
                 android:id="@+id/buttonAddBurger"
                 android:layout_width="match_parent"

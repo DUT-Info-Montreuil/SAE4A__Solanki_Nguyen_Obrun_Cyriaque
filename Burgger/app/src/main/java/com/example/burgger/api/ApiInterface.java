@@ -160,4 +160,8 @@ public interface ApiInterface {
 
     );
 
+    @POST("getAllIngredients.php")
+    Call<ResponseBody> getAllIngredients(
+    );
+
 }
