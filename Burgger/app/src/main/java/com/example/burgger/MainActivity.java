@@ -48,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.username_edittext);
         passwordEditText = findViewById(R.id.password_edittext);
         errorMsgTextView = findViewById(R.id.errorMsg_textView);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
+        String password = sharedPreferences.getString("password", "");
+
+        if (!username.isEmpty() && !password.isEmpty()) {
+            loginUser(username, password);
+        }
         forgotpsw = findViewById(R.id.forgotpsw);
         forgotpsw.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +136,11 @@ public class MainActivity extends AppCompatActivity {
                             Gson gson = new Gson();
                             String json = gson.toJson(user);
                             editor.putString("user", json);
+                            editor.apply();
+
+                            editor = sharedPreferences.edit();
+                            editor.putString("username", username);
+                            editor.putString("password", password);
                             editor.apply();
 
                             if (result.getInt("id_role") == 3) {
