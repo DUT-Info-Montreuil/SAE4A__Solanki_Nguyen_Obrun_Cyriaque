@@ -13,15 +13,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.burgger.BurgerDetailFragment;
-import com.example.burgger.CommandeUserFragment;
+import com.example.burgger.fragment.BurgerDetailFragment;
+import com.example.burgger.fragment.CommandeUserFragment;
 import com.example.burgger.MainActivity;
+import com.example.burgger.fragment.BurgerFragment;
 import com.example.burgger.cart.CartFragment;
 import com.example.burgger.profil.ProfilActivity;
 import com.example.burgger.R;
 import com.example.burgger.object.Burger;
 import com.example.burgger.object.User;
-import com.example.burgger.promotion.PromotionFragment;
+import com.example.burgger.fragment.PromotionFragment;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

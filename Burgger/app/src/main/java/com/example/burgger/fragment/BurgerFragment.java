@@ -1,4 +1,4 @@
-package com.example.burgger.home;
+package com.example.burgger.fragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -17,10 +17,11 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.example.burgger.BurgerDetailFragment;
 import com.example.burgger.MainActivity;
 import com.example.burgger.R;
 import com.example.burgger.api.RetrofitClientInstance;
+import com.example.burgger.home.BurgerAdapter;
+import com.example.burgger.home.HomeActivity;
 import com.example.burgger.object.Burger;
 import com.example.burgger.object.User;
 import com.google.gson.Gson;
