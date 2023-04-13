@@ -160,6 +160,16 @@ public interface ApiInterface {
 
     );
 
+    @FormUrlEncoded
+    @POST("addIngredientsBurger.php")
+    Call<ResponseBody> addIngredientsBurger(
+            @Field("nameIngr") String nameIngr,
+            @Field("nameBurger") String nameBurger,
+            @Field("position") int position
+
+    );
+
+
     @POST("getAllIngredients.php")
     Call<ResponseBody> getAllIngredients(
     );

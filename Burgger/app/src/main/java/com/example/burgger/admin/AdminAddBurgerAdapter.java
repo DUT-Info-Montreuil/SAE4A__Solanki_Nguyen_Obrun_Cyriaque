@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,10 +40,10 @@ public class AdminAddBurgerAdapter extends ArrayAdapter<Ingredient> {
 
         Ingredient ingr = getItem(position);
 
-        TextView nomIngr = view.findViewById(R.id.nomIngredient);
+        ImageView imageIngr = view.findViewById(R.id.imageIngredient);
         Button suppButton = view.findViewById(R.id.suppIngr);
 
-        nomIngr.setText(ingr.getName());
+        imageIngr.setImageResource(mContext.getResources().getIdentifier(ingr.getName(), "drawable", mContext.getPackageName()));
 
         suppButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +51,7 @@ public class AdminAddBurgerAdapter extends ArrayAdapter<Ingredient> {
                 // Supprimer l'ingrédient de la liste
                 ingrs.remove(position);
                 notifyDataSetChanged();
+
             }
         });
 

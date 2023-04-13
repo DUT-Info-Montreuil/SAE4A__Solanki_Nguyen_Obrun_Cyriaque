@@ -119,6 +119,8 @@ public class AddBurgerActivity extends AppCompatActivity {
 
                     addBurger(name,price,description);
                     uploadImage();
+
+
                 }
 
 
@@ -152,9 +154,13 @@ public class AddBurgerActivity extends AppCompatActivity {
                         // Inscription réussie
                         String successMessage = jsonObject.getString("msg");
                         Toast.makeText(getApplicationContext(), successMessage, Toast.LENGTH_LONG).show();
+
                         finish();
                         Intent intent=new Intent(getApplicationContext(), AdminActivity.class);
                         startActivity(intent);
+                        for (int i=0 ; i<listIngredients.size(); i++) {
+                            addIngredients(listIngredients.get(i), name, i+1);
+                        }
 
                     }
                 } catch (IOException | JSONException e) {
@@ -244,6 +250,7 @@ public class AddBurgerActivity extends AppCompatActivity {
                 Ingredient selectedIngredient = (Ingredient) data.getSerializableExtra("selectedIngredient");
                 listIngredients.add(selectedIngredient);
                 adapterIngr.notifyDataSetChanged();
+
             }
         }
     }
@@ -322,6 +329,36 @@ public class AddBurgerActivity extends AppCompatActivity {
         }
         return result;
     }
+
+
+    public void addIngredients (Ingredient ingredient, String burgerName, int postition){
+        ApiInterface apiInterface = RetrofitClientInstance.getRetrofitInstance().create(ApiInterface.class);
+        Call<ResponseBody> call = apiInterface.addIngredientsBurger(ingredient.getName(), burgerName, postition);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String jsonString = response.body().string();
+                    System.out.println(jsonString);
+                    JSONObject jsonObject = new JSONObject(jsonString);
+                    boolean success = jsonObject.getBoolean("success");
+                    if (!success) {
+                        errorMsgTextView.setText(jsonObject.getString("msg"));
+                    } else {
+                        String successMessage = jsonObject.getString("msg");
+                        System.out.println(successMessage);
+                    }
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
 
 
 }
