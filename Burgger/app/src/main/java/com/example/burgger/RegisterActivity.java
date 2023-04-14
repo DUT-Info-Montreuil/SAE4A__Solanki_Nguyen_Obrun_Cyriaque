@@ -118,6 +118,9 @@ public class RegisterActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(jsonString);
                     boolean success = jsonObject.getBoolean("success");
                     if (!success) {
+                        ScrollView scrollView = findViewById(R.id.scrollView_register);
+
+                        scrollView.scrollTo(0, 0);
                         errorMsgTextView.setText(jsonObject.getString("msg"));
                     } else {
                         // Inscription réussie
@@ -142,14 +145,18 @@ public class RegisterActivity extends AppCompatActivity {
         ScrollView scrollView = findViewById(R.id.scrollView_register);
         if (!isValidEmail(email)){
             errorMsgTextView.setText("Email invalide");
+
             scrollView.scrollTo(0, 0);
+            return false;
         }else if (name.isEmpty()){
             errorMsgTextView.setText("veuillez votre nom");
             scrollView.scrollTo(0, 0);
+            return false;
         }
         else if (firstname.isEmpty()){
             errorMsgTextView.setText("veuillez votre prénom");
             scrollView.scrollTo(0, 0);
+            return false;
         }
         else if(!isPasswordValid(password)) {
             errorMsgTextView.setTextSize(15);
@@ -159,23 +166,31 @@ public class RegisterActivity extends AppCompatActivity {
                     "Contient au moins un chiffre\n" +
                     "Contient au moins un caractère spécial");
             scrollView.scrollTo(0, 0);
+            return false;
         } else if (city.isEmpty()) {
             errorMsgTextView.setText("veuillez entrer une ville");
             scrollView.scrollTo(0, 0);
+            return false;
         } else if (adresse.isEmpty()) {
             errorMsgTextView.setText("veuillez entrez votre adresse");
             scrollView.scrollTo(0, 0);
+            return false;
         } else if (!password.equals(ConfirmpasswordEditText.getText().toString())) {
             errorMsgTextView.setText("Vos mot de passes ne sont pas indentiques");
             scrollView.scrollTo(0, 0);
+            return false;
         } else if (username.isEmpty()) {
             errorMsgTextView.setText("veuillez entrer un nom d'utilisateur");
             scrollView.scrollTo(0, 0);
+            return false;
         } else if (!acceptConditionsCheckBox.isChecked()) {
             errorMsgTextView.setText("veuillez accepter les conditions d'utilisations");
             scrollView.scrollTo(0, 0);
+            return false;
+        }else {
+            return true;
         }
-        return true;
+
     }
 
 }
